@@ -8576,3 +8576,7 @@ input, select, textarea {
 			#wrapper.divided > .invert:first-child {
 				box-shadow: none !important;
 			}
+		div.a {
+   				 text-indent: 50px;
+   				 padding-top: 0px;
+}
