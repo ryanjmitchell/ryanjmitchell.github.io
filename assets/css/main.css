@@ -8578,5 +8578,5 @@ input, select, textarea {
 			}
 		div.a {
    				 text-indent: 50px;
-   				 padding-top: 0px;
-}
+			}
+		.tab { margin-left: 50px; }
