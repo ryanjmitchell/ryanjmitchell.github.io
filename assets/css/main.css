@@ -8576,7 +8576,15 @@ input, select, textarea {
 			#wrapper.divided > .invert:first-child {
 				box-shadow: none !important;
 			}
+		
 		div.a {
    				 text-indent: 50px;
-			}
+		}
+		
 		.tab { margin-left: 50px; }
+
+		.bottomright {
+		    position: absolute;
+		    bottom: 8px;
+		    right: 16px;
+		}
