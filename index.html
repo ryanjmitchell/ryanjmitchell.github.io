@@ -305,8 +305,7 @@
 						<script>
 						var map, infoWindow;
 						function initMap() {
-						  var diyala = {lat: 33.773, lng: 45.1495};
-						  var mosul = {lat: 36.3566, lng: 43.1640};
+						  var iraq = {lat: 33.2232, lng: 43.6793};
 						  var schofield = {lat: 21.4955, lng: -158.0627};
 						  var brisbane = {lat: -27.4698, lng: 153.0251};
 						  var vilseck = {lat: 49.6402, lng: 11.7944};
@@ -503,19 +502,12 @@
 ]
 						  });
 						  infoWindow = new google.maps.InfoWindow;
-						  var markerdiyala = new google.maps.Marker({
-						  	position: diyala,
+						  var markeriraq = new google.maps.Marker({
+						  	position: iraq,
 						  	map:map,
-						  	label: 'D',
+						  	label: 'I',
 						  	opacity: .5,
-						  	title: 'Baghdad & Diyala Province 2007-2008'
-						  });
-						  var markermosul = new google.maps.Marker({
-						  	position: mosul,
-						  	map:map,
-						  	label: 'M',
-						  	opacity: .5,
-						  	title: 'Mosul 2004-2005'
+						  	title: 'Mosul 2004-2005 / Baghdad & Diyala Province 2007-2008'
 						  });
 						  var markerschofield = new google.maps.Marker({
 						  	position: schofield,
@@ -536,7 +528,7 @@
 						  	map:map,
 						  	label: 'V',
 						  	opacity: .5,
-						  	title: 'Rose Barracks 2006-2008'
+						  	title: 'Vilseck 2006-2009'
 						  });
 						  if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(function(position) {
