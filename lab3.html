@@ -11,6 +11,7 @@
 		<link rel="stylesheet" href="assets/leaflet/leaflet.css" />
 		<script src="assets/leaflet/leaflet.js"></script>
 		<script type="text/javascript" src="assets/js/tile.stamen.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -41,7 +42,8 @@
 							var layer = new L.StamenTileLayer("terrain");
 							var map = new L.Map("map", {
 							    center: new L.LatLng(47.55, -120),
-							    zoom: 7
+							    zoom: 7,
+							    zoomControl: false
 							});
 							map.addLayer(layer);
 							map.touchZoom.disable();
@@ -49,8 +51,11 @@
 							map.scrollWheelZoom.disable();
 							map.boxZoom.disable();
 							map.keyboard.disable();
-							map.removeControl(map.zoomControl);
-
+							// loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
+							$.getJSON("assets/data/lab3/allMtLahars.json",function(data){
+							// L.geoJson function is used to parse geojson file and load on to map
+							L.geoJson(allMtLahars.json).addTo(map);
+							});
 						</script>
 					<p>text</p>
 					<!-- Leaflet - Puyallup River Lahar -->
@@ -61,8 +66,8 @@
 							// replace "toner" here with "terrain" or "watercolor"
 							var layer = new L.StamenTileLayer("terrain");
 							var map = new L.Map("map1", {
-							    center: new L.LatLng(46.8523, -121.7603),
-							    zoom: 8
+							    center: new L.LatLng(46.95, -121.7603),
+							    zoom: 9
 							});
 							map.addLayer(layer);
 							map.touchZoom.disable();
