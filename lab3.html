@@ -56,10 +56,10 @@
 							// L.geoJson function is used to parse geojson file and load on to map
 							// L.geoJson(allMtLahars.json).addTo(map);
 							// });
-						$.getJSON('assets/data/evac.json', function(data){
+						$.getJSON('assets/data/sites.json', function(data){
 							var datalayer = L.geoJson(data, {
 								onEachFeature: function (feature, featurelayer){
-									featurelayer.bindPopup(feature.properties.NAME_1);
+									featurelayer.bindPopup(feature.properties.NAME);
 								}
 							}).addTo(map);
 						})
