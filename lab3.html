@@ -10,7 +10,6 @@
 		<meta charset="utf-8" />
 		<link rel="stylesheet" href="assets/leaflet/leaflet.css" />
 		<script src="assets/leaflet/leaflet.js"></script>
-		<!--<script type="text/javascript" src="assets/js/tile.stamen.js"></script> -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -30,16 +29,13 @@
 	</head>
 	<body class="is-preload">
 
-					<!-- Leaflet - WA Lahars -->
-
+			<!-- Leaflet - WA Lahars -->
 					<section class="wrapper style1 align-center">
 						<div class="inner">
 							<!-- <h1>GIS 503 Lab 3 - Leaflet</h1> -->
 							<h2>Lahars of Washington State</h2>
 						<div id="map"></div>
 						<script>
-							// replace "toner" here with "terrain" or "watercolor"
-							//var layer = new L.StamenTileLayer("terrain");
 								var layer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 									attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 								});
@@ -53,16 +49,7 @@
 							map.scrollWheelZoom.disable();
 							map.boxZoom.disable();
 							map.keyboard.disable();
-						$.getJSON('assets/data/allMtLahars.json', function(data){
-							var datalayer = L.geoJson(data, {
-									color: '#FFA500',
-									opacity: 0.0,
-									weight: 0.5,
-									fillColor: '#FFA500',
-									fillOpacity: 0.5,
-							}).addTo(map);
-						})
-						 var circle1 = L.circle([46.8523, -121.7603], {
+													 var circle1 = L.circle([46.8523, -121.7603], {
 							color: 'red',
 						    opacity: 0.0,
 						    fillColor: '#f03',
@@ -97,11 +84,22 @@
 						    fillOpacity: 0.0,
 						    radius: 10000
 						}).addTo(map).bindPopup("Mt Adams");
+						$.getJSON('assets/data/allMtLahars.json', function(data){
+							var datalayer = L.geoJson(data, {
+									color: '#FFA500',
+									opacity: 0.0,
+									weight: 0.5,
+									fillColor: '#FFA500',
+									fillOpacity: 0.5,
+							}).addTo(map);
+						})
+
 						</script>
 					<p>Volcanoes of Washington State (North to South):
 					<br>
 					Mt Baker, Glacier Peak, Mt Rainier, Mt St Helens, Mt Adams</p>
-					<!-- Leaflet - Mt Rainier Lahar -->
+					
+			<!-- Leaflet - Mt Rainier Lahar -->
 						<div class="inner">
 							<h2>Pierce County Cultural Sites Impacted by Mount Rainier Lahars</h2>
 						<div id="map1"></div>
