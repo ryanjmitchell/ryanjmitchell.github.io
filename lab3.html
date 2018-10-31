@@ -58,10 +58,41 @@
 									fillOpacity: 0.5,
 							}).addTo(map);
 						})
-						var popup = L.popup()
-							.setLatLng([46.8523, -121.7603])
-							.setContent("Mt. Rainier")
-							.openOn(map);
+							var circle1 = L.circle([46.8523, -121.7603], {
+							    color: 'red',
+							    opacity: 1,
+							    fillColor: 'red',
+							    fillOpacity: 1,
+							    radius: 10000
+								}).addTo(map).bindPopup("Mt Rainier").openPopup();
+							var circle2 = L.circle([46.1914, -122.1956], {
+							    color: 'red',
+							    opacity: 1,
+							    fillColor: '#f03',
+							    fillOpacity: 1,
+							    radius: 10000
+								}).addTo(map).bindPopup("Mt St Helens");
+							var circle3 = L.circle([46.2024, -121.4910], {
+							    color: 'red',
+							    opacity: 1,
+							    fillColor: '#f03',
+							    fillOpacity: 1,
+							    radius: 10000
+							}).addTo(map).bindPopup("Mt Adams");
+							var circle4 = L.circle([48.7767, -121.8144], {
+							    color: 'red',
+							    opacity: 1,
+							    fillColor: '#f03',
+							    fillOpacity: 1,
+							    radius: 10000
+							}).addTo(map).bindPopup("Mt Baker");
+							var circle5 = L.circle([48.1119, -121.1132], {
+							    color: 'red',
+							    opacity: 1,
+							    fillColor: '#f03',
+							    fillOpacity: 1,
+							    radius: 10000
+							}).addTo(map).bindPopup("Glacier Peak");
 						</script>
 					<p>Volcanoes of Washington State (North to South):
 					<br>
@@ -88,7 +119,7 @@
 							$.getJSON('assets/data/sites.json', function(data){
 							var datalayer1 = L.geoJson(data, {
 								onEachFeature: function (feature, featurelayer){
-									featurelayer.bindPopup(feature.properties.NAME + <br> + featurelayer.properties.ADDRESS);
+									featurelayer.bindPopup(feature.properties.NAME);
 								}
 							}).addTo(map1);
 						});
