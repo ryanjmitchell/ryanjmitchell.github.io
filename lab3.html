@@ -64,16 +64,16 @@
 						})
 						</script>
 					<p>text</p>
-					<!-- Leaflet - Puyallup River Lahar -->
+					<!-- Leaflet - Mt Rainier Lahar -->
 						<div class="inner">
-							<h2>Puyallup River Lahar</h2>
+							<h2>Pierce County Lahars</h2>
 						<div id="map1"></div>
 						<script>
 							var layer1 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 								attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 								});
 							var map1 = new L.Map("map1", {
-							    center: new L.LatLng(46.95, -121.7603),
+							    center: new L.LatLng(47, -121.7603),
 							    zoom: 9
 							});
 							map1.addLayer(layer1);
