@@ -122,18 +122,8 @@
 									featurelayer.bindPopup(feature.properties.NAME);
 									featurelayer.bindPopup(feature.properties.ADDRESS);
 								},
-								pointToLayer: function (feature, latlng) {
-                            	return L.circleMarker(latlng, {
-                                // Stroke properties
-                                color: '#5EA4D4',
-                                opacity: 0.75,
-                                weight: 2,
-
-                                // Fill properties
-                                fillColor: '#5EA4D4',
-                                fillOpacity: 0.25,
-                                radius: 2
 							}).addTo(map1);
+						});
 							$.getJSON('assets/data/lahar.json', function(data){
 							var datalayer2 = L.geoJson(data, {
 									color: '#FFA500',
