@@ -54,9 +54,12 @@
 							map.boxZoom.disable();
 							map.keyboard.disable();
 						$.getJSON('assets/data/allMtLahars.json', function(data){
-							var datalayer = L.geoJson(data),
+							var datalayer = L.geoJson(data, {
+								onEachFeature: function (feature, featurelayer){
+									featurelayer.bindPopup(feature.properties.NAME);
 								}
-						.addTo(map);
+							}).addTo(map);
+						})
 						</script>
 					<p>text</p>
 					<!-- Leaflet - Puyallup River Lahar -->
@@ -78,8 +81,12 @@
 							map1.boxZoom.disable();
 							map1.keyboard.disable();
 							$.getJSON('assets/data/sites.json', function(data){
-							var datalayer1 = L.geoJson(data);
+							var datalayer1 = L.geoJson(data, {
+								onEachFeature: function (feature, featurelayer){
+									featurelayer.bindPopup(feature.properties.NAME);
+								}
 							}).addTo(map1);
+						})
 						</script>
 					<p>text</p>
 
