@@ -53,15 +53,13 @@
 							map.scrollWheelZoom.disable();
 							map.boxZoom.disable();
 							map.keyboard.disable();
-							// loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
-							// $.getJSON("assets/data/allMtLahars.json",function(data){
-							// L.geoJson function is used to parse geojson file and load on to map
-							// L.geoJson(allMtLahars.json).addTo(map);
-							// });
 						$.getJSON('assets/data/allMtLahars.json', function(data){
 							var datalayer = L.geoJson(data, {
 								onEachFeature: function (feature, featurelayer){
 									featurelayer.bindPopup(feature.properties.NAME);
+									color: 'red',
+									fillColor: '#f03',
+									fillOpacity: 0.5,
 								}
 							}).addTo(map);
 						})
