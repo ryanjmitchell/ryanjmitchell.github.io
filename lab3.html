@@ -49,6 +49,15 @@
 							map.scrollWheelZoom.disable();
 							map.boxZoom.disable();
 							map.keyboard.disable();
+							var home = {
+							  lat: 47.3,
+							  lng: -120,
+							  zoom: 7
+							}; 
+
+							L.easyButton('fa-home fa-lg',function(btn,map){
+							  map.setView([47.3, -120], 7);
+							},'Zoom To Washington').addTo(map);
 						$.getJSON('assets/data/allMtLahars.json', function(data){
 							var datalayer = L.geoJson(data, {
 									color: '#FFA500',
