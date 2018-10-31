@@ -56,7 +56,8 @@
 						$.getJSON('assets/data/allMtLahars.json', function(data){
 							var datalayer = L.geoJson(data, {
 									color: 'red',
-									fillColor: '#f03',
+									opacity: 0.5,
+									fillColor: 'red',
 									fillOpacity: 0.5,
 							}).addTo(map);
 						})
