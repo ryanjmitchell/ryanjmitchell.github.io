@@ -58,7 +58,10 @@
 									fillOpacity: 0.5,
 							}).addTo(map);
 						})
-
+						var popup = L.popup()
+							.setLatLng([46.8523, -121.7603])
+							.setContent("Mt. Rainier")
+							.openOn(map);
 						</script>
 					<p>Volcanoes of Washington State (North to South):
 					<br>
