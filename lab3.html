@@ -88,15 +88,6 @@
 									featurelayer.bindPopup(feature.properties.NAME);
 								}
 							}).addTo(map1);
-							$.getJSON('assets/data/lahar.json', function(data){
-							var datalayer = L.geoJson(data, {
-									color: '#FFA500',
-									opacity: 0.5,
-									weight: 0.5,
-									fillColor: '#FFA500',
-									fillOpacity: 0.5,
-							}).addTo(map);
-						})
 						</script>
 					<p>text</p>
 
