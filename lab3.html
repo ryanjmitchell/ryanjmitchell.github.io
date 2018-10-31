@@ -88,7 +88,7 @@
 							$.getJSON('assets/data/sites.json', function(data){
 							var datalayer1 = L.geoJson(data, {
 								onEachFeature: function (feature, featurelayer){
-									featurelayer.bindPopup(feature.properties.NAME);
+									featurelayer.bindPopup(feature.properties.NAME + <br> + featurelayer.properties.ADDRESS);
 								}
 							}).addTo(map1);
 						});
