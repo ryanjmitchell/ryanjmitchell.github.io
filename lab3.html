@@ -86,6 +86,13 @@
 							map1.scrollWheelZoom.disable();
 							map1.boxZoom.disable();
 							map1.keyboard.disable();
+							$.getJSON('assets/data/lahars.json', function(data){
+							var datalayer = L.geoJson(data, {
+								onEachFeature: function (feature, featurelayer){
+									featurelayer.bindPopup(feature.properties.NAME);
+								}
+							}).addTo(map);
+						})
 						</script>
 					<p>text</p>
 
