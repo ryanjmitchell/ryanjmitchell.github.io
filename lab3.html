@@ -120,9 +120,18 @@
 							var datalayer1 = L.geoJson(data, {
 								onEachFeature: function (feature, featurelayer){
 									featurelayer.bindPopup(feature.properties.NAME);
-									featurelayer.bindPopup(feature.properties.ADDRESS);
 								},
-							}).addTo(map1);
+                 pointToLayer: function (feature, latlng) {
+                            return L.circleMarker(latlng, {
+                                color: 'black',
+                                opacity: 0.75,
+                                weight: 1,
+                                fillColor: 'red',
+                                fillOpacity: 0.25,
+                                radius: 2
+                            });
+                        }
+                    }).addTo(map1);
 						});
 							$.getJSON('assets/data/lahar.json', function(data){
 							var datalayer2 = L.geoJson(data, {
