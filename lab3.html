@@ -74,7 +74,9 @@
 						<div id="map1"></div>
 						<script>
 							// replace "toner" here with "terrain" or "watercolor"
-							var layer = new L.StamenTileLayer("terrain");
+								var layer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+									attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+								});
 							var map1 = new L.Map("map1", {
 							    center: new L.LatLng(46.95, -121.7603),
 							    zoom: 9
