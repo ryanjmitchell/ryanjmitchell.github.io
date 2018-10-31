@@ -54,15 +54,9 @@
 							map.boxZoom.disable();
 							map.keyboard.disable();
 						$.getJSON('assets/data/allMtLahars.json', function(data){
-							var datalayer = L.geoJson(data, {
-								onEachFeature: function (feature, featurelayer){
-									featurelayer.bindPopup(feature.properties.NAME);
-									color: 'red',
-									fillColor: '#f03',
-									fillOpacity: 0.5,
+							var datalayer = L.geoJson(data),
 								}
-							}).addTo(map);
-						})
+						.addTo(map);
 						</script>
 					<p>text</p>
 					<!-- Leaflet - Puyallup River Lahar -->
