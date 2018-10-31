@@ -46,7 +46,6 @@
 							var map = new L.Map("map", {
 							    center: new L.LatLng(47.55, -120),
 							    zoom: 6,
-							    zoomControl: false
 							});
 							map.addLayer(layer);
 							map.touchZoom.disable();
@@ -73,8 +72,8 @@
 							<h2>Puyallup River Lahar</h2>
 						<div id="map1"></div>
 						<script>
-								var layer1 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-									attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+							var layer1 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+								attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
 								});
 							var map1 = new L.Map("map1", {
 							    center: new L.LatLng(46.95, -121.7603),
@@ -87,7 +86,7 @@
 							map1.boxZoom.disable();
 							map1.keyboard.disable();
 							$.getJSON('assets/data/lahars.json', function(data){
-							var datalayer = L.geoJson(data, {
+							var datalayer1 = L.geoJson(data, {
 								onEachFeature: function (feature, featurelayer){
 									featurelayer.bindPopup(feature.properties.NAME);
 								}
