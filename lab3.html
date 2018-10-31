@@ -120,7 +120,19 @@
 							var datalayer1 = L.geoJson(data, {
 								onEachFeature: function (feature, featurelayer){
 									featurelayer.bindPopup(feature.properties.NAME);
-								}
+									featurelayer.bindPopup(feature.properties.ADDRESS);
+								},
+								pointToLayer: function (feature, latlng) {
+                            	return L.circleMarker(latlng, {
+                                // Stroke properties
+                                color: '#5EA4D4',
+                                opacity: 0.75,
+                                weight: 2,
+
+                                // Fill properties
+                                fillColor: '#5EA4D4',
+                                fillOpacity: 0.25,
+                                radius: 2
 							}).addTo(map1);
 						});
 							$.getJSON('assets/data/lahar.json', function(data){
@@ -142,7 +154,7 @@
 							}).addTo(map1);
 						});
 						</script>
-					<p>text</p>
+					<p>There are 137 cultural and historical sites at risk from lahars within Pierce County.</p>
 
 				<!-- Footer -->
 					<footer class="wrapper style1 align-center">
