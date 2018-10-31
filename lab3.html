@@ -84,12 +84,8 @@
 							map1.boxZoom.disable();
 							map1.keyboard.disable();
 							$.getJSON('assets/data/sites.json', function(data){
-							var datalayer1 = L.geoJson(data, {
-								onEachFeature: function (feature, featurelayer){
-									featurelayer.bindPopup(feature.properties.NAME);
-								}
+							var datalayer1 = L.geoJson(data);
 							}).addTo(map1);
-						})
 						</script>
 					<p>text</p>
 
