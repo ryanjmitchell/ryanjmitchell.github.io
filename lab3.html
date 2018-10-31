@@ -55,9 +55,6 @@
 							map.keyboard.disable();
 						$.getJSON('assets/data/allMtLahars.json', function(data){
 							var datalayer = L.geoJson(data, {
-								onEachFeature: function (feature, featurelayer){
-									featurelayer.bindPopup(feature.properties.NAME);
-								}
 							}).addTo(map);
 						})
 						</script>
