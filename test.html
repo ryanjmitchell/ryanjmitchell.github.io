@@ -138,7 +138,7 @@
               var datalayer4 = L.geoJson(data, {
                 onEachFeature: function (feature, featurelayer){
                   featurelayer.bindPopup(feature.properties.NAME);
-                },
+                }
                  /* pointToLayer: function (feature, latlng) {
                             return L.circleMarker(latlng, {
                                 color: 'black',
@@ -154,7 +154,6 @@
               	markers.addLayer(datalayer4);
               	map.addLayer(markers);
             });
-
 
               $.getJSON('assets/data/lahar.json', function(data){
               var datalayer2 = L.geoJson(data, {
