@@ -150,10 +150,11 @@
                             });
                         } */
                     });
-            });
-              var markers = L.markerClusterGroup();
+              	var markers = L.markerClusterGroup();
               	markers.addlayer(datalayer4);
               	map.addLayer(markers);
+            });
+
 
               $.getJSON('assets/data/lahar.json', function(data){
               var datalayer2 = L.geoJson(data, {
