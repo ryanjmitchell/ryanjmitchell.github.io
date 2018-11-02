@@ -6,11 +6,14 @@
 -->
 <html>
   <head>
-    <title>Lab 3 - GIS 503</title>
+    <title>TEST</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="assets/leaflet/leaflet.css" />
     <script src="assets/leaflet/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+	   <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -36,7 +39,7 @@
               <h2>Lahars of Washington State</h2>
             <div id="map"></div>
             <script>
-                var layer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+              var layer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                   attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
                 });
               var map = new L.Map("map", {
@@ -49,7 +52,18 @@
               map.scrollWheelZoom.disable();
               map.boxZoom.disable();
               map.keyboard.disable();
-            $.getJSON('assets/data/allMtLahars.json', function(data){
+            //With Leaflet.EasyButton, things stay pretty clean: name your icon and function (hover text if you want):
+
+			var home = {
+				  lat: 47.3,
+				  lng: -120,
+				  zoom: 7
+				}; 
+
+				L.easyButton('fa-home fa-lg',function(btn,map){
+				  map.setView([47.3, -120], 7);
+				},'Zoom To Home').addTo(map);
+			$.getJSON('assets/data/allMtLahars.json', function(data){
               var datalayer = L.geoJson(data, {
                   color: '#FFA500',
                   opacity: 0.0,
@@ -57,7 +71,7 @@
                   fillColor: '#FFA500',
                   fillOpacity: 0.5,
               }).addTo(map);
-            })
+            });
               var circle1 = L.circle([46.8523, -121.7603], {
                   color: 'red',
                   opacity: 0,
@@ -104,7 +118,7 @@
             <div id="map1"></div>
             <script>
               var layer1 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+                  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
                 });
               var map1 = new L.Map("map1", {
                   center: new L.LatLng(47, -121.7603),
@@ -123,15 +137,11 @@
                 },
                  pointToLayer: function (feature, latlng) {
                             return L.circleMarker(latlng, {
-                                // Stroke properties
                                 color: 'black',
                                 opacity: 0.75,
                                 weight: 1,
-
-                                // Fill properties
                                 fillColor: 'red',
                                 fillOpacity: 0.25,
-
                                 radius: 2
                             });
                         }
