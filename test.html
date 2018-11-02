@@ -65,6 +65,7 @@
 				L.easyButton('fa-home fa-lg',function(btn,map){
 				  map.setView([47.3, -120], 7);
 				},'Zoom To Home').addTo(map);
+
 			$.getJSON('assets/data/allMtLahars.json', function(data){
               var datalayer = L.geoJson(data, {
                   color: '#FFA500',
@@ -81,7 +82,7 @@
                   fillOpacity: 0,
                   radius: 10000
                 }).addTo(map).bindPopup("Mt Rainier").openPopup();
-                circle1.bringtofront();
+                circle1.bringToFront();
               var circle2 = L.circle([46.1914, -122.1956], {
                   color: 'red',
                   opacity: 0,
@@ -163,7 +164,7 @@
                   fillOpacity: 0.5,
               }).addTo(map1);
             });
-              $.getJSON('assets/data/cities.json', function(data){
+              $.getJSON('assets/data/pierce.json', function(data){
               var datalayer3 = L.geoJson(data, {
                   color: 'black',
                   opacity: 1,
