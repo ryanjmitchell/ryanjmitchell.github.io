@@ -151,7 +151,8 @@
                         }
                     });
               	var markers = L.markerClusterGroup({
-					zoomToBoundsOnClick: false
+					spiderfyOnMaxZoom: false,
+					showCoverageOnHover: false,
 				});
               	markers.addLayer(datalayer4);
               	map1.addLayer(markers);
