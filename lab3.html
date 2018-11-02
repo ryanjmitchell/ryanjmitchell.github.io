@@ -32,6 +32,18 @@
           height: 500px;
           background-color: grey;
         }
+    .info {
+	    padding: 6px 8px;
+	    font: 14px/16px Arial, Helvetica, sans-serif;
+	    background: white;
+	    background: rgba(255,255,255,0.9);
+	    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+	    border-radius: 5px;
+		}
+	.info h5 {
+    margin: 0 0 5px;
+    color: #FFA500;
+		}
     </style>
   </head>
   <body class="is-preload">
@@ -46,7 +58,6 @@
               var layer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                   attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
                 });
-             
               var map = new L.Map("map", {
                   center: new L.LatLng(47.3, -120),
                   zoom: 7,
@@ -70,46 +81,57 @@
               datalayer.bringToBack();
             });
               
+              var info = L.control();
+              info.onAdd = function (map) {
+                  this._div = L.DomUtil.create('div', 'info');
+                  this.update();
+                  return this._div;
+              };
+              info.update = function (props) {
+                  this._div.innerHTML = '<h5>Lahar Flows</h5>' + 'Click Lahar for Source';
+              };
+              info.addTo(map);
+
               var circle1 = L.circle([46.8523, -121.7603], {
                   color: 'red',
                   opacity: 0,
                   fillColor: 'red',
                   fillOpacity: 0,
                   radius: 10000
-                }).addTo(map).bindPopup("Mt Rainier Lahar");
+                }).addTo(map).bindPopup("Mt Rainier");
               var circle2 = L.circle([46.1914, -122.1956], {
                   color: 'red',
                   opacity: 0,
                   fillColor: '#f03',
                   fillOpacity: 0,
                   radius: 10000
-                }).addTo(map).bindPopup("Mt St Helens Lahar");
+                }).addTo(map).bindPopup("Mt St Helens");
               var circle3 = L.circle([46.2024, -121.4910], {
                   color: 'red',
                   opacity: 0,
                   fillColor: '#f03',
                   fillOpacity: 0,
                   radius: 10000
-              }).addTo(map).bindPopup("Mt Adams Lahar");
+              }).addTo(map).bindPopup("Mt Adams");
               var circle4 = L.circle([48.7767, -121.8144], {
                   color: 'red',
                   opacity: 0,
                   fillColor: '#f03',
                   fillOpacity: 0,
                   radius: 10000
-              }).addTo(map).bindPopup("Mt Baker Lahar");
+              }).addTo(map).bindPopup("Mt Baker");
               var circle5 = L.circle([48.1119, -121.1132], {
                   color: 'red',
                   opacity: 0,
                   fillColor: '#f03',
                   fillOpacity: 0,
                   radius: 10000
-              }).addTo(map).bindPopup("Glacier Peak Lahar");
+              }).addTo(map).bindPopup("Glacier Peak");
             </script>
           <p>Volcanoes of Washington State (North to South):
           <br>
           Mt Baker, Glacier Peak, Mt Rainier, Mt St Helens, Mt Adams</p>
-          
+      
       <!-- Leaflet - Mt Rainier Lahar -->
             <div class="inner">
               <h2>Pierce County Cultural Sites Impacted by Mount Rainier Lahars</h2>
@@ -131,6 +153,17 @@
               map1.boxZoom.disable();
               map1.keyboard.disable();
               
+              var info = L.control();
+              info.onAdd = function (map) {
+                  this._div = L.DomUtil.create('div', 'info');
+                  this.update();
+                  return this._div;
+              };
+              info.update = function (props) {
+                  this._div.innerHTML = '<h5>Lahar Flows</h5>' + 'Click Site for Details';
+              };
+              info.addTo(map1);
+
               $.getJSON('assets/data/sites.json', function(data){
               
               var datalayer4 = L.geoJson(data, {
@@ -144,14 +177,14 @@
                                 weight: 1,
                                 fillColor: '#FF4500',
                                 fillOpacity: 0.25,
-                                radius: 10
+                                radius: 10,
                             });
                         }
                     });
               	var markers = L.markerClusterGroup({
-					spiderfyOnMaxZoom: false,
-					showCoverageOnHover: false,
-				});
+        					spiderfyOnMaxZoom: false,
+        					showCoverageOnHover: false,
+        				});
               	markers.addLayer(datalayer4);
               	map1.addLayer(markers);
             });
@@ -177,7 +210,7 @@
               }).addTo(map1);
             });
             </script>
-          <p>There are 137 cultural and historical sites at risk from lahars within Pierce County.</p>
+          <p>137 cultural and historical sites are at risk from lahars within Pierce County.</p>
 
         <!-- Footer -->
           <footer class="wrapper style1 align-center">
