@@ -151,7 +151,7 @@
                         }
                     });
             });
-              var markers = L.MarkerClusterGroup();
+              var markers = L.markerClusterGroup();
               	markers.addlayer(datalayer1);
               	map.addLayer(markers);
 
@@ -163,6 +163,7 @@
                   fillColor: '#FFA500',
                   fillOpacity: 0.5,
               }).addTo(map1);
+              datalayer2.bringToBack();
             });
               $.getJSON('assets/data/pierce.json', function(data){
               var datalayer3 = L.geoJson(data, {
