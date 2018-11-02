@@ -137,20 +137,22 @@
               
               var datalayer4 = L.geoJson(data, {
                 onEachFeature: function (feature, featurelayer){
-                  featurelayer.bindPopup("<p>Name: "+feature.properties.NAME+"<br> City: "+feature.properties.COMMUNITY+"</p>");
+                  featurelayer.bindPopup("<p><b>NAME: </b>"+feature.properties.NAME+"<br> <b>COMMUNITY: </b>"+feature.properties.COMMUNITY+"</p>");
                 },
                  pointToLayer: function (feature, latlng) {
                             return L.circleMarker(latlng, {
                                 color: 'black',
                                 opacity: 0.75,
                                 weight: 1,
-                                fillColor: 'red',
+                                fillColor: '#FF4500',
                                 fillOpacity: 0.25,
                                 radius: 10
                             });
                         }
                     });
-              	var markers = L.markerClusterGroup();
+              	var markers = L.markerClusterGroup({
+					zoomToBoundsOnClick: false
+				});
               	markers.addLayer(datalayer4);
               	map1.addLayer(markers);
             });
