@@ -138,7 +138,7 @@
               var datalayer4 = L.geoJson(data, {
                 onEachFeature: function (feature, featurelayer){
                   featurelayer.bindPopup(feature.properties.NAME);
-                }
+                },
                  pointToLayer: function (feature, latlng) {
                             return L.circleMarker(latlng, {
                                 color: 'black',
