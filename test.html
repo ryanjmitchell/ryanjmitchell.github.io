@@ -137,7 +137,7 @@
               
               var datalayer4 = L.geoJson(data, {
                 onEachFeature: function (feature, featurelayer){
-                  featurelayer.bindPopup("<p>Name: "+feature.properties.NAME+"</p>");
+                  featurelayer.bindPopup("<p>Name: "+feature.properties.NAME+"<br> City: "+feature.properties.COMMUNITY+"</p>");
                 },
                  pointToLayer: function (feature, latlng) {
                             return L.circleMarker(latlng, {
