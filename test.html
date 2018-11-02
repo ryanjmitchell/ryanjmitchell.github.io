@@ -74,6 +74,7 @@
                   fillColor: '#FFA500',
                   fillOpacity: 0.5,
               }).addTo(map);
+              datalayer.bringToBack();
             });
               var circle1 = L.circleMarker([46.8523, -121.7603], {
                   color: 'red',
@@ -82,7 +83,6 @@
                   fillOpacity: 0,
                   radius: 10000
                 }).addTo(map).bindPopup("Mt Rainier").openPopup();
-                circle1.bringToFront();
               var circle2 = L.circle([46.1914, -122.1956], {
                   color: 'red',
                   opacity: 0,
