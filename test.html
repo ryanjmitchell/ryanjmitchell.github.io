@@ -16,6 +16,8 @@
 	<link rel="stylesheet" href="assets/markercluster/dist/MarkerCluster.css">
 	<link rel="stylesheet" href="assets/markercluster/dist/MarkerCluster.Default.css">
 	<script src="assets/markercluster/dist/leaflet.markercluster.js"></script>
+	<link rel="stylesheet" href="assets/defaultextent/dist/leaflet.defaultextent.css">
+	<script src="assets/defaultextent/dist/leaflet.defaultextent.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -25,11 +27,27 @@
           height: 500px;
           background-color: grey;
         }
-          #map1{
+      #map1{
           width: 100%;
           height: 500px;
           background-color: grey;
         }
+        .info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+}
+.info h5 {
+    margin: 0 0 5px;
+    color: #FFA500;
+}
+.info p {
+    margin: 0 0 5px;
+    color: ##FF4500;
+}
     </style>
   </head>
   <body class="is-preload">
@@ -47,6 +65,7 @@
               var map = new L.Map("map", {
                   center: new L.LatLng(47.3, -120),
                   zoom: 7,
+                  defaultExtentControl: true
               });
               map.addLayer(layer);
               map.touchZoom.disable();
@@ -54,17 +73,6 @@
               map.scrollWheelZoom.disable();
               map.boxZoom.disable();
               map.keyboard.disable();
-            //With Leaflet.EasyButton, things stay pretty clean: name your icon and function (hover text if you want):
-
-			var home = {
-				  lat: 47.3,
-				  lng: -120,
-				  zoom: 7
-				}; 
-
-				L.easyButton('fa-home fa-lg',function(btn,map){
-				  map.setView([47.3, -120], 7);
-				},'Zoom To Home').addTo(map);
 
 			$.getJSON('assets/data/allMtLahars.json', function(data){
               var datalayer = L.geoJson(data, {
@@ -76,41 +84,53 @@
               }).addTo(map);
               datalayer.bringToBack();
             });
+              
+              var info = L.control();
+              info.onAdd = function (map) {
+                  this._div = L.DomUtil.create('div', 'info');
+                  this.update();
+                  return this._div;
+              };
+              info.update = function (props) {
+                  this._div.innerHTML = '<h5>Lahar Flows</h5>' +  ('Click lahar for source');
+              };
+              info.addTo(map);
+
               var circle1 = L.circle([46.8523, -121.7603], {
                   color: 'red',
                   opacity: 0,
                   fillColor: 'red',
                   fillOpacity: 0,
                   radius: 10000
-                }).addTo(map).bindPopup("Mt Rainier Lahar");
+                }).addTo(map).bindPopup("Mt Rainier");
               var circle2 = L.circle([46.1914, -122.1956], {
                   color: 'red',
                   opacity: 0,
                   fillColor: '#f03',
                   fillOpacity: 0,
                   radius: 10000
-                }).addTo(map).bindPopup("Mt St Helens Lahar");
+                }).addTo(map).bindPopup("Mt St Helens");
               var circle3 = L.circle([46.2024, -121.4910], {
                   color: 'red',
                   opacity: 0,
                   fillColor: '#f03',
                   fillOpacity: 0,
                   radius: 10000
-              }).addTo(map).bindPopup("Mt Adams Lahar");
+              }).addTo(map).bindPopup("Mt Adams");
               var circle4 = L.circle([48.7767, -121.8144], {
                   color: 'red',
                   opacity: 0,
                   fillColor: '#f03',
                   fillOpacity: 0,
                   radius: 10000
-              }).addTo(map).bindPopup("Mt Baker Lahar");
+              }).addTo(map).bindPopup("Mt Baker");
               var circle5 = L.circle([48.1119, -121.1132], {
                   color: 'red',
                   opacity: 0,
                   fillColor: '#f03',
                   fillOpacity: 0,
                   radius: 10000
-              }).addTo(map).bindPopup("Glacier Peak Lahar");
+              }).addTo(map).bindPopup("Glacier Peak");
             </script>
           <p>Volcanoes of Washington State (North to South):
           <br>
@@ -123,9 +143,11 @@
               var layer1 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
                   attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
                 });
+              
               var map1 = new L.Map("map1", {
                   center: new L.LatLng(47, -121.7603),
-                  zoom: 9
+                  zoom: 9,
+                  defaultExtentControl: true
               });
               map1.addLayer(layer1);
               map1.touchZoom.disable();
@@ -133,11 +155,23 @@
               map1.scrollWheelZoom.disable();
               map1.boxZoom.disable();
               map1.keyboard.disable();
+              
+              var info = L.control();
+              info.onAdd = function (map) {
+                  this._div = L.DomUtil.create('div', 'info');
+                  this.update();
+                  return this._div;
+              };
+              info.update = function (props) {
+                  this._div.innerHTML = '<h5>Lahar Flows</h5>' +  ('Click ci');
+              };
+              info.addTo(map1);
+
               $.getJSON('assets/data/sites.json', function(data){
               
               var datalayer4 = L.geoJson(data, {
                 onEachFeature: function (feature, featurelayer){
-                  featurelayer.bindPopup("<p><b>NAME: </b>"+feature.properties.NAME+"<br> <b>COMMUNITY: </b>"+feature.properties.COMMUNITY+"</p>");
+                  featurelayer.bindPopup("<p>NAME: "+feature.properties.NAME+"<br>COMMUNITY: "+feature.properties.COMMUNITY+"</p>");
                 },
                  pointToLayer: function (feature, latlng) {
                             return L.circleMarker(latlng, {
@@ -146,7 +180,8 @@
                                 weight: 1,
                                 fillColor: '#FF4500',
                                 fillOpacity: 0.25,
-                                radius: 10
+                                radius: 10,
+                                riseOnHover: false,
                             });
                         }
                     });
@@ -168,6 +203,7 @@
               }).addTo(map1);
               datalayer2.bringToBack();
             });
+
               $.getJSON('assets/data/pierce.json', function(data){
               var datalayer3 = L.geoJson(data, {
                   color: 'black',
