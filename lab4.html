@@ -30,9 +30,9 @@
 			var map = new mapboxgl.Map({
 			    container: 'map',
 			    style: 'mapbox://styles/mapbox/streets-v10',
+			    center: [-122.235764, 47.107023],
+				zoom: 8
 			});
-			map.setCenter([122,45]);
-			map.setZoom(2);
 			map.on('load', function(){
 				map.addSource('earthquakes', {
 			        "type": "geojson",
