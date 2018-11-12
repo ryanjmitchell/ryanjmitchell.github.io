@@ -22,17 +22,18 @@
       <!-- Mapbox 1 -->	
          <section>
             <div>
-              <h2 style="text-align: center;">MAPBOX 1</h2>
+              <h2 style="text-align: center;">Earthquakes - Mount Rainier, WA</h2>
 				<div id='map' style='width: 100%; height: 500px;'></div>
 				<script>
 				mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
 				//The map variable
 			var map = new mapboxgl.Map({
 			    container: 'map',
-			    style: 'mapbox://styles/mapbox/streets-v10',
-			    center: [-122.235764, 47.107023],
-				zoom: 8
+			    style: 'mapbox://styles/ryanjmitch/cjoevcwjs5f1j2rpfn0q6jnsa',
+			    center: [-121.725,46.865],
+				zoom: 11
 			});
+			map.scrollZoom.disable();
 			map.on('load', function(){
 				map.addSource('earthquakes', {
 			        "type": "geojson",
@@ -74,7 +75,7 @@
 			var map1 = new mapboxgl.Map({
 			container: 'map1',
 			style: 'mapbox://styles/ryanjmitch/cjhtd3u3zanvf2soazy8ok979',
-center: [-122.235764, 47.107023],
+center: [-122.235764, 47.12],
 zoom: 11.4
 			});
 			</script>
