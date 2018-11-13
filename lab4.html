@@ -41,6 +41,7 @@
 				zoom: 11
 			});
 			map.scrollZoom.disable();
+			map.addControl(new mapboxgl.NavigationControl());
 			map.on('load', function(){
 				map.addSource('earthquakes', {
 			        "type": "geojson",
@@ -98,7 +99,8 @@ for (var i = 0; i < inputs.length; i++) {
 center: [-122.235764, 47.12],
 zoom: 11.4
 			});
-			map1.scrollZoom.disable()
+			map1.scrollZoom.disable();
+			map1.addControl(new mapboxgl.NavigationControl());
 			</script>
           <p>PLACEHOLDER TEXT</p>
   </section>
