@@ -5,127 +5,201 @@
   Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-  <head>
-    <title>Lab 4 - GIS 503</title>
-    <meta charset="utf-8" />
+<head>
+	<title>Lab 4 - GIS 503</title>
+	<meta charset="utf-8" />
 	<script src='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
 	<link href='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-    <style >
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	<style >
+	#remover {
+		margin: 0 auto;
+		background-color: #FFFF00;
+		color: 'black';
+		padding: 0.5em;
+		border: 2px solid #FF4500;
+		cursor: pointer;
+		position: absolute;
+		left: 0.7em;
+		top: 9em;
+	}
+	#remover:hover {
+		background-color: #FF4500;
+	}
+	#home {
+		margin: 0 auto;
+		background-color: #FFFF00;
+		color: 'black';
+		padding: 0.5em;
+		border: 2px solid #FF4500;
+		cursor: pointer;
+		position: absolute;
+		left: 0.7em;
+		top: 15em;
+	}
+	#home:hover {
+		background-color: #FF4500;
+	}
+		#southHill {
+		margin: 0 auto;
+		background-color: #FFFF00;
+		color: 'black';
+		padding: 0.5em;
+		border: 2px solid #FF4500;
+		cursor: pointer;
+		position: absolute;
+		left: 0.7em;
+		top: 25em;
+	}
+	#southHill:hover {
+		background-color: #FF4500;
+	}
+</style>
+</head>
+<body>
 
-    </style>
-  </head>
-  <body>
-
-      <!-- Mapbox 1 -->	
-         <section>
-            <div>
-              <h2 style="text-align: center;">Earthquakes - Mount Rainier, WA</h2>
-				
-	<div id='menu'>
+	<!-- Mapbox 1 -->	
+	<section>
+		<div>
+			<h2 style="text-align: center;">Earthquakes - Mauna Loa, Hawaii</h2>
+	<!-- <div id='menu'>
 	    <input id='light' type='radio' name='rtoggle' value='light'>
 	    <label for='light'>light</label>
 	    <input id='satellite' type='radio' name='rtoggle' value='satellite'>
 	    <label for='satellite'>satellite</label>
-	</div>
-<div id='map' style='width: 100%; height: 500px;'></div>
-				<script>
-				mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
+	   	<input id='orginal' type='radio' name='rtoggle' value='mapbox://styles/ryanjmitch/cjoevcwjs5f1j2rpfn0q6jnsa'>
+	    <label for='orginal'>orginal</label>
+	</div> -->
+	<div id='map' style='width: 100%; height: 500px;'></div>
+	<div id='remover'>Toggle Earthquakes OFF</div>
+	<div id='home'>Monana Loa</div>
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
 				//The map variable
-			var map = new mapboxgl.Map({
-			    container: 'map',
-			    style: 'mapbox://styles/ryanjmitch/cjoevcwjs5f1j2rpfn0q6jnsa',
-			    center: [-121.725,46.865],
-				zoom: 11
-			});
-			map.scrollZoom.disable();
-			map.addControl(new mapboxgl.NavigationControl());
-			map.on('load', function(){
-				map.addSource('earthquakes', {
-			        "type": "geojson",
-			        "data": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
-			    });
-			    map.addLayer({
-			    	"id":"equakes",
-			    	"type":"circle",
-			    	"circle-radius":10,
-          			"circle-color":'green',
-			    	"source":"earthquakes"
-			    });
-				//add a handler for clicking/popups 
+				var map = new mapboxgl.Map({
+					container: 'map',
+					style: 'mapbox://styles/ryanjmitch/cjoevcwjs5f1j2rpfn0q6jnsa',
+					center: [-155.5922,19.4721],
+					zoom: 11
+				});
+				map.scrollZoom.disable();
+				map.addControl(new mapboxgl.NavigationControl({
+					showCompass: false
+				}));
+				map.on('load', function(){
+					map.addSource('earthquakes', {
+						"type": "geojson",
+						"data": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
+					});
+					map.addLayer({
+						"id":"equakes",
+						"type":"circle",
+						"source":"earthquakes",
+						"paint": {
+							"circle-color": "#FFFF00",
+							"circle-opacity": 0.5,
+							"circle-stroke-color": '#FF4500',
+							"circle-stroke-width": 1,
+							"circle-stroke-opacity": 0.75
+						}
+					});
+			   //add a handler for clicking/popups 
 				//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/ 
 				map.on('click', 'equakes', function (e) {
-			        var coordinates = e.features[0].geometry.coordinates.slice();
-			        var description = e.features[0].properties.mag;
+					var coordinates = e.features[0].geometry.coordinates.slice();
+					var description = "<p>Mag: "+e.features[0].properties.mag+"<br>location: "+e.features[0].properties.place+"<br>URL: <a href='"+e.features[0].properties.url+"'>Click here for details </a></p>"
 			        // Ensure that if the map is zoomed out such that multiple
 			        // copies of the feature are visible, the popup appears
 			        // over the copy being pointed to.
 			        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-			            coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			        	coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
 			        }
 			        //make the popup
 			        new mapboxgl.Popup()
-			            .setLngLat(coordinates)
-			            .setHTML(description)
-			            .addTo(map);
+			        .setLngLat(coordinates)
+			        .setHTML(description)
+			        .addTo(map);
 			    });
 			});
-			var layerList = document.getElementById('menu');
-var inputs = layerList.getElementsByTagName('input');
+				map.on('load', function(){
+					var switchy = document.getElementById('remover');
+					switchy.addEventListener("click", function(){
+						switchy = document.getElementById('remover');
+						if (switchy.className === 'on') {
+							switchy.setAttribute('class', 'off');
+							map.setLayoutProperty('equakes', 'visibility', 'none');
+							switchy.innerHTML = 'Toggle Earthquakes ON';
+						} else {
+							switchy.setAttribute('class', 'on');
+							map.setLayoutProperty('equakes', 'visibility', 'visible');
+							switchy.innerHTML = 'Toggle Earthquakes OFF';
+						}
+					});
+	//home button
+	var home = document.getElementById('home');
+	home.addEventListener("click", function(){
+		map.setCenter([-155.5922,19.4721]);
+		map.setZoom(11);
+	});
+});
+</script>
+<p>PLACEHOLDER TEXT</p>
+</div>
 
-function switchLayer(layer) {
-    var layerId = layer.target.id;
-    map.setStyle('mapbox://styles/mapbox/' + layerId + '-v9');
-}
-
-for (var i = 0; i < inputs.length; i++) {
-    inputs[i].onclick = switchLayer;
-}
-				</script>
-          <p>PLACEHOLDER TEXT</p>
-      </div>
-      
-      <!-- Mapbox 2-->
-          <div>
-              <h2 style="text-align: center;">MAPBOX 2</h2>
-            <div id="map1" style='width: 100%; height: 500px';></div>
-            <script>
-			mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
-			var map1 = new mapboxgl.Map({
+<!-- Mapbox 2-->
+<div>
+	<h2 style="text-align: center;">MAPBOX 2</h2>
+	<div id="map1" style='width: 100%; height: 500px';></div>
+	<div id='southHill'>South Hill</div>
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
+		var map1 = new mapboxgl.Map({
 			container: 'map1',
 			style: 'mapbox://styles/ryanjmitch/cjhtd3u3zanvf2soazy8ok979',
-center: [-122.235764, 47.12],
-zoom: 11.4
+			center: [-122.2930,47.12],
+			zoom: 11.4
+		});
+		map1.scrollZoom.disable();
+		map1.addControl(new mapboxgl.NavigationControl({
+			showCompass: false
+		}));
+		map1.on('load', function(){		
+			var southHill = document.getElementById('home');
+			southHill.addEventListener("click", function(){
+				map1.setCenter([-155.5922,19.4721]);
+				map1.setZoom(11);
 			});
-			map1.scrollZoom.disable();
-			map1.addControl(new mapboxgl.NavigationControl());
-			</script>
-          <p>PLACEHOLDER TEXT</p>
-  </section>
-        <!-- Footer -->
-          <footer class="wrapper style1 align-center">
-            <div class="inner">
-              <ul class="icons">
-                  <a href="index.html"><span class="icon style2 fas fa-home"></span>
-                  <p>Home</p></a>
-                <li><a href="https://www.linkedin.com/in/ryanmitchell24" class="icon style2 fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-                <li><a href="mailto:ryanjmitch@gmail.com?Subject=MSGT Portfolio" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
-              </ul>
-              <p>&copy; Ryan Mitchell. Design: <a href="https://html5up.net" target="_blank">Story</a>.</p>
-            </div>
-          </footer>
-      </div>
+		});
 
-    <!-- Scripts -->
-      <script src="assets/js/jquery.min.js"></script>
-      <script src="assets/js/jquery.scrollex.min.js"></script>
-      <script src="assets/js/jquery.scrolly.min.js"></script>
-      <script src="assets/js/browser.min.js"></script>
-      <script src="assets/js/breakpoints.min.js"></script>
-      <script src="assets/js/util.js"></script>
-      <script src="assets/js/main.js"></script> 
 
-  </body>
+	</script>
+	<p>PLACEHOLDER TEXT</p>
+</section>
+
+<!-- Footer -->
+<footer class="wrapper style1 align-center">
+	<div class="inner">
+		<ul class="icons">
+			<a href="index.html"><span class="icon style2 fas fa-home"></span>
+				<p>Home</p></a>
+				<li><a href="https://www.linkedin.com/in/ryanmitchell24" class="icon style2 fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+				<li><a href="mailto:ryanjmitch@gmail.com?Subject=MSGT Portfolio" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
+			</ul>
+			<p>&copy; Ryan Mitchell. Design: <a href="https://html5up.net" target="_blank">Story</a>.</p>
+		</div>
+	</footer>
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script> 
+
+</body>
 </html>
