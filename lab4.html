@@ -37,7 +37,7 @@
 		cursor: pointer;
 		position: absolute;
 		left: 0.7em;
-		top: 15em;
+		top: 6em;
 	}
 	#home:hover {
 		background-color: #FF4500;
@@ -51,7 +51,7 @@
 		cursor: pointer;
 		position: absolute;
 		left: 0.7em;
-		top: 25em;
+		top: 50em;
 	}
 	#southHill:hover {
 		background-color: #FF4500;
@@ -166,7 +166,7 @@
 			showCompass: false
 		}));
 		map1.on('load', function(){		
-			var southHill = document.getElementById('home');
+			var southHill = document.getElementById('southHill');
 			southHill.addEventListener("click", function(){
 				map1.setCenter([-155.5922,19.4721]);
 				map1.setZoom(11);
