@@ -18,40 +18,43 @@
 		margin: 0 auto;
 		background-color: #FFFF00;
 		color: 'black';
-		padding: 0.5em;
+		padding: 0.1em;
 		border: 2px solid #FF4500;
+		border-radius: 0.3em;
 		cursor: pointer;
 		position: absolute;
 		left: 0.7em;
-		top: 8em;
+		top: 7em;
 	}
 	#remover:hover {
 		background-color: #FF4500;
 	}
-	#home {
+	#loa {
 		margin: 0 auto;
 		background-color: #C8C8C8;
 		color: 'black';
-		padding: 0.5em;
+		padding: 0.1em;
 		border: 2px solid #024731;
+		border-radius: 0.3em;
 		cursor: pointer;
 		position: absolute;
 		left: 0.7em;
-		top: 5em;
+		top: 4.5em;
 	}
-	#home:hover {
+	#loa:hover {
 		background-color: #024731;
 	}
 	#southHill {
 		margin: 0 auto;
 		background-color: #4bdaf7;
 		color: 'black';
-		padding: 0.5em;
+		padding: 0.1em;
 		border: 2px solid #04126c;
+		border-radius: 0.3em;
 		cursor: pointer;
 		position: absolute;
 		left: 0.7em;
-		top: 44em;
+		top: 43.5em;
 	}
 	#southHill:hover {
 		background-color: #b1b9b2;
@@ -59,24 +62,17 @@
 </style>
 </head>
 <body>
-
+	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
+	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
 	<!-- Mapbox 1 -->	
 	<section>
 		<div>
 			<h2 style="text-align: center;">Earthquakes - Mauna Loa, Hawaii</h2>
-	<!-- <div id='menu'>
-	    <input id='light' type='radio' name='rtoggle' value='light'>
-	    <label for='light'>light</label>
-	    <input id='satellite' type='radio' name='rtoggle' value='satellite'>
-	    <label for='satellite'>satellite</label>
-	   	<input id='orginal' type='radio' name='rtoggle' value='mapbox://styles/ryanjmitch/cjoevcwjs5f1j2rpfn0q6jnsa'>
-	    <label for='orginal'>orginal</label>
-	</div> -->
-	<div id='map' style='width: 100%; height: 500px;'></div>
-	<div id='remover'>Toggle Earthquakes OFF</div>
-	<div id='home'>Mauna Loa</div>
-	<script>
-		mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
+			<div id='map' style='width: 100%; height: 500px;'></div>
+			<div id='remover'>Toggle Earthquakes OFF</div>
+			<div id='loa'>Mauna Loa</div>
+			<script>
+				mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
 				//The map variable
 				var map = new mapboxgl.Map({
 					container: 'map',
@@ -85,9 +81,13 @@
 					zoom: 11
 				});
 				map.scrollZoom.disable();
+				map.addControl(new MapboxGeocoder({
+					accessToken: mapboxgl.accessToken
+				}));
 				map.addControl(new mapboxgl.NavigationControl({
 					showCompass: false
 				}));
+				
 				map.on('load', function(){
 					map.addSource('earthquakes', {
 						"type": "geojson",
@@ -109,8 +109,9 @@
 			   //add a handler for clicking/popups 
 				//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/ 
 				map.on('click', 'equakes', function (e) {
+					map.getCanvas().style.cursor = 'pointer';
 					var coordinates = e.features[0].geometry.coordinates.slice();
-					var description = "<p>Mag: "+e.features[0].properties.mag+"<br>location: "+e.features[0].properties.place+"<br>URL: <a href='"+e.features[0].properties.url+"'>Click here for details </a></p>"
+					var description = "<p>Mag: "+e.features[0].properties.mag+"<br>Location: "+e.features[0].properties.place+"<br>URL: <a href='"+e.features[0].properties.url+"'>USGS Details</a></p>"
 			        // Ensure that if the map is zoomed out such that multiple
 			        // copies of the feature are visible, the popup appears
 			        // over the copy being pointed to.
@@ -123,7 +124,15 @@
 			        .setHTML(description)
 			        .addTo(map);
 			    });
-			});
+				    // Change the cursor to a pointer when the mouse is over the places layer.
+				    map.on('mouseenter', 'equakes', function () {
+				    	map.getCanvas().style.cursor = 'pointer';
+				    });
+    				// Change it back to a pointer when it leaves.
+    				map.on('mouseleave', 'equakes', function () {
+    					map.getCanvas().style.cursor = '';
+    				});
+    			});
 				map.on('load', function(){
 					var switchy = document.getElementById('remover');
 					switchy.addEventListener("click", function(){
@@ -139,10 +148,11 @@
 						}
 					});
 	//home button
-	var home = document.getElementById('home');
-	home.addEventListener("click", function(){
+	var loa = document.getElementById('loa');
+	loa.addEventListener("click", function(){
 		map.setCenter([-155.5922,19.4721]);
 		map.setZoom(11);
+		map.setstyle('mapbox://styles/ryanjmitch/cjoevcwjs5f1j2rpfn0q6jnsa');
 	});
 });
 </script>
@@ -158,11 +168,14 @@
 		mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
 		var map1 = new mapboxgl.Map({
 			container: 'map1',
-			style: 'mapbox://styles/ryanjmitch/cjogo2nh00ebt2smm0vo16ldd',
+			style: 'mapbox://styles/ryanjmitch/cjohr4dge0boq2smjc3sklh6c',
 			center: [-122.2930,47.12],
 			zoom: 11.4
 		});
 		map1.scrollZoom.disable();
+		map1.addControl(new MapboxGeocoder({
+			accessToken: mapboxgl.accessToken
+		}));
 		map1.addControl(new mapboxgl.NavigationControl({
 			showCompass: false
 		}));
