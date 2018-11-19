@@ -20,13 +20,14 @@
 		margin: 0 auto;
 		background-color: #FFFF00;
 		color: 'black';
+		font-size: 12px;
 		padding: 0.1em;
 		border: 2px solid #FF4500;
 		border-radius: 0.3em;
 		cursor: pointer;
 		position: absolute;
 		left: 0.7em;
-		top: 7em;
+		top: 10em;
 	}
 	#remover:hover {
 		background-color: #FF4500;
@@ -35,13 +36,14 @@
 		margin: 0 auto;
 		background-color: #C8C8C8;
 		color: 'black';
+		font-size: 12px;
 		padding: 0.1em;
 		border: 2px solid #024731;
 		border-radius: 0.3em;
 		cursor: pointer;
 		position: absolute;
 		left: 0.7em;
-		top: 4.5em;
+		top: 7em;
 	}
 	#loa:hover {
 		background-color: #024731;
@@ -50,13 +52,14 @@
 		margin: 0 auto;
 		background-color: #4bdaf7;
 		color: 'black';
+		font-size: 12px;
 		padding: 0.1em;
 		border: 2px solid #04126c;
 		border-radius: 0.3em;
 		cursor: pointer;
 		position: absolute;
 		left: 0.7em;
-		top: 43.5em;
+		top: 66em;
 	}
 	#southHill:hover {
 		background-color: #b1b9b2;
@@ -113,7 +116,7 @@
 				map.on('click', 'equakes', function (e) {
 					map.getCanvas().style.cursor = 'pointer';
 					var coordinates = e.features[0].geometry.coordinates.slice();
-					var description = "<p>Mag: "+e.features[0].properties.mag+"<br>Location: "+e.features[0].properties.place+"<br>URL: <a href='"+e.features[0].properties.url+"'>USGS Details</a></p>"
+					var description = "<p>Mag: "+e.features[0].properties.mag+"<br>Location: "+e.features[0].properties.place+"<br>URL: <a target= '_blank' href='"+e.features[0].properties.url+"'>USGS Details</a></p>"
 			        // Ensure that if the map is zoomed out such that multiple
 			        // copies of the feature are visible, the popup appears
 			        // over the copy being pointed to.
