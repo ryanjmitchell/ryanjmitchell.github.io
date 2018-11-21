@@ -48,19 +48,23 @@
   </head>
   <body class="is-preload">
 
-      <!-- Leaflet - WA Lahars -->
+      <!-- US Choropleth -->
           <section class="wrapper style1 align-center">
             <div class="inner">
               <!-- <h1>GIS 503 Lab 3 - Leaflet</h1> -->
-              <h2>Lahars of Washington State</h2>
+              <h2>USA</h2>
             <div id="map"></div>
             <script>
-              var layer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+              var layer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
+				attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+					subdomains: 'abcd',
+					minZoom: 0,
+					maxZoom: 20,
+					ext: 'png'
                 });
               var map = new L.Map("map", {
-                  center: new L.LatLng(47.3, -120),
-                  zoom: 7,
+                  center: new L.LatLng(39.8283, -98.5795),
+                  zoom: 4,
                   defaultExtentControl: true
               });
               map.addLayer(layer);
