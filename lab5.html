@@ -55,12 +55,10 @@
               <h2>USA</h2>
             <div id="map"></div>
             <script>
-              var layer = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
-				attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-					subdomains: 'abcd',
-					minZoom: 0,
-					maxZoom: 20,
-					ext: 'png'
+              var layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+	subdomains: 'abcd',
+	maxZoom: 19
                 });
               var map = new L.Map("map", {
                   center: new L.LatLng(39.8283, -98.5795),
@@ -132,22 +130,24 @@
                   radius: 10000
               }).addTo(map).bindPopup("Glacier Peak");
             </script>
-          <p>Volcanoes of Washington State (North to South):
-          <br>
-          Mt Baker, Glacier Peak, Mt Rainier, Mt St Helens, Mt Adams</p>
+          <p>TEXT</p>
       
       <!-- Leaflet - Mt Rainier Lahar -->
             <div class="inner">
-              <h2>Pierce County Cultural Sites Impacted by Mount Rainier Lahars</h2>
+              <h2>HEAT MAP</h2>
             <div id="map1"></div>
             <script>
-              var layer1 = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-                  attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+              var layer1 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
+				attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+					subdomains: 'abcd',
+					minZoom: 0,
+					maxZoom: 20,
+					ext: 'png'
                 });
               
               var map1 = new L.Map("map1", {
-                  center: new L.LatLng(47, -121.7603),
-                  zoom: 9,
+                  center: new L.LatLng(39.8283, -98.5795),
+                  zoom: 4,
                   defaultExtentControl: true
               });
               map1.addLayer(layer1);
@@ -214,7 +214,7 @@
               }).addTo(map1);
             });
             </script>
-          <p>137 cultural and historical sites are at risk from lahars within Pierce County.</p>
+          <p>TEXT</p>
 
         <!-- Footer -->
           <footer class="wrapper style1 align-center">
