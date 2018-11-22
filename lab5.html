@@ -171,7 +171,7 @@
               
               var datalayer4 = L.geoJson(data, {
                 onEachFeature: function (feature, featurelayer){
-                  featurelayer.bindPopup("<p>NAME: "+feature.properties.NAME+"<br>COMMUNITY: "+feature.properties.COMMUNITY+"</p>");
+                  featurelayer.bindPopup("<p>Facility: "+feature.properties.PRIMARY_NA+"<br>CITY: "+feature.properties.CITY_NAME+" ,"+feature.properties.STATE_CODE"</p>");
                 },
                  pointToLayer: function (feature, latlng) {
                             return L.circleMarker(latlng, {
@@ -182,8 +182,9 @@
                                 fillOpacity: 0.25,
                                 radius: 10,
                             });
-                        }
+                        },
                     });
+          });
 var cfg = {
   // radius should be small ONLY if scaleRadius is true (or small radius is intended)
   // if scaleRadius is false it will be the constant radius used in pixels
