@@ -171,7 +171,7 @@
               
               var datalayer4 = L.geoJson(data, {
                 onEachFeature: function (feature, featurelayer){
-                  featurelayer.bindPopup("<p>FACILITY: "+feature.properties.PRIMARY_NA+"<br>CITY,STATE: "+feature.properties.CITY_NAME+","+feature.properties.STATE_CODE+"<br>URL: <a target= '_blank' href='"+.feature.properties.FAC_URL+"'>EPA Details</a"</p>");
+                  featurelayer.bindPopup("<p>FACILITY: "+feature.properties.PRIMARY_NA+"<br>CITY,STATE: "+feature.properties.CITY_NAME+feature.properties.STATE_CODE+"<br>URL: <a target= '_blank' href='"+.feature.properties.FAC_URL+"'>EPA Details</a></p>");
                 },
                  pointToLayer: function (feature, latlng) {
                             return L.circleMarker(latlng, {
