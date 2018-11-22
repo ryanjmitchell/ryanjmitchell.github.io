@@ -13,9 +13,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
 	<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="assets/markercluster/dist/MarkerCluster.css">
-	<link rel="stylesheet" href="assets/markercluster/dist/MarkerCluster.Default.css">
-	<script src="assets/markercluster/dist/leaflet.markercluster.js"></script>
+	<script src="assets/js/heatmap.js"></script>
+	<script src="assets/js/leaflet-heatmap.js"></script>
 	<link rel="stylesheet" href="assets/defaultextent/dist/leaflet.defaultextent.css">
 	<script src="assets/defaultextent/dist/leaflet.defaultextent.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -132,7 +131,7 @@
             </script>
           <p>TEXT</p>
       
-      <!-- Leaflet - Mt Rainier Lahar -->
+      <!--HHeat Mao -->
             <div class="inner">
               <h2>HEAT MAP</h2>
             <div id="map1"></div>
@@ -185,34 +184,25 @@
                             });
                         }
                     });
-              	var markers = L.markerClusterGroup({
-        					spiderfyOnMaxZoom: false,
-        					showCoverageOnHover: false,
-        				});
-              	markers.addLayer(datalayer4);
-              	map1.addLayer(markers);
-            });
-
-              $.getJSON('assets/data/lahar.json', function(data){
-              var datalayer2 = L.geoJson(data, {
-                  color: '#FFA500',
-                  opacity: 0.0,
-                  weight: 0.5,
-                  fillColor: '#FFA500',
-                  fillOpacity: 0.5,
-              }).addTo(map1);
-              datalayer2.bringToBack();
-            });
-
-              $.getJSON('assets/data/pierce.json', function(data){
-              var datalayer3 = L.geoJson(data, {
-                  color: 'black',
-                  opacity: 1,
-                  weight: 0.5,
-                  fillColor: 'white',
-                  fillOpacity: 0.0,
-              }).addTo(map1);
-            });
+var cfg = {
+  // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+  // if scaleRadius is false it will be the constant radius used in pixels
+  "radius": 2,
+  "maxOpacity": .8, 
+  // scales the radius based on map zoom
+  "scaleRadius": true, 
+  // if set to false the heatmap uses the global maximum for colorization
+  // if activated: uses the data maximum within the current map boundaries 
+  //   (there will always be a red spot with useLocalExtremas true)
+  "useLocalExtrema": true,
+  // which field name in your data represents the latitude - default "lat"
+  latField: 'LATITUDE83',
+  // which field name in your data represents the longitude - default "lng"
+  lngField: 'LONGITUDE8',
+  // which field name in your data represents the data value - default "value"
+  valueField: 'count'
+};
+var heatmapLayer = new HeatmapOverlay(cfg);
             </script>
           <p>TEXT</p>
 
