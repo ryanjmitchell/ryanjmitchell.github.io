@@ -135,11 +135,11 @@
               
               var datalayer4 = L.geoJson(data, {
                 onEachFeature: function (feature, featurelayer){
-                  featurelayer.bindPopup("<p>Facility: "+feature.properties.PRIMARY_NA+"<br>CITY: "+feature.properties.CITY_NAME+" ,"+feature.properties.STATE_CODE+"</p>");
+                  featurelayer.bindPopup("<p>Facility: "+feature.properties.PRIMARY_NA+"<br>CITY: "+feature.properties.CITY_NAME+"</p>");
                 },
                  pointToLayer: function (feature, latlng) {
                             return L.circleMarker(latlng, {
-                                color: 'black',
+                                color: 'red',
                                 opacity: 0.75,
                                 weight: 1,
                                 fillColor: '#FF4500',
