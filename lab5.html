@@ -41,7 +41,7 @@
 		}
 	.info h5 {
     margin: 0 0 5px;
-    color: #FFA500;
+    color: #0050B8;
 		}
     </style>
   </head>
@@ -79,7 +79,7 @@
                   fillColor: '#FFA500',
                   fillOpacity: 0.5,
               }).addTo(map);
-              datalayer.bringToBack();
+              //datalayer.bringToBack();
             });
               
               var info = L.control();
@@ -89,45 +89,9 @@
                   return this._div;
               };
               info.update = function (props) {
-                  this._div.innerHTML = '<h5>Lahar Flows</h5>' + 'Click Lahar for Source';
+                  this._div.innerHTML = '<h5>EPA Sites</h5>' + 'TEXT';
               };
               info.addTo(map);
-
-              var circle1 = L.circle([46.8523, -121.7603], {
-                  color: 'red',
-                  opacity: 0,
-                  fillColor: 'red',
-                  fillOpacity: 0,
-                  radius: 10000
-                }).addTo(map).bindPopup("Mt Rainier");
-              var circle2 = L.circle([46.1914, -122.1956], {
-                  color: 'red',
-                  opacity: 0,
-                  fillColor: '#f03',
-                  fillOpacity: 0,
-                  radius: 10000
-                }).addTo(map).bindPopup("Mt St Helens");
-              var circle3 = L.circle([46.2024, -121.4910], {
-                  color: 'red',
-                  opacity: 0,
-                  fillColor: '#f03',
-                  fillOpacity: 0,
-                  radius: 10000
-              }).addTo(map).bindPopup("Mt Adams");
-              var circle4 = L.circle([48.7767, -121.8144], {
-                  color: 'red',
-                  opacity: 0,
-                  fillColor: '#f03',
-                  fillOpacity: 0,
-                  radius: 10000
-              }).addTo(map).bindPopup("Mt Baker");
-              var circle5 = L.circle([48.1119, -121.1132], {
-                  color: 'red',
-                  opacity: 0,
-                  fillColor: '#f03',
-                  fillOpacity: 0,
-                  radius: 10000
-              }).addTo(map).bindPopup("Glacier Peak");
             </script>
           <p>TEXT</p>
       
@@ -163,7 +127,7 @@
                   return this._div;
               };
               info.update = function (props) {
-                  this._div.innerHTML = '<h5>Lahar Flows</h5>' + 'Click Site for Details';
+                  this._div.innerHTML = '<h5>EPA Sites</h5>' + 'TEXT';
               };
               info.addTo(map1);
 
@@ -185,25 +149,7 @@
                         },
                     });
           });
-var cfg = {
-  // radius should be small ONLY if scaleRadius is true (or small radius is intended)
-  // if scaleRadius is false it will be the constant radius used in pixels
-  "radius": 2,
-  "maxOpacity": .8, 
-  // scales the radius based on map zoom
-  "scaleRadius": true, 
-  // if set to false the heatmap uses the global maximum for colorization
-  // if activated: uses the data maximum within the current map boundaries 
-  //   (there will always be a red spot with useLocalExtremas true)
-  "useLocalExtrema": true,
-  // which field name in your data represents the latitude - default "lat"
-  latField: 'LATITUDE83',
-  // which field name in your data represents the longitude - default "lng"
-  lngField: 'LONGITUDE8',
-  // which field name in your data represents the data value - default "value"
-  valueField: 'count'
-};
-var heatmapLayer = new HeatmapOverlay(cfg);
+
             </script>
           <p>TEXT</p>
 
