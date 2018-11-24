@@ -72,14 +72,7 @@
               map.keyboard.disable();
 
 			$.getJSON('assets/data/EPAUS.json', function(data){
-              var datalayer = L.geoJson(data, {
-                  color: '#FFA500',
-                  opacity: 0.0,
-                  weight: 0.5,
-                  fillColor: '#FFA500',
-                  fillOpacity: 0.5,
-              }).addTo(map);
-              //datalayer.bringToBack();
+              var datalayer = L.geoJson(data).addTo(map);
             });
               
               var info = L.control();
@@ -95,7 +88,7 @@
             </script>
           <p>TEXT</p>
       
-      <!--HHeat Mao -->
+      <!--HHeat Map -->
             <div class="inner">
               <h2>HEAT MAP</h2>
             <div id="map1"></div>
