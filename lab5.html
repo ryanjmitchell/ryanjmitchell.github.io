@@ -95,7 +95,7 @@ function style(feature) {
     };
 }
 
-L.geoJson(data, {style: style}).addTo(map);
+L.geoJson('assets/data/EPAUS.json', {style: style}).addTo(map);
 
               var info = L.control();
               info.onAdd = function (map) {
