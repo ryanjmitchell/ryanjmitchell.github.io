@@ -54,140 +54,192 @@
 			<h2>USA</h2>
 			<div id="map"></div>
 			<script>
-				var layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-					attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-					subdomains: 'abcd',
-					maxZoom: 19
-				});
 				var map = new L.Map("map", {
 					center: new L.LatLng(39.8283, -98.5795),
 					zoom: 4,
 					defaultExtentControl: true
 				});
-				map.addLayer(layer);
 				map.touchZoom.disable();
 				map.doubleClickZoom.disable();
 				map.scrollWheelZoom.disable();
 				map.boxZoom.disable();
 				map.keyboard.disable();
 
-				$.getJSON('assets/data/EPAUS.json', function(data){
-					var datalayer = L.geoJson(data).addTo(map);
-				});
-				function getColor(d) {
-			 return d > 1000 ? '#800026' :
-					d > 500  ? '#BD0026' :
-					d > 200  ? '#E31A1C' :
-					d > 100  ? '#FC4E2A' :
-					d > 50   ? '#FD8D3C' :
-					d > 20   ? '#FEB24C' :
-					d > 10   ? '#FED976' :
-					'#FFEDA0';
-				}
-				function style(feature) {
-					return {
-						fillColor: getColor(feature.properties.COUNT_coun),
-						weight: 2,
-						opacity: 1,
-						color: 'white',
-						dashArray: '3',
-						fillOpacity: 0.7
-					};
-				}
+				var layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+					attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+					subdomains: 'abcd',
+					maxZoom: 19
+				});.addTo(map);
+	// control that shows state info on hover
+	var info = L.control();
 
-				var info = L.control();
-				info.onAdd = function (map) {
-					this._div = L.DomUtil.create('div', 'info');
-					this.update();
-					return this._div;
-				};
-				info.update = function (props) {
-					this._div.innerHTML = '<h5>EPA Sites</h5>' + 'TEXT';
-				};
-				info.addTo(map);
-			</script>
-			<p>TEXT</p>
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+		this.update();
+		return this._div;
+	};
 
-			<!--HHeat Map -->
-			<div class="inner">
-				<h2>HEAT MAP</h2>
-				<div id="map1"></div>
-				<script>
-					var layer1 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
-						attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-						subdomains: 'abcd',
-						minZoom: 0,
-						maxZoom: 20,
-						ext: 'png'
+	info.update = function (props) {
+		this._div.innerHTML = '<h4>EPA Sites</h4>' +  (props ?
+			'<b>' + props.NAME + '</b><br />' + props.COUNT_coun + 'EPA sites: '
+			: 'Hover over a state');
+	};
+
+	info.addTo(map);
+
+
+	function getColor(d) {
+		return d > 1000 ? '#800026' :
+		d > 500  ? '#BD0026' :
+		d > 200  ? '#E31A1C' :
+		d > 100  ? '#FC4E2A' :
+		d > 50   ? '#FD8D3C' :
+		d > 20   ? '#FEB24C' :
+		d > 10   ? '#FED976' :
+		'#FFEDA0';
+	}
+	function style(feature) {
+		return {
+			weight: 2,
+			opacity: 1,
+			color: 'white',
+			dashArray: '3',
+			fillOpacity: 0.7,
+			fillColor: getColor(feature.properties.COUNT_coun)
+		};
+	}
+
+	function highlightFeature(e) {
+		var layer = e.target;
+
+		layer.setStyle({
+			weight: 5,
+			color: '#666',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+			layer.bringToFront();
+		}
+
+		info.update(layer.feature.properties);
+	}
+
+	var geojson;
+
+	function resetHighlight(e) {
+		geojson.resetStyle(e.target);
+		info.update();
+	}
+
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
+	$.getJSON('assets/data/EPAUS.json', function(data){
+		var datalayer = L.geoJson(data).addTo(map);
+	});
+	var info = L.control();
+	info.onAdd = function (map) {
+		this._div = L.DomUtil.create('div', 'info');
+		this.update();
+		return this._div;
+	};
+	info.update = function (props) {
+		this._div.innerHTML = '<h5>EPA Sites</h5>' + 'TEXT';
+	};
+	info.addTo(map);
+</script>
+<p>TEXT</p>
+
+<!--HHeat Map -->
+<div class="inner">
+	<h2>HEAT MAP</h2>
+	<div id="map1"></div>
+	<script>
+		var layer1 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
+			attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+			subdomains: 'abcd',
+			minZoom: 0,
+			maxZoom: 20,
+			ext: 'png'
+		});
+
+		var map1 = new L.Map("map1", {
+			center: new L.LatLng(39.8283, -98.5795),
+			zoom: 4,
+			defaultExtentControl: true
+		});
+		map1.addLayer(layer1);
+		map1.touchZoom.disable();
+		map1.doubleClickZoom.disable();
+		map1.scrollWheelZoom.disable();
+		map1.boxZoom.disable();
+		map1.keyboard.disable();
+
+		var info = L.control();
+		info.onAdd = function (map) {
+			this._div = L.DomUtil.create('div', 'info');
+			this.update();
+			return this._div;
+		};
+		info.update = function (props) {
+			this._div.innerHTML = '<h5>EPA Sites</h5>' + 'TEXT';
+		};
+		info.addTo(map1);
+
+		$.getJSON('assets/data/EPA.json', function(data){
+
+			var datalayer4 = L.geoJson(data, {
+				onEachFeature: function (feature, featurelayer){
+					featurelayer.bindPopup("<p>Facility: "+feature.properties.PRIMARY_NA+"<br>CITY: "+feature.properties.CITY_NAME+"</p>");
+				},
+				pointToLayer: function (feature, latlng) {
+					return L.circleMarker(latlng, {
+						color: 'red',
+						opacity: 0.75,
+						weight: 1,
+						fillColor: '#FF4500',
+						fillOpacity: 0.25,
+						radius: 10,
 					});
+				},
+			});
+		});
 
-					var map1 = new L.Map("map1", {
-						center: new L.LatLng(39.8283, -98.5795),
-						zoom: 4,
-						defaultExtentControl: true
-					});
-					map1.addLayer(layer1);
-					map1.touchZoom.disable();
-					map1.doubleClickZoom.disable();
-					map1.scrollWheelZoom.disable();
-					map1.boxZoom.disable();
-					map1.keyboard.disable();
+	</script>
+	<p>TEXT</p>
 
-					var info = L.control();
-					info.onAdd = function (map) {
-						this._div = L.DomUtil.create('div', 'info');
-						this.update();
-						return this._div;
-					};
-					info.update = function (props) {
-						this._div.innerHTML = '<h5>EPA Sites</h5>' + 'TEXT';
-					};
-					info.addTo(map1);
+	<!-- Footer -->
+	<footer class="wrapper style1 align-center">
+		<div class="inner">
+			<ul class="icons">
+				<a href="index.html"><span class="icon style2 fas fa-home"></span>
+					<p>Home</p></a>
+					<li><a href="https://www.linkedin.com/in/ryanmitchell24" class="icon style2 fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+					<li><a href="mailto:ryanjmitch@gmail.com?Subject=MSGT Portfolio" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
+				</ul>
+				<p>&copy; Ryan Mitchell. Design: <a href="https://html5up.net" target="_blank">Story</a>.</p>
+			</div>
+		</footer>
+	</div>
 
-					$.getJSON('assets/data/EPA.json', function(data){
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/jquery.scrollex.min.js"></script>
+	<script src="assets/js/jquery.scrolly.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
 
-						var datalayer4 = L.geoJson(data, {
-							onEachFeature: function (feature, featurelayer){
-								featurelayer.bindPopup("<p>Facility: "+feature.properties.PRIMARY_NA+"<br>CITY: "+feature.properties.CITY_NAME+"</p>");
-							},
-							pointToLayer: function (feature, latlng) {
-								return L.circleMarker(latlng, {
-									color: 'red',
-									opacity: 0.75,
-									weight: 1,
-									fillColor: '#FF4500',
-									fillOpacity: 0.25,
-									radius: 10,
-								});
-							},
-						});
-					});
-
-				</script>
-				<p>TEXT</p>
-
-				<!-- Footer -->
-				<footer class="wrapper style1 align-center">
-					<div class="inner">
-						<ul class="icons">
-							<a href="index.html"><span class="icon style2 fas fa-home"></span>
-								<p>Home</p></a>
-								<li><a href="https://www.linkedin.com/in/ryanmitchell24" class="icon style2 fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-								<li><a href="mailto:ryanjmitch@gmail.com?Subject=MSGT Portfolio" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
-							</ul>
-							<p>&copy; Ryan Mitchell. Design: <a href="https://html5up.net" target="_blank">Story</a>.</p>
-						</div>
-					</footer>
-				</div>
-
-				<!-- Scripts -->
-				<script src="assets/js/jquery.min.js"></script>
-				<script src="assets/js/jquery.scrollex.min.js"></script>
-				<script src="assets/js/jquery.scrolly.min.js"></script>
-				<script src="assets/js/browser.min.js"></script>
-				<script src="assets/js/breakpoints.min.js"></script>
-				<script src="assets/js/util.js"></script>
-				<script src="assets/js/main.js"></script>
-
-			</body>
-			</html>
+</body>
+</html>
