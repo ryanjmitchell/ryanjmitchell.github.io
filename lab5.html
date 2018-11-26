@@ -54,22 +54,23 @@
 			<h2>USA</h2>
 			<div id="map"></div>
 			<script>
-				var map = new L.Map("map", {
+				var layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+					attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+					subdomains: 'abcd',
+					maxZoom: 19
+				});
+
+					var map = new L.Map("map", {
 					center: new L.LatLng(39.8283, -98.5795),
 					zoom: 4,
 					defaultExtentControl: true
 				});
+				map.addLayer(layer);
 				map.touchZoom.disable();
 				map.doubleClickZoom.disable();
 				map.scrollWheelZoom.disable();
 				map.boxZoom.disable();
 				map.keyboard.disable();
-
-				var layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-					attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-					subdomains: 'abcd',
-					maxZoom: 19
-				});.addTo(map);
 	// control that shows state info on hover
 	var info = L.control();
 
@@ -84,9 +85,7 @@
 			'<b>' + props.NAME + '</b><br />' + props.COUNT_coun + 'EPA sites: '
 			: 'Hover over a state');
 	};
-
 	info.addTo(map);
-
 
 	function getColor(d) {
 		return d > 1000 ? '#800026' :
