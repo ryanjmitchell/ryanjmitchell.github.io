@@ -82,9 +82,11 @@
 	};
 
 	info.update = function (props) {
-		this._div.innerHTML = '<h4>EPA Sites</h4>' +  (props ?
-			'<b>' + props.NAME + '</b><br />' + props.COUNT_coun + 'EPA sites: '
-			: 'Hover over a state');
+		console.log(props.NAME);
+		console.log(features.properties.NAME)
+		// this._div.innerHTML = '<h4>EPA Sites</h4>' +  (props ?
+			// '<b>' + props.NAME + '</b><br />' + props.COUNT_coun + 'EPA sites: '
+			// : 'Hover over a state');
 	};
 	info.addTo(map);
 
