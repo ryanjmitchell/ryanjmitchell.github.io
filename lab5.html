@@ -227,23 +227,25 @@
 		info.update = function (props) {
 			this._div.innerHTML = '<h5>EPA Sites</h5>' + 'TEXT';
 		};
-		info.addTo(map1);
+		info.addTo(map1);             
 
-
-				$.getJSON('assests/data/EPAclip.json',function(data){
-			//make a locations variable, and fill it with locations from each point in your dataset
-			    var locations = data.features.map(function(points) {
-			      // the heatmap plugin wants an array of each location
-			      var location = points.geometry.coordinates.reverse();
-			      location.push(1);
-			      return location; // e.g. [50.5, 30.5, 0.2], // lat, lng, intensity
-		    });
-			//make the heatmap layer
-		    var heat = L.heatLayer(locations, { radius: 35 });
-		    //add the heatmap layer to the map
-		    map.addLayer(heat);
-		  });
-
+		 $.getJSON('assets/data/EPAclip.json', function(data){
+              
+              var datalayer4 = L.geoJson(data, {
+                onEachFeature: function (feature, featurelayer){
+                  featurelayer.bindPopup("<p>NAME: "+feature.properties.NAME+"<br>COMMUNITY: "+feature.properties.COMMUNITY+"</p>");
+                },
+                 pointToLayer: function (feature, latlng) {
+                            return L.circleMarker(latlng, {
+                                color: 'black',
+                                opacity: 0.75,
+                                weight: 1,
+                                fillColor: '#FF4500',
+                                fillOpacity: 0.25,
+                                radius: 10,
+                            });
+                        }
+                    });
 	</script>
 	<p>TEXT</p>
 
