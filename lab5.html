@@ -13,8 +13,6 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
 	<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="assets/js/heatmap.js"></script>
-	<script src="assets/js/leaflet-heatmap.js"></script>
 	<link rel="stylesheet" href="assets/defaultextent/dist/leaflet.defaultextent.css">
 	<script src="assets/defaultextent/dist/leaflet.defaultextent.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -102,7 +100,7 @@
 	}
 	function style(feature) {
 		return {
-			weight: 2,
+			weight: 1,
 			opacity: 1,
 			color: 'white',
 			dashArray: '3',
@@ -125,6 +123,7 @@
 			layer.bringToFront();
 		}
 
+		console.log(layer.feature.properties);
 		info.update(layer.feature.properties);
 	}
 
