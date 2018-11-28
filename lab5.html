@@ -101,11 +101,11 @@
 
 // get color depending on count value
 	function getColor(d) {
-		return d > 1611 ? '#800026' :
-		d > 960  ? '#FC4E2A' :
-		d > 370   ? '#FD8D3C' :
-		d > 220   ? '#FEB24C' :
-		d > 110   ? '#FED976' :
+		return d > 1611 ? '#004DA8' :
+		d > 960  ? '#005CE6' :
+		d > 370   ? '#0070FF' :
+		d > 220   ? '#73B2FF' :
+		d > 110   ? '#BED2FF' :
 		'#FFEDA0';
 	}
 	function style(feature) {
@@ -169,7 +169,7 @@
 	legend.onAdd = function (map) {
 
 		var div = L.DomUtil.create('div', 'info legend'),
-			grades = [21, 110, 220, 370, 960, 1611],
+			grades = [21, 110, 220, 370, 960],
 			labels = [],
 			from, to;
 
