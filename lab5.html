@@ -158,7 +158,7 @@
 			click: zoomToFeature
 		});
 	}
-	$.getJSON('assets/data/USEPA.json', function(data){
+	$.getJSON('assets/data/EPAUS48.json', function(data){
 		var datalayer = L.geoJson(data);
 	geojson = L.geoJson(data, {
     style: style,
@@ -229,7 +229,7 @@
 		};
 		info.addTo(map1);             
 
-		 $.getJSON('assets/data/EPA.json', function(data){
+		 $.getJSON('assets/data/EPAsites48.json', function(data){
               
               var datalayer4 = L.geoJson(data, {
                 onEachFeature: function (feature, featurelayer){
