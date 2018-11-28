@@ -157,7 +157,7 @@
 			click: zoomToFeature
 		});
 	}
-	$.getJSON('assets/data/EPAUS.json', function(data){
+	$.getJSON('assets/data/US.json', function(data){
 		var datalayer = L.geoJson(data);
 	geojson = L.geoJson(data, {
     style: style,
@@ -245,6 +245,59 @@
                         }
                     }).addTo(map1);
           });
+		function style(feature) {
+		return {
+			weight: 1,
+			opacity: 1,
+			color: 'white',
+			dashArray: '3',
+			fillOpacity: 0.7,
+			fillColor: getColor(feature.properties.COUNT_coun)
+		};
+	}
+
+	function highlightFeature(e) {
+		var layer = e.target;
+
+		layer.setStyle({
+			weight: 3,
+			color: '#666',
+			dashArray: '',
+			fillOpacity: 0.7
+		});
+
+		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+			layer.bringToFront();
+		}
+
+		info.update(layer.feature.properties);
+	}
+
+	var geojson;
+
+	function resetHighlight(e) {
+		geojson.resetStyle(e.target);
+		info.update();
+	}
+
+	function zoomToFeature(e) {
+		map.fitBounds(e.target.getBounds());
+	}
+
+	function onEachFeature(feature, layer) {
+		layer.on({
+			mouseover: highlightFeature,
+			mouseout: resetHighlight,
+			click: zoomToFeature
+		});
+	}
+	$.getJSON('assets/data/US.json', function(data){
+		var datalayer = L.geoJson(data);
+	geojson = L.geoJson(data, {
+    style: style,
+    onEachFeature: onEachFeature
+}).addTo(map1);
+	});
           /*$.getJSON("assets/data/EPAclip.json",function(data){
 			//make a locations variable, and fill it with locations from each point in your dataset
 			    var locations = data.features.map(function(points) {
