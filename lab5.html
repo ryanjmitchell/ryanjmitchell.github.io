@@ -208,7 +208,7 @@
 		var map1 = new L.Map("map1", {
 			center: new L.LatLng(39.8283, -98.5795),
 			zoom: 4,
-			zoomControl:false,
+			zoomControl:false
 			defaultExtentControl: true
 		});
 		map1.addLayer(layer1);
@@ -247,57 +247,7 @@
                         }
                     }).addTo(map1);
           });
-		function map1style(feature) {
-		return {
-			opacity: 0,
-			color: 'white',
-			fillOpacity: 0,
-			fillColor: 'white'
-		};
-	}
 
-	function map1highlightFeature(e) {
-		var layer = e.target;
-
-		layer.setStyle({
-			weight: 3,
-			color: '#666',
-			dashArray: '',
-			fillOpacity: 0.7
-		});
-
-		if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-			layer.bringToFront();
-		}
-
-		info.update(layer.feature.properties);
-	}
-
-	var geojson;
-
-	function map1resetHighlight(e) {
-		geojson.resetStyle(e.target);
-		info.update();
-	}
-
-	function map1zoomToFeature(e) {
-		map.fitBounds(e.target.getBounds());
-	}
-
-	function map1onEachFeature(feature, layer) {
-		layer.on({
-			mouseover: map1highlightFeature,
-			mouseout: map1resetHighlight,
-			click: map1zoomToFeature
-		});
-	}
-	$.getJSON('assets/data/US.json', function(data){
-		var datalayer = L.geoJson(data);
-	geojson = L.geoJson(data, {
-    style: map1style,
-    onEachFeature: map1onEachFeature
-}).addTo(map1);
-	});
           /*$.getJSON("assets/data/EPAclip.json",function(data){
 			//make a locations variable, and fill it with locations from each point in your dataset
 			    var locations = data.features.map(function(points) {
