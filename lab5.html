@@ -229,11 +229,11 @@
 		};
 		info.addTo(map1);             
 
-		 $.getJSON('assets/data/EPAclip.json', function(data){
+		 $.getJSON('assets/data/EPA.json', function(data){
               
               var datalayer4 = L.geoJson(data, {
                 onEachFeature: function (feature, featurelayer){
-                  featurelayer.bindPopup("<p>"+feature.properties.PRIMARY_NA+"<br>"+feature.properties.CITY_NAME+", "+feature.properties.STUSP+"</p>");
+                  featurelayer.bindPopup("<p>"+feature.properties.PRIMARY_NA+"<br>"+feature.properties.CITY_NAME+", "+feature.properties.STATE_CODE+"</p>");
                 },
                  pointToLayer: function (feature, latlng) {
                             return L.circleMarker(latlng, {
