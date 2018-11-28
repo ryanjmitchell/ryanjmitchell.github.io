@@ -77,6 +77,7 @@
 					var map = new L.Map("map", {
 					center: new L.LatLng(39.8283, -98.5795),
 					zoom: 4,
+					zoomControl:false,
 					defaultExtentControl: true
 				});
 				map.addLayer(layer);
@@ -207,6 +208,7 @@
 		var map1 = new L.Map("map1", {
 			center: new L.LatLng(39.8283, -98.5795),
 			zoom: 4,
+			zoomControl:false,
 			defaultExtentControl: true
 		});
 		map1.addLayer(layer1);
@@ -231,16 +233,16 @@
               
               var datalayer4 = L.geoJson(data, {
                 onEachFeature: function (feature, featurelayer){
-                  featurelayer.bindPopup("<p>NAME: "+feature.properties.NAME+"<br>COMMUNITY: "+feature.properties.COMMUNITY+"</p>");
+                  featurelayer.bindPopup("<p>NAME: "+feature.properties.PRIMARY_NA+"<br>CITY: "+feature.properties.CITY_NAME+"</p>");
                 },
                  pointToLayer: function (feature, latlng) {
                             return L.circleMarker(latlng, {
-                                color: 'black',
+                                color: '#004DA8',
                                 opacity: 0.1,
                                 weight: 1,
-                                fillColor: '#FF4500',
-                                fillOpacity: 0.25,
-                                radius: 5,
+                                fillColor: '#004DA8',
+                                fillOpacity: 0.1,
+                                radius: 2,
                             });
                         }
                     }).addTo(map1);
