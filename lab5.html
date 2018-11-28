@@ -96,10 +96,8 @@
 	};
 
 	info.update = function (props) {
-		console.log(props);
-		console.log("hello")
 		this._div.innerHTML = '<h4>EPA Sites</h4>' +  (props ?
-			 '<b>' + props.NAME + '</b><br />' + props.COUNT_coun + 'EPA sites: '
+			 '<b>' + props.NAME + '</b></br>' + props.COUNT_coun + 'EPA sites: '
 			 : 'Hover over a state');
 	};
 	info.addTo(map);
