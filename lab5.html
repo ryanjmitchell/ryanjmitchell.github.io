@@ -93,6 +93,7 @@
 
 	info.update = function (props) {
 		console.log(props);
+		console.log("hello")
 		// this._div.innerHTML = '<h4>EPA Sites</h4>' +  (props ?
 			// '<b>' + props.NAME + '</b><br />' + props.COUNT_coun + 'EPA sites: '
 			// : 'Hover over a state');
@@ -101,11 +102,11 @@
 
 // get color depending on count value
 	function getColor(d) {
-		return d > 1611 ? '#004DA8' :
-		d > 960  ? '#004DA8' :
-		d > 370   ? '#005CE6' :
-		d > 220   ? '#0070FF' :
-		d > 110   ? '#73B2FF' :
+		return d > 960 ? '#004DA8' :
+				d > 370  ? '#004DA8' :
+				d > 220   ? '#005CE6' :
+				d > 110   ? '#0070FF' :
+				d > 20   ? '#73B2FF' :
 		'#BED2FF';
 	}
 	function style(feature) {
