@@ -199,8 +199,8 @@
 		var layer1 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
 			attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 			subdomains: 'abcd',
-			minZoom: 0,
-			maxZoom: 20,
+			minZoom: 4,
+			maxZoom: 15,
 			ext: 'png'
 		});
 
@@ -256,7 +256,7 @@
 			//make the heatmap layer
 		    var heat = L.heatLayer(locations, { radius: 25,
 		    									0.4: 'blue', 0.65: 'lime', 1: 'red',
-		   										maxzoom: 4
+		   										maxzoom: 10
 		     });
 		    //add the heatmap layer to the map
 		    map1.addLayer(heat);
