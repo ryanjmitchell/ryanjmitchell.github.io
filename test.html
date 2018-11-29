@@ -5,210 +5,369 @@
   Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
-  <head>
-    <title>TEST</title>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="assets/leaflet/leaflet.css" />
-    <script src="assets/leaflet/leaflet.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
-    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="assets/js/heatmap.js"></script>
-    <script src="assets/js/leaflet-heatmap.js"></script>
-    <link rel="stylesheet" href="assets/defaultextent/dist/leaflet.defaultextent.css">
-    <script src="assets/defaultextent/dist/leaflet.defaultextent.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-    <style >
-      #map{
-          width: 100%;
-          height: 500px;
-          background-color: grey;
-        }
-          #map1{
-          width: 100%;
-          height: 500px;
-          background-color: grey;
-        }
-    .info {
-        padding: 6px 8px;
-        font: 14px/16px Arial, Helvetica, sans-serif;
-        background: white;
-        background: rgba(255,255,255,1);
-        box-shadow: 0 0 15px rgba(0,0,0,0.2);
-        border-radius: 5px;
-        }
-    .info h5 {
+<head>
+  <title>TEST</title>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="assets/leaflet/leaflet.css" />
+  <script src="assets/leaflet/leaflet.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+  <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="assets/defaultextent/dist/leaflet.defaultextent.css">
+  <script src="assets/defaultextent/dist/leaflet.defaultextent.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+  <style >
+  #map{
+    width: 100%;
+    height: 500px;
+    background-color: grey;
+  }
+  #map1{
+    width: 100%;
+    height: 500px;
+    background-color: grey;
+  }
+  .info {
+    padding: 6px 8px;
+    font: 14px/16px Arial, Helvetica, sans-serif;
+    background: white;
+    background: rgba(255,255,255,1);
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    border-radius: 5px;
+  }
+  .info h5 {
     margin: 0 0 5px;
-    color: #FFA500;
-        }
-    </style>
-  </head>
-  <body class="is-preload">
+    color: #045a8d;
+  }
+  .info h4 {
+    margin: 0 0 5px;
+    color: #777;
+  }
+  .legend {
+    line-height: 18px;
+    color: #555;
+  }
+  .legend i {
+    width: 100%;
+    height: 18px;
+    float: left;
+    margin-right: 8px;
+    opacity: 0.7;
+  }
+  img.resize {
+    max-width:150%;
+    max-height:150%;
+  }
+  img.resize2 {
+    max-width:100%;
+    max-height:100%;
+  }
+</style>
+</head>
+<body class="is-preload">
 
-      <!-- US Choropleth -->
-          <section class="wrapper style1 align-center">
-            <div class="inner">
-              <!-- <h1>GIS 503 Lab 3 - Leaflet</h1> -->
-              <h2>USA</h2>
-            <div id="map"></div>
-            <script>
-              var layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-    subdomains: 'abcd',
-    maxZoom: 19
-                });
-              var map = new L.Map("map", {
-                  center: new L.LatLng(39.8283, -98.5795),
-                  zoom: 4,
-                  defaultExtentControl: true
-              });
-              map.addLayer(layer);
-              map.touchZoom.disable();
-              map.doubleClickZoom.disable();
-              map.scrollWheelZoom.disable();
-              map.boxZoom.disable();
-              map.keyboard.disable();
+  <!-- US Choropleth -->
+  <section class="wrapper style1 align-center">
+    <div class="inner">
+      <h1>How Maps Lie</h1>
+      <h2>Choropleth Map</h2>
+      <div id="map"></div>
+      <script>
+        var layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+          subdomains: 'abcd',
+          maxZoom: 19
+        });
 
-            $.getJSON('assets/data/US.json', function(data){
-              var datalayer = L.geoJson(data, {
-                  color: '#FFA500',
-                  opacity: 0.0,
-                  weight: 0.5,
-                  fillColor: '#FFA500',
-                  fillOpacity: 0.5,
-              }).addTo(map);
-              datalayer.bringToBack();
-            });
-              
-              var info = L.control();
-              info.onAdd = function (map) {
-                  this._div = L.DomUtil.create('div', 'info');
-                  this.update();
-                  return this._div;
-              };
-              info.update = function (props) {
-                  this._div.innerHTML = '<h5>Lahar Flows</h5>' + 'Click Lahar for Source';
-              };
-              info.addTo(map);
+        var map = new L.Map("map", {
+          center: new L.LatLng(39.8283, -98.5795),
+          zoom: 4,
+          zoomControl:false,
+          defaultExtentControl: true
+        });
+        map.addLayer(layer);
+        map.touchZoom.disable();
+        map.doubleClickZoom.disable();
+        map.scrollWheelZoom.disable();
+        map.boxZoom.disable();
+        map.keyboard.disable();
 
-              var circle1 = L.circle([46.8523, -121.7603], {
-                  color: 'red',
-                  opacity: 0,
-                  fillColor: 'red',
-                  fillOpacity: 0,
-                  radius: 10000
-                }).addTo(map).bindPopup("Mt Rainier");
-              var circle2 = L.circle([46.1914, -122.1956], {
-                  color: 'red',
-                  opacity: 0,
-                  fillColor: '#f03',
-                  fillOpacity: 0,
-                  radius: 10000
-                }).addTo(map).bindPopup("Mt St Helens");
-              var circle3 = L.circle([46.2024, -121.4910], {
-                  color: 'red',
-                  opacity: 0,
-                  fillColor: '#f03',
-                  fillOpacity: 0,
-                  radius: 10000
-              }).addTo(map).bindPopup("Mt Adams");
-              var circle4 = L.circle([48.7767, -121.8144], {
-                  color: 'red',
-                  opacity: 0,
-                  fillColor: '#f03',
-                  fillOpacity: 0,
-                  radius: 10000
-              }).addTo(map).bindPopup("Mt Baker");
-              var circle5 = L.circle([48.1119, -121.1132], {
-                  color: 'red',
-                  opacity: 0,
-                  fillColor: '#f03',
-                  fillOpacity: 0,
-                  radius: 10000
-              }).addTo(map).bindPopup("Glacier Peak");
-            </script>
-          <p>TEXT</p>
-      
-      <!--Heat Mao -->
-            <div class="inner">
-              <h2>HEAT MAP</h2>
-            <div id="map1"></div>
-            <script>
-              var layer1 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
-                attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-                    subdomains: 'abcd',
-                    minZoom: 0,
-                    maxZoom: 20,
-                    ext: 'png'
-                });
-              
-              var map1 = new L.Map("map1", {
-                  center: new L.LatLng(39.8283, -98.5795),
-                  zoom: 4,
-                  defaultExtentControl: true
-              });
-              map1.addLayer(layer1);
-              map1.touchZoom.disable();
-              map1.doubleClickZoom.disable();
-              map1.scrollWheelZoom.disable();
-              map1.boxZoom.disable();
-              map1.keyboard.disable();
-              
-              var info = L.control();
-              info.onAdd = function (map) {
-                  this._div = L.DomUtil.create('div', 'info');
-                  this.update();
-                  return this._div;
-              };
-              info.update = function (props) {
-                  this._div.innerHTML = '<h5>Lahar Flows</h5>' + 'Click Site for Details';
-              };
-              info.addTo(map1);
+// control that shows state info on hover
+var info = L.control();
 
-              $.getJSON('assets/data/EPA.json', function(data){
-              
-              var datalayer4 = L.geoJson(data, {
-                onEachFeature: function (feature, featurelayer){
-                  featurelayer.bindPopup("<p>FACILITY: "+feature.properties.PRIMARY_NA+"<br>CITY,STATE: "+feature.properties.CITY_NAME+feature.properties.STATE_CODE+"<br>URL: <a target= '_blank' href='"+.feature.properties.FAC_URL+"'>EPA Details</a></p>");
-                },
-                 pointToLayer: function (feature, latlng) {
-                            return L.circleMarker(latlng, {
-                                color: 'black',
-                                opacity: 0.75,
-                                weight: 1,
-                                fillColor: '#FF4500',
-                                fillOpacity: 0.25,
-                                radius: 10,
-                            });
-                        }
-                    });
-            </script>
-          <p>TEXT</p>
+info.onAdd = function (map) {
+  this._div = L.DomUtil.create('div', 'info');
+  this.update();
+  return this._div;
+};
 
-        <!-- Footer -->
-          <footer class="wrapper style1 align-center">
-            <div class="inner">
-              <ul class="icons">
-                  <a href="index.html"><span class="icon style2 fas fa-home"></span>
-                  <p>Home</p></a>
-                <li><a href="https://www.linkedin.com/in/ryanmitchell24" class="icon style2 fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-                <li><a href="mailto:ryanjmitch@gmail.com?Subject=MSGT Portfolio" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
-              </ul>
-              <p>&copy; Ryan Mitchell. Design: <a href="https://html5up.net" target="_blank">Story</a>.</p>
-            </div>
-          </footer>
+info.update = function (props) {
+  this._div.innerHTML = '<h4>EPA Petrol Sites</h4>' +  (props ?
+   '<b>' + props.NAME + '</b></br>' + props.COUNT_coun + ' sites'
+   : 'Hover over a state');
+};
+info.addTo(map);
+
+// get color depending on count value
+function getColor(d) {
+  return d > 960 ? '#045a8d' :
+  d > 370  ? '#2b8cbe' :
+  d > 220   ? '#74a9cf' :
+  d > 110   ? '#a6bddb' :
+  d > 20   ? '#d0d1e6' :
+  '#000000';
+}
+function style(feature) {
+  return {
+    weight: 1,
+    opacity: 1,
+    color: 'white',
+    dashArray: '3',
+    fillOpacity: 0.7,
+    fillColor: getColor(feature.properties.COUNT_coun)
+  };
+}
+
+function highlightFeature(e) {
+  var layer = e.target;
+
+  layer.setStyle({
+    weight: 3,
+    color: '#666',
+    dashArray: '',
+    fillOpacity: 0.9
+  });
+
+  if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+    layer.bringToFront();
+  }
+
+  info.update(layer.feature.properties);
+}
+
+var geojson;
+
+function resetHighlight(e) {
+  geojson.resetStyle(e.target);
+  info.update();
+}
+
+function zoomToFeature(e) {
+  map.fitBounds(e.target.getBounds());
+}
+
+function onEachFeature(feature, layer) {
+  layer.on({
+    mouseover: highlightFeature,
+    mouseout: resetHighlight,
+    click: zoomToFeature
+  });
+}
+$.getJSON('assets/data/EPAUS48.json', function(data){
+  var datalayer = L.geoJson(data);
+  geojson = L.geoJson(data, {
+    style: style,
+    onEachFeature: onEachFeature
+  }).addTo(map);
+});
+
+//legend
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+  var div = L.DomUtil.create('div', 'info legend'),
+  grades = [21, 110, 220, 370, 960],
+  labels = [],
+  from, to;
+
+  for (var i = 0; i < grades.length; i++) {
+    from = grades[i];
+    to = grades[i + 1];
+
+    labels.push(
+      '<i style="background:' + getColor(from + 1) + '"></i> ' +
+      from + (to ? '&ndash;' + to : '+'));
+  }
+
+  div.innerHTML = labels.join('<br>');
+  return div;
+};
+legend.addTo(map);
+</script>
+<!-- Pros/Cons -->
+<section class="wrapper style1 align-center">
+  <div class="items style1 medium onscroll-fade-in">
+    <section>
+      <h3>Pro's</h3>
+      <ul><p>
+        <li>Popular</li>
+        <li>Shows general patterns clearly</li>
+        <li>Links variables to locations</li>
+        <li>Visually effective</li>
+        <li>Levels of shading/colour represent a range of values</li>
+      </p></ul>
+    </section>
+    <section>
+      <h3>Con's</h3>
+      <ul><p>
+        <li>Gives impression of uniform values within sub-areas</li>
+        <li>Can only be used for ratio data not absolute values</li>
+        <li>Often not suitable for showing total values</li>
+        <li>Can be difficult to distinguish between different shades</li>
+      </p></ul>
+    </section>
+    <section>
+      <h3>Well Exectued Choropleth</h3>
+      <div class="image">
+        <img <img class="resize" src="images/choroplethGood.JPG" alt="Choropleth Example" />
       </div>
+      <p><sub>Credit: David Yanofsky</sub></p> 
+    </section>
+  </div>
+</section>
 
-    <!-- Scripts -->
-      <script src="assets/js/jquery.min.js"></script>
-      <script src="assets/js/jquery.scrollex.min.js"></script>
-      <script src="assets/js/jquery.scrolly.min.js"></script>
-      <script src="assets/js/browser.min.js"></script>
-      <script src="assets/js/breakpoints.min.js"></script>
-      <script src="assets/js/util.js"></script>
-      <script src="assets/js/main.js"></script>
+<!-- Dot/Heat Map -->
+<h2>Dot Map</h2>
+<div id="map1"></div>
+<script>
+  var layer1 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
+    attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    subdomains: 'abcd',
+    minZoom: 4,
+    maxZoom: 15,
+    ext: 'png'
+  });
 
-  </body>
+  var map1 = new L.Map("map1", {
+    center: new L.LatLng(39.8283, -98.5795),
+    zoom: 4,
+    zoomControl:false,
+    defaultExtentControl: true
+  });
+  map1.addLayer(layer1);
+  map1.touchZoom.disable();
+  map1.doubleClickZoom.disable();
+  map1.scrollWheelZoom.disable();
+  map1.boxZoom.disable();
+  map1.keyboard.disable();
+
+  var info = L.control();
+  info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+  };
+  info.update = function (props) {
+    this._div.innerHTML = '<h4>EPA Petrol Sites</h4>' + '<h5>ONE Dot = ONE Facility</h5>';
+  };
+  info.addTo(map1);             
+
+     //hover
+     function highlightFeature1(e) {
+      var layer = e.target;
+
+      layer.setStyle({
+        weight: 3,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.9
+      });
+
+      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+      }
+    }
+    $.getJSON('assets/data/EPAUS48.json', function(data){
+      var datalayer2 = L.geoJson(data);
+      geojson = L.geoJson(data, {
+        style: style,
+        onEachFeature: onEachFeature
+      }).addTo(map1);
+    });
+
+    $.getJSON('assets/data/EPAsites48.json', function(data){
+
+      var datalayer4 = L.geoJson(data, {
+        onEachFeature: function (feature, featurelayer){
+          featurelayer.bindPopup("<p>"+feature.properties.PRIMARY_NA+"<br>"+feature.properties.CITY_NAME+", "+feature.properties.STATE_CODE+"</p>");
+        },
+        pointToLayer: function (feature, latlng) {
+          return L.circleMarker(latlng, {
+            color: '#045a8d',
+            opacity: 0.1,
+            weight: .5,
+            fillColor: '#045a8d',
+            fillOpacity: 0.1,
+            radius: 2,
+          });
+        }
+      }).addTo(map1);
+    });
+          /*$.getJSON("assets/data/EPAclip.json",function(data){
+      //make a locations variable, and fill it with locations from each point in your dataset
+          var locations = data.features.map(function(points) {
+            // the heatmap plugin wants an array of each location
+            var location = points.geometry.coordinates.reverse();
+            location.push(1);
+            return location; // e.g. [50.5, 30.5, 0.2], // lat, lng, intensity
+        });
+      //make the heatmap layer
+        var heat = L.heatLayer(locations, { radius: 40,
+                          0.4: 'blue', 0.65: 'lime', 1: 'red',
+                          maxzoom: 15
+         });
+        //add the heatmap layer to the map
+        map1.addLayer(heat);
+      });*/
+    </script>
+    <!-- Pros/Cons -->
+    <section class="wrapper style1 align-center">
+      <div class="items style1 medium onscroll-fade-in">
+        <section>
+          <h3>Heat Map</h3>
+          <div class="image">
+            <img <img class="resize2" src="images/heatMap.jpg" alt="Heat Map Example" />
+          </div>
+          <p><sub>Credit: Patrick Wied</sub></p> 
+        </section>
+        <section>
+          <h3>Pro's</h3>
+          <p>Pros</p>
+        </section>
+        <section>
+          <h3>Con's</h3>
+          <p>Cons</p>
+        </section>
+
+      </div>
+    </section>
+  </div>  
+</section>
+<!-- Footer -->
+<footer class="wrapper style1 align-center">
+  <div class="inner">
+    <ul class="icons">
+      <a href="index.html"><span class="icon style2 fas fa-home"></span>
+        <p>Home</p></a>
+        <li><a href="https://www.linkedin.com/in/ryanmitchell24" class="icon style2 fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+        <li><a href="mailto:ryanjmitch@gmail.com?Subject=MSGT Portfolio" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
+      </ul>
+      <p>&copy; Ryan Mitchell. Design: <a href="https://html5up.net" target="_blank">Story</a>.</p>
+    </div>
+  </footer>
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
 </html>
