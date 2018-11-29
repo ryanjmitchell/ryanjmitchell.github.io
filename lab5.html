@@ -56,6 +56,10 @@
     margin-right: 8px;
     opacity: 0.7;
 }
+img.resize {
+  max-width:150%;
+  max-height:150%;
+}
 </style>
 </head>
 <body class="is-preload">
@@ -189,7 +193,28 @@
 	};
 	legend.addTo(map);
 </script>
-<p>TEXT</p>
+			<!-- Labs -->
+				<div class="items style1 medium onscroll-fade-in">
+								<section>
+									<span></span>
+									<h3>Pro's</h3>
+									<p>Pros</p>
+									</section>
+									<section>
+										<span></span>
+										<h3>Con's</h3>
+										<p>Cons</p>
+										</section>
+										<section>
+											<span></span>
+											<h3 align="center">Well Exectued Choropleth</h3>
+											<div class="image">
+												<img <img class="resize" src="images/choroplethgood.jpg" alt="Choropleth Example" />
+											</div>
+											<p><sub>Credit: David Yanofsky</sub></p> 
+										</section>
+								</div>
+				</section>
 
 <!--Heat Map -->
 <div class="inner">
@@ -241,7 +266,7 @@
                                 weight: .5,
                                 fillColor: '#045a8d',
                                 fillOpacity: 0.1,
-                                radius: 1.5,
+                                radius: 2,
                             });
                         }
                     }).addTo(map1);
