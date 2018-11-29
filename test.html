@@ -280,10 +280,19 @@ legend.addTo(map);
         layer.bringToFront();
       }
     }
+    function style1(feature) {
+  return {
+    weight: 1,
+    opacity: 0,
+    color: 'white',
+    fillOpacity: 0,
+    fillColor: 'white'
+  };
+}
     $.getJSON('assets/data/EPAUS48.json', function(data){
       var datalayer2 = L.geoJson(data);
       geojson = L.geoJson(data, {
-        style: style,
+        style: style1,
         onEachFeature: onEachFeature
       }).addTo(map1);
     });
