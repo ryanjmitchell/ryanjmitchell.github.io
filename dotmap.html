@@ -124,10 +124,10 @@
       function style(feature) {
     return {
       weight: 1,
-      opacity: 1,
+      opacity: 0,
       color: 'white',
       dashArray: '3',
-      fillOpacity: 0.7,
+      fillOpacity: 0,
       fillColor: 'white'
     };
   }
@@ -143,7 +143,7 @@
     });
 
     if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-      layer.bringToFront();
+      layer.bringToBack();
     }
 
     info.update(layer.feature.properties);
