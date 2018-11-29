@@ -101,7 +101,7 @@ info.onAdd = function (map) {
 
 info.update = function (props) {
   this._div.innerHTML = '<h4>EPA Petrol Sites</h4>' +  (props ?
-   '<h4>' + props.NAME + '</h4></br>' + props.COUNT_coun + ' sites'
+   '<h5>' + props.NAME + '</h5>' + props.COUNT_coun + ' sites'
    : 'Hover over a state');
 };
 info.addTo(map);
