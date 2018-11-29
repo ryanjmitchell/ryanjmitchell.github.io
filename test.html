@@ -265,7 +265,7 @@ legend.addTo(map);
   };
   info.addTo(map1);             
 
-     //hover
+  //hover
      function highlightFeature1(e) {
       var layer = e.target;
 
@@ -289,11 +289,27 @@ legend.addTo(map);
     fillColor: 'white'
   };
 }
+function resetHighlight1(e) {
+  geojson.resetStyle(e.target);
+  info.update();
+}
+
+function zoomToFeature1(e) {
+  map.fitBounds(e.target.getBounds());
+}
+
+function onEachFeature1(feature, layer) {
+  layer.on({
+    mouseover: highlightFeature1,
+    mouseout: resetHighlight1,
+    click: zoomToFeature1
+  });
+}
     $.getJSON('assets/data/EPAUS48.json', function(data){
       var datalayer2 = L.geoJson(data);
       geojson = L.geoJson(data, {
         style: style1,
-        onEachFeature: onEachFeature
+        onEachFeature: onEachFeature1
       }).addTo(map1);
     });
 
