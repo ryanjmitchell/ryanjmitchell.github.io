@@ -15,7 +15,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="assets/defaultextent/dist/leaflet.defaultextent.css">
 	<script src="assets/defaultextent/dist/leaflet.defaultextent.js"></script>
-	<script src="assets/leafletHeat/dist/leaflet-heat.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 	<link rel="stylesheet" href="assets/css/main.css" />
 	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -40,7 +39,7 @@
 	}
 	.info h5 {
 		margin: 0 0 5px;
-		color: #0050B8;
+		color: #045a8d;
 	}
 	.info h4 {
     margin: 0 0 5px;
@@ -64,8 +63,8 @@
 	<!-- US Choropleth -->
 	<section class="wrapper style1 align-center">
 		<div class="inner">
-			<!-- <h1>GIS 503 Lab 3 - Leaflet</h1> -->
-			<h2>USA</h2>
+			<h1>How Maps Lie</h1>
+			<h2>Choropleth Map</h2>
 			<div id="map"></div>
 			<script>
 				var layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
@@ -194,7 +193,7 @@
 
 <!--Heat Map -->
 <div class="inner">
-	<h2>HEAT MAP</h2>
+	<h2>Dot Map</h2>
 	<div id="map1"></div>
 	<script>
 		var layer1 = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
@@ -225,7 +224,7 @@
 			return this._div;
 		};
 		info.update = function (props) {
-			this._div.innerHTML = '<h5>EPA Sites</h5>' + 'TEXT';
+			this._div.innerHTML = '<h4>EPA Petrol Sites</h4>' + '<h5>ONE Circle = ONE Facility</h5>';
 		};
 		info.addTo(map1);             
 
@@ -242,7 +241,7 @@
                                 weight: .5,
                                 fillColor: '#045a8d',
                                 fillOpacity: 0.1,
-                                radius: 2,
+                                radius: 1,
                             });
                         }
                     }).addTo(map1);
