@@ -106,9 +106,6 @@
      $.getJSON('assets/data/EPAsites48.json', function(data){
               
               var datalayer4 = L.geoJson(data, {
-                onEachFeature: function (feature, featurelayer){
-                  featurelayer.bindPopup("<p>"+feature.properties.PRIMARY_NA+"<br>"+feature.properties.CITY_NAME+", "+feature.properties.STATE_CODE+"</p>");
-                },
                  pointToLayer: function (feature, latlng) {
                             return L.circleMarker(latlng, {
                                 color: '#045a8d',
