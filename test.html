@@ -266,6 +266,7 @@ legend.addTo(map);
   info.addTo(map1);             
 
   //hover
+    var geojson; 
      function highlightFeature1(e) {
       var layer = e.target;
 
@@ -284,9 +285,10 @@ legend.addTo(map);
   return {
     weight: 1,
     opacity: 0.0,
-    color: 'white',
+    color: 'green',
+    dashArray: '',
     fillOpacity: 0.0,
-    fillColor: 'white'
+    fillColor: 'green'
   };
 }
 function resetHighlight1(e) {
