@@ -100,9 +100,9 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props) {
-  this._div.innerHTML = '<h4>EPA Petrol Sites</h4>' +  (props ?
+  this._div.innerHTML = '<h4>EPA Sites</h4>' +  (props ?
    '<h5>' + props.NAME + '</h5>' + props.COUNT_coun + ' sites'
-   : 'Hover over a state');
+   : 'Hover Cver or Click a State');
 };
 info.addTo(map);
 
