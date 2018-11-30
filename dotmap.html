@@ -92,16 +92,20 @@
     map.boxZoom.disable();
     map.keyboard.disable();
 
-    var info = L.control();
-    info.onAdd = function (map) {
-      this._div = L.DomUtil.create('div', 'info');
-      this.update();
-      return this._div;
-    };
-    info.update = function (props) {
-      this._div.innerHTML = '<h4>EPA Petrol Sites</h4>' + '<h5>ONE Dot = ONE Facility</h5>';
-    };
-    info.addTo(map);             
+var info = L.control();
+
+info.onAdd = function (map) {
+  this._div = L.DomUtil.create('div', 'info');
+  this.update();
+  return this._div;
+};
+
+info.update = function (props) {
+  this._div.innerHTML = '<h4>EPA Petrol Sites</h4>' +  (props ?
+   '<h5>' + props.NAME + '</h5>' + props.COUNT_coun + ' sites'
+   : 'Hover over or click a state');
+};
+info.addTo(map);            
 
      $.getJSON('assets/data/EPAsites48.json', function(data){
               
