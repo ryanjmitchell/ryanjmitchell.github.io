@@ -6,154 +6,173 @@
 -->
 <html>
 <head>
-  <title>Lab 5 - GIS 503</title>
-  <meta charset="utf-8" />
-  <link rel="stylesheet" href="assets/leaflet/leaflet.css" />
-  <script src="assets/leaflet/leaflet.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
-  <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <link rel="stylesheet" href="assets/defaultextent/dist/leaflet.defaultextent.css">
-  <script src="assets/defaultextent/dist/leaflet.defaultextent.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-  <link rel="stylesheet" href="assets/css/main.css" />
-  <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-  <style >
-  #map{
-    width: 100%;
-    height: 500px;
-    background-color: grey;
-  }
-  #map1{
-    width: 100%;
-    height: 500px;
-    background-color: grey;
-  }
-  .info {
-    padding: 6px 8px;
-    font: 14px/16px Arial, Helvetica, sans-serif;
-    background: white;
-    background: rgba(255,255,255,1);
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    border-radius: 5px;
-  }
-  .info h5 {
-    margin: 0 0 5px;
-    color: #045a8d;
-  }
-  .info h4 {
-    margin: 0 0 5px;
-    color: #777;
-  }
-  .legend {
-    line-height: 18px;
-    color: #555;
-  }
-  .legend i {
-    width: 100%;
-    height: 18px;
-    float: left;
-    margin-right: 8px;
-    opacity: 0.7;
-  }
-  img.resize {
-    max-width:150%;
-    max-height:150%;
-  }
-  img.resize2 {
-    max-width:100%;
-    max-height:100%;
-  }
+	<title>Lab 5 - GIS 503</title>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" href="assets/leaflet/leaflet.css" />
+	<script src="assets/leaflet/leaflet.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+	<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="assets/defaultextent/dist/leaflet.defaultextent.css">
+	<script src="assets/defaultextent/dist/leaflet.defaultextent.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	<style >
+	#map{
+		width: 100%;
+		height: 500px;
+		background-color: grey;
+	}
+	#map1{
+		width: 100%;
+		height: 500px;
+		background-color: grey;
+	}
+	.info {
+		padding: 6px 8px;
+		font: 14px/16px Arial, Helvetica, sans-serif;
+		background: white;
+		background: rgba(255,255,255,1);
+		box-shadow: 0 0 15px rgba(0,0,0,0.2);
+		border-radius: 5px;
+	}
+	.info h5 {
+		margin: 0 0 5px;
+		color: #045a8d;
+	}
+	.info h4 {
+		margin: 0 0 5px;
+		color: #777;
+	}
+	.legend {
+		line-height: 18px;
+		color: #555;
+	}
+	.legend i {
+		width: 100%;
+		height: 18px;
+		float: left;
+		margin-right: 8px;
+		opacity: 0.7;
+	}
+	img.resize {
+		max-width:150%;
+		max-height:150%;
+	}
+	img.resize2 {
+		max-width:100%;
+		max-height:100%;
+	}
 </style>
 </head>
 <body class="is-preload">
 
-  <!-- US Choropleth -->
-  <section class="wrapper style1 align-center">
-    <div class="inner">
-      <h1>How Maps Lie</h1>
-      <h2>Choropleth Map</h2>
-      <iframe src="choroplethmap.html" style="width: 100%;height: 500px;background-color: grey;"></iframe>
-<!-- Pros/Cons -->
-<section class="wrapper style1 align-center">
-  <div class="items style1 medium onscroll-fade-in">
-    <section>
-      <h3>Pro's</h3>
-      <ul style='text-align: left;'><p>
-        <li>Popular</li>
-        <li>Shows general patterns clearly</li>
-        <li>Links variables to locations</li>
-        <li>Visually effective</li>
-        <li>Levels of shading/colour represent a range of values</li>
-      </p></ul>
-    </section>
-    <section>
-      <h3>Con's</h3>
-      <ul style='text-align: left;'><p>
-        <li>Gives impression of uniform values within sub-areas</li>
-        <li>Can only be used for ratio data not absolute values</li>
-        <li>Often not suitable for showing total values</li>
-        <li>Can be difficult to distinguish between different shades</li>
-      </p></ul>
-    </section>
-    <section>
-      <h3>Well Exectued Choropleth</h3>
-      <div class="image">
-        <img <img class="resize" src="images/choroplethGood.JPG" alt="Choropleth Example" />
-      </div>
-      <p><sub>Credit: David Yanofsky</sub></p> 
-    </section>
-  </div>
-</section>
+	<!-- US Choropleth -->
+	<section class="wrapper style1 align-center">
+		<div class="inner">
+			<h1>Thematic Mapping</h1>
+			<section>
+				<p style='text-align: left;'>
+					words
+				</p>
+			</section>
+			<h3>Choropleth Map</h3>
+			<iframe src="choroplethmap.html" style="width: 100%;height: 500px;background-color: grey;"></iframe>
+			<!-- Pros/Cons -->
+			<section class="wrapper style1 align-center">
+				<div class="items style1 medium onscroll-fade-in">
+					<section>
+						<h3>Pro's</h3>
+						<ul style='text-align: left;'><p>
+							<li>Popular</li>
+							<li>Shows general patterns clearly</li>
+							<li>Links variables to locations</li>
+							<li>Visually effective</li>
+							<li>Levels of shading/color represent a range of values</li>
+						</p></ul>
+					</section>
+					<section>
+						<h3>Con's</h3>
+						<ul style='text-align: left;'><p>
+							<li>Gives impression of uniform values within sub-areas</li>
+							<li>Can only be used for ratio data not absolute values</li>
+							<li>Often not suitable for showing total values</li>
+							<li>Can be difficult to distinguish between different shades</li>
+						</p></ul>
+					</section>
+					<section>
+						<h3>Well Executed Choropleth</h3>
+						<div class="image">
+							<img <img class="resize" src="images/choroplethGood.JPG" alt="Choropleth Example" />
+						</div>
+						<p><sub>Credit: David Yanofsky</sub></p> 
+					</section>
+				</div>
+			</section>
 
-<!-- Dot/Heat Map -->
-<h2>Dot Map</h2>
-      <iframe src="dotmap.html" style="width: 100%;height: 500px;background-color: grey;"></iframe>
-    <!-- Pros/Cons -->
-    <section class="wrapper style1 align-center">
-      <div class="items style1 medium onscroll-fade-in">
-        <section>
-          <h3>Heat Map</h3>
-          <div class="image">
-            <img <img class="resize2" src="images/heatMap.jpg" alt="Heat Map Example" />
-          </div>
-          <p><sub>Credit: Patrick Wied</sub></p> 
-        </section>
-        <section>
-          <h3>Pro's</h3>
-          <p>Pros</p>
-        </section>
-        <section>
-          <h3>Con's</h3>
-          <p>Cons</p>
-        </section>
+			<!-- Dot/Heat Map -->
+			<h3>Dot Map</h3>
+			<iframe src="dotmap.html" style="width: 100%;height: 500px;background-color: grey;"></iframe>
+			<!-- Pros/Cons -->
+			<section class="wrapper style1 align-center">
+				<div class="items style1 medium onscroll-fade-in">
+					<section>
+						<h3>Heat Maps</h3>
+						<div class="image">
+							<img <img class="resize2" src="images/heatMap.jpg" alt="Heat Map Example" />
+						</div>
+						<p style="style='text-align: left;'">Another way to visualize point data
+							<br>
+							<sub>Credit: Patrick Wied</sub></p> 
+						</section>
+						<section>
+							<h3>Pro's</h3>
+							<ul style='text-align: left;'><p>
+								<li>Shows density and distribution across a wide area</li>
+								<li>Good visual impression of variations</li>
+								<li>Can be used for statistical analysis</li>
+								<li>Exact data can be shown </li>
+								<li>Highlights clustering of data</li>
+							</p></ul>
+						</section>
+						<section>
+							<h3>Con's</h3>
+							<ul style='text-align: left;'><p>
+								<li>Areas with no dots may give a false sense of emptiness</li>
+								<li>The size of the dot has to be carefully selected</li>
+								<li>Cannot be used to show data in the form of ratios</li>
+								<li>Points may not have a spatial reference</li>
+								<li>Subjective decisions made about dot size, dot value, and dot location</li>
+							</p></ul>
+						</section>
 
-      </div>
-    </section>
-  </div>  
-</section>
-<!-- Footer -->
-<footer class="wrapper style1 align-center">
-  <div class="inner">
-    <ul class="icons">
-      <a href="index.html"><span class="icon style2 fas fa-home"></span>
-        <p>Home</p></a>
-        <li><a href="https://www.linkedin.com/in/ryanmitchell24" class="icon style2 fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-        <li><a href="mailto:ryanjmitch@gmail.com?Subject=MSGT Portfolio" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
-      </ul>
-      <p>&copy; Ryan Mitchell. Design: <a href="https://html5up.net" target="_blank">Story</a>.</p>
-    </div>
-  </footer>
-</div>
+					</div>
+				</section>
+			</div>  
+		</section>
+		<!-- Footer -->
+		<footer class="wrapper style1 align-center">
+			<div class="inner">
+				<ul class="icons">
+					<a href="index.html"><span class="icon style2 fas fa-home"></span>
+						<p>Home</p></a>
+						<li><a href="https://www.linkedin.com/in/ryanmitchell24" class="icon style2 fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
+						<li><a href="mailto:ryanjmitch@gmail.com?Subject=MSGT Portfolio" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+					<p>&copy; Ryan Mitchell. Design: <a href="https://html5up.net" target="_blank">Story</a>.</p>
+				</div>
+			</footer>
+		</div>
 
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
 
-</body>
-</html>
+	</body>
+	</html>
