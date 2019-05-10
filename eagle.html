@@ -1,154 +1,87 @@
 <!DOCTYPE HTML>
-<!--
-  Story by HTML5 UP
-  html5up.net | @ajlkn
-  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
 <html>
 <head>
-	<title>Bald Eagle</title>
-	<meta charset="utf-8" />
 	<script src='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
 	<link href='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	<style >
-	p.lightblue {color:#4bdaf7;}
-	p.darkblue {color:#04126c;}
-	#loa {
-		margin: 0 auto;
-		background-color: #C8C8C8;
-		color: 'black';
-		font-size: 12px;
-		padding: 0.1em;
-		border: 2px solid #024731;
-		border-radius: 0.3em;
-		cursor: pointer;
-		position: absolute;
-		left: 0.7em;
-		top: 7em;
-	}
-	#loa:hover {
-		background-color: #024731;
-	}
-</style>
 </head>
 <body>
-	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.min.js'></script>
-	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.3.0/mapbox-gl-geocoder.css' type='text/css' />
-
-	<section>
-		<div>
-			<h2 style="text-align: center;">Bald Eagle Flight Data</h2>
-			<div id='map' style='width: 100%; height: 500px;'></div>
-			<div id='loa'>Home</div>
-			<script>
-				mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
-				//The map variable
-				var map = new mapboxgl.Map({
-					container: 'map',
-					style: 'mapbox://styles/ryanjmitch/cjvfpdbi93id41fnr9c5s07fq',
-					center: [-97.9668,53.2977],
-					zoom: 2
-				});
-				map.scrollZoom.enable();
-				map.addControl(new mapboxgl.NavigationControl({
-					showCompass: false
-				}));
-				map.on('load', function(){
-					map.addSource('eagle', {
-						"type": "geojson",
-						"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle.json"
-					});
-        });
-					map.addLayer({
-						"id":"eaglefp",
-						"type":"circle",
-						"source":"eagle",
-						"paint": {
-							"circle-color": "#FFFF00",
-							"circle-opacity": 0.5,
-							"circle-radius": 10,
-							"circle-stroke-color": '#FF4500',
-							"circle-stroke-width": 1,
-							"circle-stroke-opacity": 0.75
-						}
-					});
-			   //add a handler for clicking/popups
-				//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/
-				map.on('click', 'equakes', function (e) {
-					map.getCanvas().style.cursor = 'pointer';
-					var coordinates = e.features[0].geometry.coordinates.slice();
-					var description = "<p>Mag: "+e.features[0].properties.mag+"<br>Location: "+e.features[0].properties.place+"<br>URL: <a target= '_blank' href='"+e.features[0].properties.url+"'>USGS Details</a></p>"
-			        // Ensure that if the map is zoomed out such that multiple
-			        // copies of the feature are visible, the popup appears
-			        // over the copy being pointed to.
-			        while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-			        	coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-			        }
-			        //make the popup
-			        new mapboxgl.Popup()
-			        .setLngLat(coordinates)
-			        .setHTML(description)
-			        .addTo(map);
-			    });
-				    // Change the cursor to a pointer when the mouse is over the places layer.
-				    map.on('mouseenter', 'equakes', function () {
-				    	map.getCanvas().style.cursor = 'pointer';
-				    });
-    				// Change it back to a pointer when it leaves.
-    				map.on('mouseleave', 'equakes', function () {
-    					map.getCanvas().style.cursor = '';
-    				});
-				map.on('load', function(){
-					var switchy = document.getElementById('remover');
-					switchy.addEventListener("click", function(){
-						switchy = document.getElementById('remover');
-						if (switchy.className === 'on') {
-							switchy.setAttribute('class', 'off');
-							map.setLayoutProperty('equakes', 'visibility', 'none');
-							switchy.innerHTML = 'Toggle Earthquakes ON';
-						} else {
-							switchy.setAttribute('class', 'on');
-							map.setLayoutProperty('equakes', 'visibility', 'visible');
-							switchy.innerHTML = 'Toggle Earthquakes OFF';
-						}
-					});
-	//home button
-	var loa = document.getElementById('loa');
-	loa.addEventListener("click", function(){
-		map.setCenter([-97.9668,53.2977]);
-		map.setZoom(2);
-		map.setstyle('mapbox://styles/ryanjmitch/cjvfpdbi93id41fnr9c5s07fq');
-	});
-});
-</script>
-<p>Bald Eagle Flight Paths</p>
+	<div>
+		<h2 style="text-align: center;">Bald Eagle Flight Data</h2>
+		<div id='map' style='width: 100%; height: 500px;'></div>
+		<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
+		//The map variable
+		var map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/ryanjmitch/cjvfpdbi93id41fnr9c5s07fq',
+			center: [-97.9668,53.2977],
+			zoom: 2
+		});
+		map.on('load', function(){
+			map.addSource('eagle2014', {
+				"type": "geojson",
+				"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2014.json"
+			});
+			map.addLayer({
+				"id":"eaglefp2014",
+				"type":"circle",
+				"source":"eagle2014",
+				"paint": {"circle-color": "blue"}
+			});
+			//add new years here
+			map.addSource('eagle2015', {
+				"type": "geojson",
+				"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2015.json"
+			});
+			map.addLayer({
+				"id":"eaglefp2015",
+				"type":"circle",
+				"source":"eagle2015",
+				"paint": {"circle-color": "red"}
+			});
+			map.addSource('eagle2016', {
+				"type": "geojson",
+				"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2016.json"
+			});
+			map.addLayer({
+				"id":"eaglefp2016",
+				"type":"circle",
+				"source":"eagle2016",
+				"paint": {"circle-color": "green"}
+			});
+			map.addSource('eagle2017', {
+				"type": "geojson",
+				"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2017.json"
+			});
+			map.addLayer({
+				"id":"eaglefp2017",
+				"type":"circle",
+				"source":"eagle2017",
+				"paint": {"circle-color": "yellow"}
+			});
+			map.addSource('eagle2018', {
+				"type": "geojson",
+				"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2018.json"
+			});
+			map.addLayer({
+				"id":"eaglefp2018",
+				"type":"circle",
+				"source":"eagle2018",
+				"paint": {"circle-color": "white"}
+			});
+			map.addSource('eagle2019', {
+				"type": "geojson",
+				"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2019.json"
+			});
+			map.addLayer({
+				"id":"eaglefp2019",
+				"type":"circle",
+				"source":"eagle2019",
+				"paint": {"circle-color": "grey"}
+			});
+			//add new years here
+		});
+	</script>
 </div>
-
-<!-- Footer -->
-<footer class="wrapper style1 align-center">
-	<div class="inner">
-		<ul class="icons">
-			<a href="index.html"><span class="icon style2 fas fa-home"></span>
-				<p>Home</p></a>
-				<li><a href="https://www.linkedin.com/in/ryanmitchell24" class="icon style2 fa-linkedin" target="_blank"><span class="label">LinkedIn</span></a></li>
-				<li><a href="mailto:ryanjmitch@gmail.com?Subject=MSGT Portfolio" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
-			</ul>
-			<p>&copy; Ryan Mitchell. Design: <a href="https://html5up.net" target="_blank">Story</a>.</p>
-		</div>
-	</footer>
-</div>
-
-<!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
-<script src="assets/js/jquery.scrolly.min.js"></script>
-<script src="assets/js/browser.min.js"></script>
-<script src="assets/js/breakpoints.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
-
 </body>
 </html>
