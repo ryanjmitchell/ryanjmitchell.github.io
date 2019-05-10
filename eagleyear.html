@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+}
+
+#map {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+h1 {
+	font-size: 20px;
+	line-height: 30px;
+}
+
+h2 {
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+
+a {
+	text-decoration: none;
+	color: #2dc4b2;
+}
+
+#console {
+	position: absolute;
+	width: 240px;
+	margin: 10px;
+	padding: 0px 10px;
+	background-color: white;
+}
+
+.legend {
+	background-color: #fff;
+	bottom: 30px;
+
+	font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+	padding: 5px;
+	position: absolute;
+	right: 10px;
+	z-index: 1;
+}
+
+.legend h4 {
+	margin: 0 0 10px;
+}
+
+.legend div span {
+	border-radius: 50%;
+	display: inline-block;
+	height: 10px;
+	margin-right: 5px;
+	width: 10px;
+}
+</style>
+<body>
+	<div id='map'></div>
+	<div id='console'>
+		<h1>Bald Eagle Flight Data</h1>
+		<p>Flight data for one bald eagle March 2014 to March 2019</p>
+	</div>
+	<div id='year-legend' class='legend'>
+		<h4>Year</h4>
+		<div><span style='background-color: #e41a1c'></span>2014</div>
+		<div><span style='background-color: #b15928'></span>2015</div>
+		<div><span style='background-color: #4daf4a'></span>2016</div>
+		<div><span style='background-color: #984ea3'></span>2017</div>
+		<div><span style='background-color: #ff7f00'></span>2018</div>
+		<div><span style='background-color: #ffff33'></span>2019</div>
+	</div>
+	<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
+	//The map variable
+	var map = new mapboxgl.Map({
+		container: 'map',
+		style: 'mapbox://styles/ryanjmitch/cjvfpdbi93id41fnr9c5s07fq',
+		center: [-98.1,56.5],
+		zoom: 2.5
+	});
+	map.on('load', function(){
+		map.addSource('eagle2014', {
+			"type": "geojson",
+			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2014.json"
+		});
+		map.addLayer({
+			"id":"eaglefp2014",
+			"type":"circle",
+			"source":"eagle2014",
+			"paint": {"circle-color": "#e41a1c",
+			"circle-radius": 1,
+			"circle-opacity": 0.5}
+		});
+		//add new years here
+		map.addSource('eagle2015', {
+			"type": "geojson",
+			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2015.json"
+		});
+		map.addLayer({
+			"id":"eaglefp2015",
+			"type":"circle",
+			"source":"eagle2015",
+			"paint": {"circle-color": "#b15928",
+			"circle-radius": 1,
+			"circle-opacity": 0.5}
+		});
+		map.addSource('eagle2016', {
+			"type": "geojson",
+			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2016.json"
+		});
+		map.addLayer({
+			"id":"eaglefp2016",
+			"type":"circle",
+			"source":"eagle2016",
+			"paint": {"circle-color": "#4daf4a",
+			"circle-radius": 1,
+			"circle-opacity": 0.5}
+		});
+		map.addSource('eagle2017', {
+			"type": "geojson",
+			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2017.json"
+		});
+		map.addLayer({
+			"id":"eaglefp2017",
+			"type":"circle",
+			"source":"eagle2017",
+			"paint": {"circle-color": "#984ea3",
+			"circle-radius": 1,
+			"circle-opacity": 0.5}
+		});
+		map.addSource('eagle2018', {
+			"type": "geojson",
+			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2018.json"
+		});
+		map.addLayer({
+			"id":"eaglefp2018",
+			"type":"circle",
+			"source":"eagle2018",
+			"paint": {"circle-color": "#ff7f00",
+			"circle-radius": 1,
+			"circle-opacity": 0.5}
+		});
+		map.addSource('eagle2019', {
+			"type": "geojson",
+			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2019.json"
+		});
+		map.addLayer({
+			"id":"eaglefp2019",
+			"type":"circle",
+			"source":"eagle2019",
+			"paint": {"circle-color": "#ffff33",
+			"circle-radius": 1,
+			"circle-opacity": 0.5}
+		});
+		//add new years here
+	});
+	</script>
+</div>
+</body>
+</html>
