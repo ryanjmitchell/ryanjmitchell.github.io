@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+}
+
+#map {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+h1 {
+	font-size: 20px;
+	line-height: 30px;
+}
+
+h2 {
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+
+a {
+	text-decoration: none;
+	color: #2dc4b2;
+}
+
+#console {
+	position: absolute;
+	width: 235px;
+	margin: 5px;
+	padding: 0px 5px;
+	background-color: white;
+}
+#menu {
+	background: #fff;
+	position: absolute;
+	z-index: 1;
+	top: 10px;
+	right: 10px;
+	width: 40px;
+	font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+#menu a {
+	font-size: 13px;
+	color: #404040;
+	display: block;
+	margin: 0;
+	padding: 0;
+	padding: 5px;
+	text-decoration: none;
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	text-align: center;
+}
+
+#menu a:last-child {
+	border: none;
+}
+
+#menu a:hover {
+	background-color: #f8f8f8;
+	color: #404040;
+}
+
+#menu a.active {
+	background-color: #343332;
+	color: #ffffff;
+}
+
+#menu a.active:hover {
+	background: #6E6E6E;
+}
+</style>
+<body>
+	<nav id="menu"></nav>
+	<div id='map'></div>
+	<div id='console'>
+		<h1>Bald Eagle Altitude Data</h1>
+		<p>Altitude data for one bald eagle March 2014 to March 2019</p>
+	</div>
+	<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
+	//The map variable
+	var map = new mapboxgl.Map({
+		container: 'map',
+		style: 'mapbox://styles/ryanjmitch/cjvfpdbi93id41fnr9c5s07fq',
+		center: [-98.1,56.5],
+		zoom: 2.6
+	});
+	map.on('load', function(){
+			map.addSource('eagle2015', {
+			"type": "geojson",
+			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2015.json"
+		});
+		map.addLayer({
+			"id":"2015",
+			"type":"circle",
+			"source":"eagle2015",
+			'layout': {
+				'visibility': 'visible'
+			},
+			"paint": {
+			"circle-radius": 1,
+			"circle-opacity": 0.5,
+			'circle-color': {
+ property: 'Altitude',
+ stops: [
+[-400, '#67001f'],
+[-300, '#b2182b'],
+[-200, '#d6604d'],
+[-100, '#f4a582'],
+[0, '#f7f7f7'],
+[100, '#d1e5f0'],
+[200, '#92c5de'],
+[300, '#4393c3'],
+[400, '#2166ac'],
+[500, '#053061']
+ ]
+}
+		},
+	});
+});
+	</script>
+</div>
+</body>
+</html>
