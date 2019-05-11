@@ -80,6 +80,64 @@ a {
 #menu a.active:hover {
 	background: #6E6E6E;
 }
+#menu {
+	background: #fff;
+	position: absolute;
+	z-index: 1;
+	top: 10px;
+	right: 10px;
+	width: 40px;
+	font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+#menu a {
+	font-size: 13px;
+	color: #404040;
+	display: block;
+	margin: 0;
+	padding: 0;
+	padding: 5px;
+	text-decoration: none;
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	text-align: center;
+}
+
+#menu a:last-child {
+	border: none;
+}
+
+#menu a:hover {
+	background-color: #f8f8f8;
+	color: #404040;
+}
+
+#menu a.active {
+	background-color: #343332;
+	color: #ffffff;
+}
+
+#menu a.active:hover {
+	background: #6E6E6E;
+}
+.session {
+  margin-bottom: 20px;
+}
+
+.row {
+  height: 12px;
+  width: 100%;
+}
+
+.colors {
+  background: linear-gradient(to right, #f7f7f7, #d1e5f0, #92c5de, #4393c3,#2166ac, #053061);
+  margin-bottom: 5px;
+}
+
+.label {
+  width: 15%;
+  display: inline-block;
+  text-align: center;
+}
 </style>
 <body>
 	<nav id="menu"></nav>
@@ -87,6 +145,19 @@ a {
 	<div id='console'>
 		<h1>Bald Eagle Altitude Data</h1>
 		<p>Altitude data for one bald eagle March 2014 to March 2019</p>
+		<div class='session'>
+  <h2>Altitude</h2>
+  <div class='row colors'>
+  </div>
+  <div class='row labels'>
+    <div class='label'>Low</div>
+    <div class='label'> </div>
+    <div class='label'> </div>
+    <div class='label'> </div>
+    <div class='label'> </div>
+    <div class='label'>High</div>
+  </div>
+</div>
 	</div>
 	<script>
 	mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
@@ -95,10 +166,42 @@ a {
 		container: 'map',
 		style: 'mapbox://styles/ryanjmitch/cjvfpdbi93id41fnr9c5s07fq',
 		center: [-98.1,56.5],
-		zoom: 2.6
+		zoom: 2.6,
+		maxZoom: 5
 	});
 	map.on('load', function(){
-			map.addSource('eagle2015', {
+		map.addSource('eagle2014', {
+			"type": "geojson",
+			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2014.json"
+		});
+		map.addLayer({
+			"id":"2014",
+			"type":"circle",
+			"source":"eagle2014",
+			'layout': {
+				'visibility': 'visible'
+			},
+			"paint": {
+				"circle-radius": 1,
+				"circle-opacity": 0.5,
+				'circle-color': {
+					property: 'Altitude',
+					stops: [
+						[-400, '#67001f'],
+						[-300, '#b2182b'],
+						[-200, '#d6604d'],
+						[-100, '#f4a582'],
+						[0, '#f7f7f7'],
+						[100, '#d1e5f0'],
+						[200, '#92c5de'],
+						[300, '#4393c3'],
+						[400, '#2166ac'],
+						[500, '#053061']
+					]
+				}
+			},
+		});
+		map.addSource('eagle2015', {
 			"type": "geojson",
 			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2015.json"
 		});
@@ -110,26 +213,179 @@ a {
 				'visibility': 'visible'
 			},
 			"paint": {
-			"circle-radius": 1,
-			"circle-opacity": 0.5,
-			'circle-color': {
- property: 'Altitude',
- stops: [
-[-400, '#67001f'],
-[-300, '#b2182b'],
-[-200, '#d6604d'],
-[-100, '#f4a582'],
-[0, '#f7f7f7'],
-[100, '#d1e5f0'],
-[200, '#92c5de'],
-[300, '#4393c3'],
-[400, '#2166ac'],
-[500, '#053061']
- ]
-}
-		},
+				"circle-radius": 1,
+				"circle-opacity": 0.5,
+				'circle-color': {
+					property: 'Altitude',
+					stops: [
+						[-400, '#67001f'],
+						[-300, '#b2182b'],
+						[-200, '#d6604d'],
+						[-100, '#f4a582'],
+						[0, '#f7f7f7'],
+						[100, '#d1e5f0'],
+						[200, '#92c5de'],
+						[300, '#4393c3'],
+						[400, '#2166ac'],
+						[500, '#053061']
+					]
+				}
+			},
+		});
+		map.addSource('eagle2016', {
+			"type": "geojson",
+			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2016.json"
+		});
+		map.addLayer({
+			"id":"2016",
+			"type":"circle",
+			"source":"eagle2016",
+			'layout': {
+				'visibility': 'visible'
+			},
+			"paint": {
+				"circle-radius": 1,
+				"circle-opacity": 0.5,
+				'circle-color': {
+					property: 'Altitude',
+					stops: [
+						[-400, '#67001f'],
+						[-300, '#b2182b'],
+						[-200, '#d6604d'],
+						[-100, '#f4a582'],
+						[0, '#f7f7f7'],
+						[100, '#d1e5f0'],
+						[200, '#92c5de'],
+						[300, '#4393c3'],
+						[400, '#2166ac'],
+						[500, '#053061']
+					]
+				}
+			},
+		});
+		map.addSource('eagle2017', {
+			"type": "geojson",
+			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2017.json"
+		});
+		map.addLayer({
+			"id":"2017",
+			"type":"circle",
+			"source":"eagle2017",
+			'layout': {
+				'visibility': 'visible'
+			},
+			"paint": {
+				"circle-radius": 1,
+				"circle-opacity": 0.5,
+				'circle-color': {
+					property: 'Altitude',
+					stops: [
+						[-400, '#67001f'],
+						[-300, '#b2182b'],
+						[-200, '#d6604d'],
+						[-100, '#f4a582'],
+						[0, '#f7f7f7'],
+						[100, '#d1e5f0'],
+						[200, '#92c5de'],
+						[300, '#4393c3'],
+						[400, '#2166ac'],
+						[500, '#053061']
+					]
+				}
+			},
+		});
+		map.addSource('eagle2018', {
+			"type": "geojson",
+			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2018.json"
+		});
+		map.addLayer({
+			"id":"2018",
+			"type":"circle",
+			"source":"eagle2018",
+			'layout': {
+				'visibility': 'visible'
+			},
+			"paint": {
+				"circle-radius": 1,
+				"circle-opacity": 0.5,
+				'circle-color': {
+					property: 'Altitude',
+					stops: [
+						[-400, '#67001f'],
+						[-300, '#b2182b'],
+						[-200, '#d6604d'],
+						[-100, '#f4a582'],
+						[0, '#f7f7f7'],
+						[100, '#d1e5f0'],
+						[200, '#92c5de'],
+						[300, '#4393c3'],
+						[400, '#2166ac'],
+						[500, '#053061']
+					]
+				}
+			},
+		});
+		map.addSource('eagle2019', {
+			"type": "geojson",
+			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2019.json"
+		});
+		map.addLayer({
+			"id":"2019",
+			"type":"circle",
+			"source":"eagle2019",
+			'layout': {
+				'visibility': 'visible'
+			},
+			"paint": {
+				"circle-radius": 1,
+				"circle-opacity": 0.5,
+				'circle-color': {
+					property: 'Altitude',
+					stops: [
+						[-400, '#67001f'],
+						[-300, '#b2182b'],
+						[-200, '#d6604d'],
+						[-100, '#f4a582'],
+						[0, '#f7f7f7'],
+						[100, '#d1e5f0'],
+						[200, '#92c5de'],
+						[300, '#4393c3'],
+						[400, '#2166ac'],
+						[500, '#053061']
+					]
+				}
+			},
+		});
 	});
-});
+	var toggleableLayerIds = [ '2019', '2018', '2017', '2016', '2015', '2014',];
+
+	for (var i = 0; i < toggleableLayerIds.length; i++) {
+		var id = toggleableLayerIds[i];
+
+		var link = document.createElement('a');
+		link.href = '#';
+		link.className = 'active';
+		link.textContent = id;
+
+		link.onclick = function (e) {
+			var clickedLayer = this.textContent;
+			e.preventDefault();
+			e.stopPropagation();
+
+			var visibility = map.getLayoutProperty(clickedLayer, 'visibility');
+
+			if (visibility === 'visible') {
+				map.setLayoutProperty(clickedLayer, 'visibility', 'none');
+				this.className = '';
+			} else {
+				this.className = 'active';
+				map.setLayoutProperty(clickedLayer, 'visibility', 'visible');
+			}
+		};
+
+		var layers = document.getElementById('menu');
+		layers.appendChild(link);
+	}
 	</script>
 </div>
 </body>
