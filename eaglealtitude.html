@@ -41,6 +41,7 @@ a {
 	padding: 0px 5px;
 	background-color: white;
 }
+
 #menu {
 	background: #fff;
 	position: absolute;
@@ -120,23 +121,28 @@ a {
 	background: #6E6E6E;
 }
 .session {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
+}
+
+.session h5 {
+	margin: 0 0 5px;
 }
 
 .row {
-  height: 12px;
-  width: 100%;
+	height: 12px;
+	width: 100%;
 }
 
 .colors {
-  background: linear-gradient(to right, #f7f7f7, #d1e5f0, #92c5de, #4393c3,#2166ac, #053061);
-  margin-bottom: 5px;
+	background: linear-gradient(to right, #f7f7f7, #d1e5f0, #92c5de, #4393c3,#2166ac, #053061);
+	margin-bottom: 5px;
 }
 
 .label {
-  width: 15%;
-  display: inline-block;
-  text-align: center;
+	width: 15%;
+	display: inline-block;
+	text-align: center;
+	font-size: 13px;
 }
 </style>
 <body>
@@ -146,18 +152,18 @@ a {
 		<h1>Bald Eagle Altitude Data</h1>
 		<p>Altitude data for one bald eagle March 2014 to March 2019</p>
 		<div class='session'>
-  <h2>Altitude</h2>
-  <div class='row colors'>
-  </div>
-  <div class='row labels'>
-    <div class='label'>Low</div>
-    <div class='label'> </div>
-    <div class='label'> </div>
-    <div class='label'> </div>
-    <div class='label'> </div>
-    <div class='label'>High</div>
-  </div>
-</div>
+			<h5>Altitude</h5>
+			<div class='row colors'>
+			</div>
+			<div class='row labels'>
+				<div class='label'>Low</div>
+				<div class='label'> </div>
+				<div class='label'> </div>
+				<div class='label'> </div>
+				<div class='label'> </div>
+				<div class='label'>High</div>
+			</div>
+		</div>
 	</div>
 	<script>
 	mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
@@ -167,6 +173,7 @@ a {
 		style: 'mapbox://styles/ryanjmitch/cjvfpdbi93id41fnr9c5s07fq',
 		center: [-98.1,56.5],
 		zoom: 2.6,
+		minZoom: 2.6,
 		maxZoom: 5
 	});
 	map.on('load', function(){
@@ -386,7 +393,7 @@ a {
 		var layers = document.getElementById('menu');
 		layers.appendChild(link);
 	}
-	</script>
+</script>
 </div>
 </body>
 </html>
