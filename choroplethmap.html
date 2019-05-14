@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
 <!--
-  Story by HTML5 UP
-  html5up.net | @ajlkn
-  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+Story by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 <head>
@@ -69,129 +69,129 @@
 <body class="is-preload">
 
   <!-- US Choropleth -->
-      <div id="map"></div>
-      <script>
-        var layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
-          subdomains: 'abcd',
-          maxZoom: 19
-        });
+  <div id="map"></div>
+  <script>
+  var layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  });
 
-        var map = new L.Map("map", {
-          center: new L.LatLng(39.8283, -98.5795),
-          zoom: 4,
-          zoomControl:false,
-          defaultExtentControl: true
-        });
-        map.addLayer(layer);
-        map.touchZoom.disable();
-        map.doubleClickZoom.disable();
-        map.scrollWheelZoom.disable();
-        map.boxZoom.disable();
-        map.keyboard.disable();
+  var map = new L.Map("map", {
+    center: new L.LatLng(39.8283, -98.5795),
+    zoom: 4,
+    zoomControl:false,
+    defaultExtentControl: true
+  });
+  map.addLayer(layer);
+  map.touchZoom.disable();
+  map.doubleClickZoom.disable();
+  map.scrollWheelZoom.disable();
+  map.boxZoom.disable();
+  map.keyboard.disable();
 
-// control that shows state info on hover
-var info = L.control();
+  // control that shows state info on hover
+  var info = L.control();
 
-info.onAdd = function (map) {
-  this._div = L.DomUtil.create('div', 'info');
-  this.update();
-  return this._div;
-};
-
-info.update = function (props) {
-  this._div.innerHTML = '<h4>EPA Sites</h4>' +  (props ?
-   '<h5>' + props.NAME + '</h5>' + props.COUNT_coun + ' sites'
-   : 'Hover Cver or Click a State');
-};
-info.addTo(map);
-
-// get color depending on count value
-function getColor(d) {
-  return d > 960 ? '#045a8d' :
-  d > 370  ? '#2b8cbe' :
-  d > 220   ? '#74a9cf' :
-  d > 110   ? '#a6bddb' :
-  d > 20   ? '#d0d1e6' :
-  '#000000';
-}
-function style(feature) {
-  return {
-    weight: 1,
-    opacity: 1,
-    color: 'white',
-    dashArray: '3',
-    fillOpacity: 0.7,
-    fillColor: getColor(feature.properties.COUNT_coun)
+  info.onAdd = function (map) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
   };
-}
 
-function highlightFeature(e) {
-  var layer = e.target;
+  info.update = function (props) {
+    this._div.innerHTML = '<h4>EPA Sites</h4>' +  (props ?
+      '<h5>' + props.NAME + '</h5>' + props.COUNT_coun + ' sites'
+      : 'Hover Cver or Click a State');
+    };
+    info.addTo(map);
 
-  layer.setStyle({
-    weight: 3,
-    color: '#666',
-    dashArray: '',
-    fillOpacity: 0.9
-  });
+    // get color depending on count value
+    function getColor(d) {
+      return d > 960 ? '#045a8d' :
+      d > 370  ? '#2b8cbe' :
+      d > 220   ? '#74a9cf' :
+      d > 110   ? '#a6bddb' :
+      d > 20   ? '#d0d1e6' :
+      '#000000';
+    }
+    function style(feature) {
+      return {
+        weight: 1,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7,
+        fillColor: getColor(feature.properties.COUNT_coun)
+      };
+    }
 
-  if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-    layer.bringToFront();
-  }
+    function highlightFeature(e) {
+      var layer = e.target;
 
-  info.update(layer.feature.properties);
-}
+      layer.setStyle({
+        weight: 3,
+        color: '#666',
+        dashArray: '',
+        fillOpacity: 0.9
+      });
 
-var geojson;
+      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+        layer.bringToFront();
+      }
 
-function resetHighlight(e) {
-  geojson.resetStyle(e.target);
-  info.update();
-}
+      info.update(layer.feature.properties);
+    }
 
-function zoomToFeature(e) {
-  map.fitBounds(e.target.getBounds());
-}
+    var geojson;
 
-function onEachFeature(feature, layer) {
-  layer.on({
-    mouseover: highlightFeature,
-    mouseout: resetHighlight,
-    click: zoomToFeature
-  });
-}
-$.getJSON('assets/data/EPAUS48.json', function(data){
-  var datalayer = L.geoJson(data);
-  geojson = L.geoJson(data, {
-    style: style,
-    onEachFeature: onEachFeature
-  }).addTo(map);
-});
+    function resetHighlight(e) {
+      geojson.resetStyle(e.target);
+      info.update();
+    }
 
-//legend
-var legend = L.control({position: 'bottomright'});
+    function zoomToFeature(e) {
+      map.fitBounds(e.target.getBounds());
+    }
 
-legend.onAdd = function (map) {
+    function onEachFeature(feature, layer) {
+      layer.on({
+        mouseover: highlightFeature,
+        mouseout: resetHighlight,
+        click: zoomToFeature
+      });
+    }
+    $.getJSON('assets/data/EPAUS48.json', function(data){
+      var datalayer = L.geoJson(data);
+      geojson = L.geoJson(data, {
+        style: style,
+        onEachFeature: onEachFeature
+      }).addTo(map);
+    });
 
-  var div = L.DomUtil.create('div', 'info legend'),
-  grades = [21, 110, 220, 370, 960],
-  labels = [],
-  from, to;
+    //legend
+    var legend = L.control({position: 'bottomright'});
 
-  for (var i = 0; i < grades.length; i++) {
-    from = grades[i];
-    to = grades[i + 1];
+    legend.onAdd = function (map) {
 
-    labels.push(
-      '<i style="background:' + getColor(from + 1) + '"></i> ' +
-      from + (to ? '&ndash;' + to : '+'));
-  }
+      var div = L.DomUtil.create('div', 'info legend'),
+      grades = [21, 110, 220, 370, 960],
+      labels = [],
+      from, to;
 
-  div.innerHTML = labels.join('<br>');
-  return div;
-};
-legend.addTo(map);
-</script>
-</body>
-</html>
+      for (var i = 0; i < grades.length; i++) {
+        from = grades[i];
+        to = grades[i + 1];
+
+        labels.push(
+          '<i style="background:' + getColor(from + 1) + '"></i> ' +
+          from + (to ? '&ndash;' + to : '+'));
+        }
+
+        div.innerHTML = labels.join('<br>');
+        return div;
+      };
+      legend.addTo(map);
+    </script>
+  </body>
+  </html>
