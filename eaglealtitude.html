@@ -146,11 +146,11 @@ a {
 }
 </style>
 <body>
-	<nav id="menu"></nav>
+	<nav id='menu'></nav>
 	<div id='map'></div>
 	<div id='console'>
 		<h1>Bald Eagle Altitude Data</h1>
-		<p>Altitude data for one bald eagle March 2014 to March 2019</p>
+		<p>March 2014 to March 2019</p>
 		<div class='session'>
 			<h5>Altitude</h5>
 			<div class='row colors'>
@@ -177,20 +177,20 @@ a {
 		maxZoom: 5
 	});
 	map.on('load', function(){
-		map.addSource('eagle2014', {
-			"type": "geojson",
-			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2014.json"
+		map.addSource('eagle258', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/258.json'
 		});
 		map.addLayer({
-			"id":"2014",
-			"type":"circle",
-			"source":"eagle2014",
+			'id':'258',
+			'type':'circle',
+			'source':'eagle258',
 			'layout': {
 				'visibility': 'visible'
 			},
-			"paint": {
-				"circle-radius": 1,
-				"circle-opacity": 0.5,
+			'paint': {
+				'circle-radius': 1,
+				'circle-opacity': 0.5,
 				'circle-color': {
 					property: 'Altitude',
 					stops: [
@@ -208,20 +208,20 @@ a {
 				}
 			},
 		});
-		map.addSource('eagle2015', {
-			"type": "geojson",
-			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2015.json"
+		map.addSource('eagle431', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/431.json'
 		});
 		map.addLayer({
-			"id":"2015",
-			"type":"circle",
-			"source":"eagle2015",
+			'id':'431',
+			'type':'circle',
+			'source':'eagle431',
 			'layout': {
 				'visibility': 'visible'
 			},
-			"paint": {
-				"circle-radius": 1,
-				"circle-opacity": 0.5,
+			'paint': {
+				'circle-radius': 1,
+				'circle-opacity': 0.5,
 				'circle-color': {
 					property: 'Altitude',
 					stops: [
@@ -239,20 +239,20 @@ a {
 				}
 			},
 		});
-		map.addSource('eagle2016', {
-			"type": "geojson",
-			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2016.json"
+		map.addSource('eagle974', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/974.json'
 		});
 		map.addLayer({
-			"id":"2016",
-			"type":"circle",
-			"source":"eagle2016",
+			'id':'974',
+			'type':'circle',
+			'source':'eagle974',
 			'layout': {
 				'visibility': 'visible'
 			},
-			"paint": {
-				"circle-radius": 1,
-				"circle-opacity": 0.5,
+			'paint': {
+				'circle-radius': 1,
+				'circle-opacity': 0.5,
 				'circle-color': {
 					property: 'Altitude',
 					stops: [
@@ -270,20 +270,20 @@ a {
 				}
 			},
 		});
-		map.addSource('eagle2017', {
-			"type": "geojson",
-			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2017.json"
+		map.addSource('eagle1370', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/1370.json'
 		});
 		map.addLayer({
-			"id":"2017",
-			"type":"circle",
-			"source":"eagle2017",
+			'id':'1370',
+			'type':'circle',
+			'source':'eagle1370',
 			'layout': {
 				'visibility': 'visible'
 			},
-			"paint": {
-				"circle-radius": 1,
-				"circle-opacity": 0.5,
+			'paint': {
+				'circle-radius': 1,
+				'circle-opacity': 0.5,
 				'circle-color': {
 					property: 'Altitude',
 					stops: [
@@ -301,20 +301,20 @@ a {
 				}
 			},
 		});
-		map.addSource('eagle2018', {
-			"type": "geojson",
-			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2018.json"
+		map.addSource('eagle1388', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/1388.json'
 		});
 		map.addLayer({
-			"id":"2018",
-			"type":"circle",
-			"source":"eagle2018",
+			'id':'1388',
+			'type':'circle',
+			'source':'eagle1388',
 			'layout': {
 				'visibility': 'visible'
 			},
-			"paint": {
-				"circle-radius": 1,
-				"circle-opacity": 0.5,
+			'paint': {
+				'circle-radius': 1,
+				'circle-opacity': 0.5,
 				'circle-color': {
 					property: 'Altitude',
 					stops: [
@@ -332,20 +332,237 @@ a {
 				}
 			},
 		});
-		map.addSource('eagle2019', {
-			"type": "geojson",
-			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/eagle_2019.json"
+		map.addSource('eagle2634', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/2364.json'
 		});
 		map.addLayer({
-			"id":"2019",
-			"type":"circle",
-			"source":"eagle2019",
+			'id':'2634',
+			'type':'circle',
+			'source':'eagle2634',
 			'layout': {
 				'visibility': 'visible'
 			},
-			"paint": {
-				"circle-radius": 1,
-				"circle-opacity": 0.5,
+			'paint': {
+				'circle-radius': 1,
+				'circle-opacity': 0.5,
+				'circle-color': {
+					property: 'Altitude',
+					stops: [
+						[-400, '#67001f'],
+						[-300, '#b2182b'],
+						[-200, '#d6604d'],
+						[-100, '#f4a582'],
+						[0, '#f7f7f7'],
+						[100, '#d1e5f0'],
+						[200, '#92c5de'],
+						[300, '#4393c3'],
+						[400, '#2166ac'],
+						[500, '#053061']
+					]
+				}
+			},
+		});
+		map.addSource('eagle3988', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/3988.json'
+		});
+		map.addLayer({
+			'id':'3988',
+			'type':'circle',
+			'source':'eagle3988',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'circle-radius': 1,
+				'circle-opacity': 0.5,
+				'circle-color': {
+					property: 'Altitude',
+					stops: [
+						[-400, '#67001f'],
+						[-300, '#b2182b'],
+						[-200, '#d6604d'],
+						[-100, '#f4a582'],
+						[0, '#f7f7f7'],
+						[100, '#d1e5f0'],
+						[200, '#92c5de'],
+						[300, '#4393c3'],
+						[400, '#2166ac'],
+						[500, '#053061']
+					]
+				}
+			},
+		});
+		map.addSource('eagle4770', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/4770.json'
+		});
+		map.addLayer({
+			'id':'4770',
+			'type':'circle',
+			'source':'eagle4770',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'circle-radius': 1,
+				'circle-opacity': 0.5,
+				'circle-color': {
+					property: 'Altitude',
+					stops: [
+						[-400, '#67001f'],
+						[-300, '#b2182b'],
+						[-200, '#d6604d'],
+						[-100, '#f4a582'],
+						[0, '#f7f7f7'],
+						[100, '#d1e5f0'],
+						[200, '#92c5de'],
+						[300, '#4393c3'],
+						[400, '#2166ac'],
+						[500, '#053061']
+					]
+				}
+			},
+		});
+		map.addSource('eagle5413', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/5413.json'
+		});
+		map.addLayer({
+			'id':'5413',
+			'type':'circle',
+			'source':'eagle5413',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'circle-radius': 1,
+				'circle-opacity': 0.5,
+				'circle-color': {
+					property: 'Altitude',
+					stops: [
+						[-400, '#67001f'],
+						[-300, '#b2182b'],
+						[-200, '#d6604d'],
+						[-100, '#f4a582'],
+						[0, '#f7f7f7'],
+						[100, '#d1e5f0'],
+						[200, '#92c5de'],
+						[300, '#4393c3'],
+						[400, '#2166ac'],
+						[500, '#053061']
+					]
+				}
+			},
+		});
+		map.addSource('eagle6692', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/6692.json'
+		});
+		map.addLayer({
+			'id':'6692',
+			'type':'circle',
+			'source':'eagle6692',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'circle-radius': 1,
+				'circle-opacity': 0.5,
+				'circle-color': {
+					property: 'Altitude',
+					stops: [
+						[-400, '#67001f'],
+						[-300, '#b2182b'],
+						[-200, '#d6604d'],
+						[-100, '#f4a582'],
+						[0, '#f7f7f7'],
+						[100, '#d1e5f0'],
+						[200, '#92c5de'],
+						[300, '#4393c3'],
+						[400, '#2166ac'],
+						[500, '#053061']
+					]
+				}
+			},
+		});
+		map.addSource('eagle7090', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/7090.json'
+		});
+		map.addLayer({
+			'id':'7090',
+			'type':'circle',
+			'source':'eagle7090',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'circle-radius': 1,
+				'circle-opacity': 0.5,
+				'circle-color': {
+					property: 'Altitude',
+					stops: [
+						[-400, '#67001f'],
+						[-300, '#b2182b'],
+						[-200, '#d6604d'],
+						[-100, '#f4a582'],
+						[0, '#f7f7f7'],
+						[100, '#d1e5f0'],
+						[200, '#92c5de'],
+						[300, '#4393c3'],
+						[400, '#2166ac'],
+						[500, '#053061']
+					]
+				}
+			},
+		});
+		map.addSource('eagle8049', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/8049.json'
+		});
+		map.addLayer({
+			'id':'8049',
+			'type':'circle',
+			'source':'eagle8049',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'circle-radius': 1,
+				'circle-opacity': 0.5,
+				'circle-color': {
+					property: 'Altitude',
+					stops: [
+						[-400, '#67001f'],
+						[-300, '#b2182b'],
+						[-200, '#d6604d'],
+						[-100, '#f4a582'],
+						[0, '#f7f7f7'],
+						[100, '#d1e5f0'],
+						[200, '#92c5de'],
+						[300, '#4393c3'],
+						[400, '#2166ac'],
+						[500, '#053061']
+					]
+				}
+			},
+		});
+		map.addSource('eagle9896', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/9896.json'
+		});
+		map.addLayer({
+			'id':'9896',
+			'type':'circle',
+			'source':'eagle9896',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {
+				'circle-radius': 1,
+				'circle-opacity': 0.5,
 				'circle-color': {
 					property: 'Altitude',
 					stops: [
@@ -364,7 +581,7 @@ a {
 			},
 		});
 	});
-	var toggleableLayerIds = [ '2019', '2018', '2017', '2016', '2015', '2014',];
+	var toggleableLayerIds = [ '258', '431', '974', '1370', '1388', '2634', '3988', '4770', '5413', '6692', '7090', '8049', '9896'];
 
 	for (var i = 0; i < toggleableLayerIds.length; i++) {
 		var id = toggleableLayerIds[i];
