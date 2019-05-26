@@ -181,6 +181,7 @@ a {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/258.json'
 		});
+		<!--eagle258-->
 		map.addLayer({
 			'id':'258',
 			'type':'circle',
@@ -208,6 +209,25 @@ a {
 				}
 			},
 		});
+		map.on('click', '258', function (e) {
+			map.getCanvas().style.cursor = 'pointer';
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = '<p>Eagle: '+e.features[0].properties.Path_ID+'<br>Coordinates: '+e.features[0].properties.Latitude+','+e.features[0].properties.Longitude+'<br>Altitude: '+e.features[0].properties.Altitude+'ft<br>Date: '+e.features[0].properties.Date+'</p>'
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			new mapboxgl.Popup()
+			.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+		});
+		map.on('mouseenter', '258', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		map.on('mouseleave', '258', function () {
+			map.getCanvas().style.cursor = '';
+		});
+		<!--eagle431-->
 		map.addSource('eagle431', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/431.json'
@@ -239,6 +259,25 @@ a {
 				}
 			},
 		});
+		map.on('click', '431', function (e) {
+			map.getCanvas().style.cursor = 'pointer';
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = '<p>Eagle: '+e.features[0].properties.Path_ID+'<br>Coordinates: '+e.features[0].properties.Latitude+','+e.features[0].properties.Longitude+'<br>Altitude: '+e.features[0].properties.Altitude+'ft<br>Date: '+e.features[0].properties.Date+'</p>'
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			new mapboxgl.Popup()
+			.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+		});
+		map.on('mouseenter', '431', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		map.on('mouseleave', '431', function () {
+			map.getCanvas().style.cursor = '';
+		});
+		<!--eagle974-->
 		map.addSource('eagle974', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/974.json'
@@ -270,6 +309,25 @@ a {
 				}
 			},
 		});
+		map.on('click', '974', function (e) {
+			map.getCanvas().style.cursor = 'pointer';
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = '<p>Eagle: '+e.features[0].properties.Path_ID+'<br>Coordinates: '+e.features[0].properties.Latitude+','+e.features[0].properties.Longitude+'<br>Altitude: '+e.features[0].properties.Altitude+'ft<br>Date: '+e.features[0].properties.Date+'</p>'
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			new mapboxgl.Popup()
+			.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+		});
+		map.on('mouseenter', '974', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		map.on('mouseleave', '974', function () {
+			map.getCanvas().style.cursor = '';
+		});
+		<!--ealge1370-->
 		map.addSource('eagle1370', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/1370.json'
@@ -301,6 +359,25 @@ a {
 				}
 			},
 		});
+		map.on('click', '1370', function (e) {
+			map.getCanvas().style.cursor = 'pointer';
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = '<p>Eagle: '+e.features[0].properties.Path_ID+'<br>Coordinates: '+e.features[0].properties.Latitude+','+e.features[0].properties.Longitude+'<br>Altitude: '+e.features[0].properties.Altitude+'ft<br>Date: '+e.features[0].properties.Date+'</p>'
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			new mapboxgl.Popup()
+			.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+		});
+		map.on('mouseenter', '1370', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		map.on('mouseleave', '1370', function () {
+			map.getCanvas().style.cursor = '';
+		});
+		<!--eagle1388-->
 		map.addSource('eagle1388', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/1388.json'
@@ -332,9 +409,28 @@ a {
 				}
 			},
 		});
+		map.on('click', '1388', function (e) {
+			map.getCanvas().style.cursor = 'pointer';
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = '<p>Eagle: '+e.features[0].properties.Path_ID+'<br>Coordinates: '+e.features[0].properties.Latitude+','+e.features[0].properties.Longitude+'<br>Altitude: '+e.features[0].properties.Altitude+'ft<br>Date: '+e.features[0].properties.Date+'</p>'
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			new mapboxgl.Popup()
+			.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+		});
+		map.on('mouseenter', '1388', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		map.on('mouseleave', '1388', function () {
+			map.getCanvas().style.cursor = '';
+		});
+		<!--eagle2634-->
 		map.addSource('eagle2634', {
 			'type': 'geojson',
-			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/2364.json'
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/2634.json'
 		});
 		map.addLayer({
 			'id':'2634',
@@ -363,6 +459,25 @@ a {
 				}
 			},
 		});
+		map.on('click', '2634', function (e) {
+			map.getCanvas().style.cursor = 'pointer';
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = '<p>Eagle: '+e.features[0].properties.Path_ID+'<br>Coordinates: '+e.features[0].properties.Latitude+','+e.features[0].properties.Longitude+'<br>Altitude: '+e.features[0].properties.Altitude+'ft<br>Date: '+e.features[0].properties.Date+'</p>'
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			new mapboxgl.Popup()
+			.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+		});
+		map.on('mouseenter', '2634', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		map.on('mouseleave', '2634', function () {
+			map.getCanvas().style.cursor = '';
+		});
+		<!--eagle3988-->
 		map.addSource('eagle3988', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/3988.json'
@@ -394,6 +509,25 @@ a {
 				}
 			},
 		});
+		map.on('click', '3988', function (e) {
+			map.getCanvas().style.cursor = 'pointer';
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = '<p>Eagle: '+e.features[0].properties.Path_ID+'<br>Coordinates: '+e.features[0].properties.Latitude+','+e.features[0].properties.Longitude+'<br>Altitude: '+e.features[0].properties.Altitude+'ft<br>Date: '+e.features[0].properties.Date+'</p>'
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			new mapboxgl.Popup()
+			.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+		});
+		map.on('mouseenter', '3988', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		map.on('mouseleave', '3988', function () {
+			map.getCanvas().style.cursor = '';
+		});
+		<!--ealge4770-->
 		map.addSource('eagle4770', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/4770.json'
@@ -425,6 +559,25 @@ a {
 				}
 			},
 		});
+		map.on('click', '4770', function (e) {
+			map.getCanvas().style.cursor = 'pointer';
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = '<p>Eagle: '+e.features[0].properties.Path_ID+'<br>Coordinates: '+e.features[0].properties.Latitude+','+e.features[0].properties.Longitude+'<br>Altitude: '+e.features[0].properties.Altitude+'ft<br>Date: '+e.features[0].properties.Date+'</p>'
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			new mapboxgl.Popup()
+			.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+		});
+		map.on('mouseenter', '4770', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		map.on('mouseleave', '4770', function () {
+			map.getCanvas().style.cursor = '';
+		});
+		<!--eagle5413-->
 		map.addSource('eagle5413', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/5413.json'
@@ -456,6 +609,25 @@ a {
 				}
 			},
 		});
+		map.on('click', '5413', function (e) {
+			map.getCanvas().style.cursor = 'pointer';
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = '<p>Eagle: '+e.features[0].properties.Path_ID+'<br>Coordinates: '+e.features[0].properties.Latitude+','+e.features[0].properties.Longitude+'<br>Altitude: '+e.features[0].properties.Altitude+'ft<br>Date: '+e.features[0].properties.Date+'</p>'
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			new mapboxgl.Popup()
+			.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+		});
+		map.on('mouseenter', '5413', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		map.on('mouseleave', '5413', function () {
+			map.getCanvas().style.cursor = '';
+		});
+		<!--ealge6692-->
 		map.addSource('eagle6692', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/6692.json'
@@ -487,6 +659,25 @@ a {
 				}
 			},
 		});
+		map.on('click', '6692', function (e) {
+			map.getCanvas().style.cursor = 'pointer';
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = '<p>Eagle: '+e.features[0].properties.Path_ID+'<br>Coordinates: '+e.features[0].properties.Latitude+','+e.features[0].properties.Longitude+'<br>Altitude: '+e.features[0].properties.Altitude+'ft<br>Date: '+e.features[0].properties.Date+'</p>'
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			new mapboxgl.Popup()
+			.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+		});
+		map.on('mouseenter', '6692', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		map.on('mouseleave', '6692', function () {
+			map.getCanvas().style.cursor = '';
+		});
+		<!--eagle7090-->
 		map.addSource('eagle7090', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/7090.json'
@@ -518,6 +709,25 @@ a {
 				}
 			},
 		});
+		map.on('click', '7090', function (e) {
+			map.getCanvas().style.cursor = 'pointer';
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = '<p>Eagle: '+e.features[0].properties.Path_ID+'<br>Coordinates: '+e.features[0].properties.Latitude+','+e.features[0].properties.Longitude+'<br>Altitude: '+e.features[0].properties.Altitude+'ft<br>Date: '+e.features[0].properties.Date+'</p>'
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			new mapboxgl.Popup()
+			.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+		});
+		map.on('mouseenter', '7090', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		map.on('mouseleave', '7090', function () {
+			map.getCanvas().style.cursor = '';
+		});
+		<!--eagle8049-->
 		map.addSource('eagle8049', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/8049.json'
@@ -549,6 +759,25 @@ a {
 				}
 			},
 		});
+		map.on('click', '8049', function (e) {
+			map.getCanvas().style.cursor = 'pointer';
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = '<p>Eagle: '+e.features[0].properties.Path_ID+'<br>Coordinates: '+e.features[0].properties.Latitude+','+e.features[0].properties.Longitude+'<br>Altitude: '+e.features[0].properties.Altitude+'ft<br>Date: '+e.features[0].properties.Date+'</p>'
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			new mapboxgl.Popup()
+			.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+		});
+		map.on('mouseenter', '8049', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		map.on('mouseleave', '8049', function () {
+			map.getCanvas().style.cursor = '';
+		});
+		<!--ealge9896-->
 		map.addSource('eagle9896', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/9896.json'
@@ -579,6 +808,24 @@ a {
 					]
 				}
 			},
+		});
+		map.on('click', '9896', function (e) {
+			map.getCanvas().style.cursor = 'pointer';
+			var coordinates = e.features[0].geometry.coordinates.slice();
+			var description = '<p>Eagle: '+e.features[0].properties.Path_ID+'<br>Coordinates: '+e.features[0].properties.Latitude+','+e.features[0].properties.Longitude+'<br>Altitude: '+e.features[0].properties.Altitude+'ft<br>Date: '+e.features[0].properties.Date+'</p>'
+			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+			}
+			new mapboxgl.Popup()
+			.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+		});
+		map.on('mouseenter', '9896', function () {
+			map.getCanvas().style.cursor = 'pointer';
+		});
+		map.on('mouseleave', '9896', function () {
+			map.getCanvas().style.cursor = '';
 		});
 	});
 	var toggleableLayerIds = [ '258', '431', '974', '1370', '1388', '2634', '3988', '4770', '5413', '6692', '7090', '8049', '9896'];
