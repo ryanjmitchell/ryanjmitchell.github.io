@@ -69,7 +69,7 @@ a {
 	background: #fff;
 	position: absolute;
 	z-index: 1;
-	top: 10px;
+	top: 50px;
 	right: 10px;
 	width: 70px;
 	font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
@@ -106,10 +106,13 @@ a {
 }
 </style>
 <body>
-	<nav id="menu"></nav>
+	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.min.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.css' type='text/css' />
+
+	<nav id='menu'></nav>
 	<div id='map'></div>
 	<div id='console'>
-		<h1 style="color:#F8B2B0;">500-year Floodplain</h1>
+		<h1 style='color:#F8B2B0;'>500-year Floodplain</h1>
 		<div id='legend' class='legend'>
 			<div><span style='background-color: red'></span>Fire Station</div>
 			<div><span style='background-color: navy'></span>Police Station</div>
@@ -127,82 +130,87 @@ a {
 		zoom: 9,
 		minZoom: 3,
 	});
+<!-- Geocoder -->
+	map.addControl(new MapboxGeocoder({
+accessToken: mapboxgl.accessToken,
+mapboxgl: mapboxgl
+}));
 	map.on('load', function(){
 		map.addSource('harris_county', {
-			"type": "geojson",
-			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/harris_county.json"
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/harris_county.json'
 		});
 		map.addLayer({
-			"id":"harris",
-			"type":"line",
-			"source":"harris_county",
+			'id':'harris',
+			'type':'line',
+			'source':'harris_county',
 			'layout': {
 				'visibility': 'visible',
-				"line-join": "round",
-				"line-cap": "round"
+				'line-join': 'round',
+				'line-cap': 'round'
 			},
-			"paint": {
-				"line-color": "#888",
-				"line-width": 1,
-				"line-opacity": 0.75
+			'paint': {
+				'line-color': '#888',
+				'line-width': 1,
+				'line-opacity': 0.75
 			}
 		});
 		map.addSource('highways', {
-			"type": "geojson",
-			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/highways.json"
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/highways.json'
 		});
 		map.addLayer({
-			"id":"roads",
-			"type":"line",
-			"source":"highways",
+			'id':'roads',
+			'type':'line',
+			'source':'highways',
 			'layout': {
 				'visibility': 'visible',
-				"line-join": "round",
-				"line-cap": "round"
+				'line-join': 'round',
+				'line-cap': 'round'
 			},
-			"paint": {
-				"line-color": "silver",
-				"line-width": .5,
-				"line-opacity": 0.5
+			'paint': {
+				'line-color': 'silver',
+				'line-width': .5,
+				'line-opacity': 0.5
 			}
 		});
 		map.addSource('harris_flood', {
-			"type": "geojson",
-			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/500_flood.json"
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/500_flood.json'
 		});
 		map.addLayer({
-			"id":"Floodplain",
-			"type":"fill",
-			"source":"harris_flood",
+			'id':'Floodplain',
+			'type':'fill',
+			'source':'harris_flood',
 			'layout': {
 				'visibility': 'visible'
 			},
-			"paint": {"fill-color": "red",
-			"fill-opacity": 0.15}
+			'paint': {'fill-color': 'red',
+			'fill-opacity': 0.15}
 		});
 		map.addSource('harris_fire', {
-			"type": "geojson",
-			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/fire.json"
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/fire.json'
 		});
 		map.addLayer({
-			"id":"Fire",
-			"type":"circle",
-			"source":"harris_fire",
+			'id':'Fire',
+			'type':'circle',
+			'source':'harris_fire',
 			'layout': {
 				'visibility': 'visible'
 			},
-			"paint": {"circle-color": "red",
-			"circle-radius": 3,
-			"circle-stroke-color": "white",
-			"circle-stroke-width": .5,
-			"circle-opacity": 0.75}
+			'paint': {'circle-color': 'red',
+			'circle-radius': 3,
+			'circle-stroke-color': 'white',
+			'circle-stroke-width': .5,
+			'circle-opacity': 0.75}
 		});
 		//add a handler for clicking/popups
 		//Thanks to: https://www.mapbox.com/mapbox-gl-js/example/popup-on-click/
 		map.on('click', 'Fire', function (e) {
 			map.getCanvas().style.cursor = 'pointer';
 			var coordinates = e.features[0].geometry.coordinates.slice();
-			var description = "<p>Fire Station #"+e.features[0].properties.LABEL+"</p>"
+			var description = '<p>Fire Station #'+e.features[0].properties.LABEL+'</p>'
 			// Ensure that if the map is zoomed out such that multiple
 			// copies of the feature are visible, the popup appears
 			// over the copy being pointed to.
@@ -224,26 +232,26 @@ a {
 			map.getCanvas().style.cursor = '';
 		});
 		map.addSource('harris_police', {
-			"type": "geojson",
-			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/police.json"
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/police.json'
 		});
 		map.addLayer({
-			"id":"Police",
-			"type":"circle",
-			"source":"harris_police",
+			'id':'Police',
+			'type':'circle',
+			'source':'harris_police',
 			'layout': {
 				'visibility': 'visible'
 			},
-			"paint": {"circle-color": "navy",
-			"circle-radius": 3,
-			"circle-stroke-color": "white",
-			"circle-stroke-width": .5,
-			"circle-opacity": 0.75}
+			'paint': {'circle-color': 'navy',
+			'circle-radius': 3,
+			'circle-stroke-color': 'white',
+			'circle-stroke-width': .5,
+			'circle-opacity': 0.75}
 		});
 		map.on('click', 'Police', function (e) {
 			map.getCanvas().style.cursor = 'pointer';
 			var coordinates = e.features[0].geometry.coordinates.slice();
-			var description = "<p>"+e.features[0].properties.STATION+" Police Station</p>"
+			var description = '<p>'+e.features[0].properties.STATION+' Police Station</p>'
 
 			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
 				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -263,26 +271,26 @@ a {
 			map.getCanvas().style.cursor = '';
 		});
 		map.addSource('harris_hospitals', {
-			"type": "geojson",
-			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/hospitals.json"
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/hospitals.json'
 		});
 		map.addLayer({
-			"id":"Medical Centers",
-			"type":"circle",
-			"source":"harris_hospitals",
+			'id':'Medical Centers',
+			'type':'circle',
+			'source':'harris_hospitals',
 			'layout': {
 				'visibility': 'visible'
 			},
-			"paint": {"circle-color": "teal",
-			"circle-radius": 3,
-			"circle-stroke-color": "white",
-			"circle-stroke-width": .5,
-			"circle-opacity": 0.75}
+			'paint': {'circle-color': 'teal',
+			'circle-radius': 3,
+			'circle-stroke-color': 'white',
+			'circle-stroke-width': .5,
+			'circle-opacity': 0.75}
 		});
 		map.on('click', 'Medical Centers', function (e) {
 			map.getCanvas().style.cursor = 'pointer';
 			var coordinates = e.features[0].geometry.coordinates.slice();
-			var description = "<p>"+e.features[0].properties.NAME+"</p>"
+			var description = '<p>'+e.features[0].properties.NAME+'</p>'
 
 			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
 				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
@@ -302,26 +310,26 @@ a {
 			map.getCanvas().style.cursor = '';
 		});
 		map.addSource('harris_schools', {
-			"type": "geojson",
-			"data": "https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/schools.json"
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/schools.json'
 		});
 		map.addLayer({
-			"id":"Schools",
-			"type":"circle",
-			"source":"harris_schools",
+			'id':'Schools',
+			'type':'circle',
+			'source':'harris_schools',
 			'layout': {
 				'visibility': 'visible'
 			},
-			"paint": {"circle-color": "gray",
-			"circle-radius": 3,
-			"circle-stroke-color": "white",
-			"circle-stroke-width": .5,
-			"circle-opacity": 0.75}
+			'paint': {'circle-color': 'gray',
+			'circle-radius': 3,
+			'circle-stroke-color': 'white',
+			'circle-stroke-width': .5,
+			'circle-opacity': 0.75}
 		});
 		map.on('click', 'Schools', function (e) {
 			map.getCanvas().style.cursor = 'pointer';
 			var coordinates = e.features[0].geometry.coordinates.slice();
-			var description = "<p>"+e.features[0].properties.CampName+"</p>"
+			var description = '<p>'+e.features[0].properties.CampName+'</p>'
 
 			while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
 				coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
