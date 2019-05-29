@@ -107,7 +107,7 @@ a {
 </style>
 <body>
 	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.min.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.css' type='text/css' />
+	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.css' type='text/css' />
 
 	<nav id='menu'></nav>
 	<div id='map'></div>
@@ -130,11 +130,11 @@ a {
 		zoom: 9,
 		minZoom: 3,
 	});
-<!-- Geocoder -->
+	<!-- Geocoder -->
 	map.addControl(new MapboxGeocoder({
-accessToken: mapboxgl.accessToken,
-mapboxgl: mapboxgl
-}));
+		accessToken: mapboxgl.accessToken,
+		mapboxgl: mapboxgl
+	}));
 	map.on('load', function(){
 		map.addSource('harris_county', {
 			'type': 'geojson',
@@ -163,6 +163,7 @@ mapboxgl: mapboxgl
 			'id':'roads',
 			'type':'line',
 			'source':'highways',
+			'minzoom': 6,
 			'layout': {
 				'visibility': 'visible',
 				'line-join': 'round',
@@ -182,6 +183,7 @@ mapboxgl: mapboxgl
 			'id':'Floodplain',
 			'type':'fill',
 			'source':'harris_flood',
+			'minzoom': 6.5,
 			'layout': {
 				'visibility': 'visible'
 			},
@@ -196,6 +198,7 @@ mapboxgl: mapboxgl
 			'id':'Fire',
 			'type':'circle',
 			'source':'harris_fire',
+			'minzoom': 7,
 			'layout': {
 				'visibility': 'visible'
 			},
@@ -239,6 +242,7 @@ mapboxgl: mapboxgl
 			'id':'Police',
 			'type':'circle',
 			'source':'harris_police',
+			'minzoom': 7,
 			'layout': {
 				'visibility': 'visible'
 			},
@@ -278,6 +282,7 @@ mapboxgl: mapboxgl
 			'id':'Medical Centers',
 			'type':'circle',
 			'source':'harris_hospitals',
+			'minzoom': 7,
 			'layout': {
 				'visibility': 'visible'
 			},
@@ -317,6 +322,7 @@ mapboxgl: mapboxgl
 			'id':'Schools',
 			'type':'circle',
 			'source':'harris_schools',
+			'minzoom': 8,
 			'layout': {
 				'visibility': 'visible'
 			},
