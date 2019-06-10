@@ -135,6 +135,7 @@ a {
 		accessToken: mapboxgl.accessToken,
 		mapboxgl: mapboxgl
 	}));
+	//county line
 	map.on('load', function(){
 		map.addSource('harris_county', {
 			'type': 'geojson',
@@ -155,6 +156,7 @@ a {
 				'line-opacity': 0.75
 			}
 		});
+		//highways
 		map.addSource('highways', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/highways.json'
@@ -175,6 +177,7 @@ a {
 				'line-opacity': 0.5
 			}
 		});
+		//flooplain
 		map.addSource('harris_flood', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/500_flood.json'
@@ -190,6 +193,7 @@ a {
 			'paint': {'fill-color': 'red',
 			'fill-opacity': 0.15}
 		});
+		//FD
 		map.addSource('harris_fire', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/fire.json'
@@ -234,6 +238,7 @@ a {
 		map.on('mouseleave', 'Fire', function () {
 			map.getCanvas().style.cursor = '';
 		});
+		//PD
 		map.addSource('harris_police', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/police.json'
@@ -274,6 +279,7 @@ a {
 		map.on('mouseleave', 'Police', function () {
 			map.getCanvas().style.cursor = '';
 		});
+		//Medical
 		map.addSource('harris_hospitals', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/hospitals.json'
@@ -314,6 +320,7 @@ a {
 		map.on('mouseleave', 'Medical Centers', function () {
 			map.getCanvas().style.cursor = '';
 		});
+		//Schools
 		map.addSource('harris_schools', {
 			'type': 'geojson',
 			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/schools.json'
