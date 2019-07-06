@@ -1,0 +1,169 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<script src='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v0.50.0/mapbox-gl.css' rel='stylesheet' />
+</head>
+<style>
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Helvetica Neue', Helvetica, Arial, Sans-serif;
+}
+
+#map {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+}
+
+h1 {
+	font-size: 20px;
+	line-height: 30px;
+}
+
+h2 {
+	font-size: 14px;
+	line-height: 20px;
+	margin-bottom: 10px;
+}
+
+a {
+	text-decoration: none;
+	color: #2dc4b2;
+}
+
+#console {
+	position: absolute;
+	width: 190px;
+	margin: 5px;
+	padding: 0px 2.5px;
+	background-color: white;
+}
+
+.legend {
+	background-color: #fff;
+	top: 50px;
+	font: 13px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+	padding: 5px;
+	position: absolute;
+	left: 0px;
+	z-index: 1;
+	text-align: left;
+}
+
+.legend h4 {
+	margin: 0 0 0px;
+}
+
+.legend div span {
+	border-radius: 50%;
+	display: inline-block;
+	height: 10px;
+	margin-right: 5px;
+	width: 10px;
+}
+
+#menu {
+	background: #fff;
+	position: absolute;
+	z-index: 1;
+	top: 50px;
+	right: 10px;
+	width: 70px;
+	font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
+}
+
+#menu a {
+	font-size: 13px;
+	color: #404040;
+	display: block;
+	margin: 0;
+	padding: 0;
+	padding: 5px;
+	text-decoration: none;
+	border-bottom: 1px solid rgba(0,0,0,0.25);
+	text-align: center;
+}
+
+#menu a:last-child {
+	border: none;
+}
+
+#menu a:hover {
+	background-color: #f8f8f8;
+	color: #404040;
+}
+
+#menu a.active {
+	background-color: #6E6E6E;
+	color: #ffffff;
+}
+
+#menu a.active:hover {
+	background: #8C8C8C;
+}
+</style>
+<body>
+	<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.min.js'></script>
+	<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.3.0/mapbox-gl-geocoder.css' type='text/css' />
+
+	<nav id='menu'></nav>
+	<div id='map'></div>
+	<div id='console'>
+		<!-- <h1 style='color:#F8B2B0;'>Landing Zones</h1> -->
+		<div id='legend' class='legend'>
+			<div><span style='background-color: green'></span>Gentrified Area</div>
+			<div><span style='background-color: yellow'></span>Landing Zone</div>
+		</div>
+	</div>
+	<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoicnlhbmptaXRjaCIsImEiOiJjamhhdDBjaXgwcmZlMzBxZ2t1cnZ4bnFnIn0.4tXv0Yvk06rDbYp7ZLSdAw';
+	//The map variable
+	var map = new mapboxgl.Map({
+		container: 'map',
+		style: 'mapbox://styles/ryanjmitch/cjxs5trau748x1cqms8ug0e4s',
+		center: [-122.6793,45.5155],
+		zoom: 9,
+		minZoom: 3,
+	});
+	<!-- Geocoder -->
+	map.addControl(new MapboxGeocoder({
+		accessToken: mapboxgl.accessToken,
+		mapboxgl: mapboxgl
+	}));
+		//Gentrified
+		map.addSource('gentrification', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/gentrified.json'
+		});
+		map.addLayer({
+			'id':'Gentrified',
+			'type':'fill',
+			'source':'gentrification',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {'fill-color': 'green',
+			'fill-opacity': 0.15}
+		});
+		//Landing Zones
+		map.addSource('landing', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/landing_zones.json'
+		});
+		map.addLayer({
+			'id':'Landing Zone',
+			'type':'fill',
+			'source':'landing',
+			'layout': {
+				'visibility': 'visible'
+			},
+			'paint': {'fill-color': 'yellow',
+			'fill-opacity': 0.15}
+		});
+	</script>
+</div>
+</body>
+</html>
