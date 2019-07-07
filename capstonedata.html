@@ -125,7 +125,7 @@ a {
 		container: 'map',
 		style: 'mapbox://styles/ryanjmitch/cjxs5trau748x1cqms8ug0e4s',
 		center: [-122.6793,45.55],
-		zoom: 10.5,
+		zoom: 10,
 		minZoom: 3,
 	});
 	<!-- Geocoder -->
@@ -134,6 +134,26 @@ a {
 		mapboxgl: mapboxgl
 	}));
 	map.on('load', function(){
+//Portlan/Gresham
+		map.addSource('portgres', {
+			'type': 'geojson',
+			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/portland_gresham.json'
+		});
+		map.addLayer({
+			'id':'portland and gresham',
+			'type':'line',
+			'source':'portgres',
+			'layout': {
+				'visibility': 'visible',
+				'line-join': 'round',
+				'line-cap': 'round'
+			},
+			'paint': {
+				'line-color': 'white',
+				'line-width': 1,
+				'line-opacity': 0.75
+			}
+		});
 	//Gentrified
 	map.addSource('gentrification', {
 		'type': 'geojson',
@@ -146,7 +166,7 @@ a {
 		'layout': {
 			'visibility': 'visible'
 		},
-		'paint': {'fill-color': 'green',
+		'paint': {'fill-color': '#fb6a4a',
 		'fill-opacity': 0.25}
 	});
 	//Landing Zones
