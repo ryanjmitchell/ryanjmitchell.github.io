@@ -124,8 +124,8 @@ a {
 	var map = new mapboxgl.Map({
 		container: 'map',
 		style: 'mapbox://styles/ryanjmitch/cjxs5trau748x1cqms8ug0e4s',
-		center: [-122.6793,45.5155],
-		zoom: 9,
+		center: [-122.6793,45.55],
+		zoom: 10.5,
 		minZoom: 3,
 	});
 	<!-- Geocoder -->
@@ -133,35 +133,37 @@ a {
 		accessToken: mapboxgl.accessToken,
 		mapboxgl: mapboxgl
 	}));
-		//Gentrified
-		map.addSource('gentrification', {
-			'type': 'geojson',
-			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/gentrified.json'
-		});
-		map.addLayer({
-			'id':'Gentrified',
-			'type':'fill',
-			'source':'gentrification',
-			'layout': {
-				'visibility': 'visible'
-			},
-			'paint': {'fill-color': 'green',
-			'fill-opacity': 0.15}
-		});
-		//Landing Zones
-		map.addSource('landing', {
-			'type': 'geojson',
-			'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/landing_zones.json'
-		});
-		map.addLayer({
-			'id':'Landing Zone',
-			'type':'fill',
-			'source':'landing',
-			'layout': {
-				'visibility': 'visible'
-			},
-			'paint': {'fill-color': 'yellow',
-			'fill-opacity': 0.15}
+	map.on('load', function(){
+	//Gentrified
+	map.addSource('gentrification', {
+		'type': 'geojson',
+		'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/gentrified.json'
+	});
+	map.addLayer({
+		'id':'Gentrified',
+		'type':'fill',
+		'source':'gentrification',
+		'layout': {
+			'visibility': 'visible'
+		},
+		'paint': {'fill-color': 'green',
+		'fill-opacity': 0.25}
+	});
+	//Landing Zones
+	map.addSource('landing', {
+		'type': 'geojson',
+		'data': 'https://raw.githubusercontent.com/ryanjmitchell/ryanjmitchell.github.io/master/assets/data/landing_zones.json'
+	});
+	map.addLayer({
+		'id':'Landing Zone',
+		'type':'fill',
+		'source':'landing',
+		'layout': {
+			'visibility': 'visible'
+		},
+		'paint': {'fill-color': 'yellow',
+		'fill-opacity': 0.25}
+	});
 		});
 	</script>
 </div>
