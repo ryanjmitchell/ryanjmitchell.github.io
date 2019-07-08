@@ -225,20 +225,25 @@ a {
 		'fill-outline-color': 'rgba(200, 100, 240, 0)'
 	}
 	});
-	map.on('click', 'Vulnerable Tracts', function (e) {
+
+	var popup = new mapboxgl.Popup({
+	closeButton: false,
+	closeOnClick: false
+	});
+	map.on('mousemove', 'Vulnerable Tracts', function (e) {
 		map.getCanvas().style.cursor = 'pointer';
 		var coordinates = e.features[0].geometry.coordinates.slice();
-		var description = "<p>Tract #"+e.features[0].properties.TRACT_NO+"<br>Vulnerability Score: "+e.features[0].properties.risk_total+"<br>Rent: "+e.features[0].properties.Perc_rente+"%<br>Without Bachelor's: "+e.features[0].properties.Perc_WO_ba+"%<br>Non-white: "+e.features[0].properties.Perc_com_c+"%<br>Low-income: "+e.features[0].properties.Perc_HHs_8+"%</p>"
-		new mapboxgl.Popup()
-		.setLngLat(e.lngLat)
+		var description = "<p>Tract #"+e.features[0].properties.TRACT_NO+"<br>Household Demographics:<br>Rent: "+e.features[0].properties.Perc_rente+"%<br>Without Bachelor's: "+e.features[0].properties.Perc_WO_ba+"%<br>Non-white: "+e.features[0].properties.Perc_com_c+"%<br>Low-income: "+e.features[0].properties.Perc_HHs_8+"%</p>";
+		while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+}
+		popup.setLngLat(e.lngLat)
 		.setHTML(description)
 		.addTo(map);
 	});
-	map.on('mouseenter', 'Vulnerable Tracts', function () {
-		map.getCanvas().style.cursor = 'pointer';
-	});
 	map.on('mouseleave', 'Vulnerable Tracts', function () {
 		map.getCanvas().style.cursor = '';
+		popup.remove();
 	});
 		});
 	</script>
