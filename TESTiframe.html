@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<iframe id="myframe" src="https://ryanjmitchell.github.io/USbarchart.html" style='width: 720px;height: 520px; align= center;background-color: white;'></iframe>
+
+<p>Click the buttons to change things</p>
+
+<button onclick="myFunctionUS()">USA</button>
+<button onclick="myFunctionOR()">Oregon</button>
+<button onclick="myFunction()">Portland, OR</button>
+
+<script>
+function myFunction() {
+  document.getElementById("myframe").src = "https://ryanjmitchell.github.io/Portlandbarchart.html";
+}
+
+function myFunctionOR() {
+  document.getElementById("myframe").src = "https://ryanjmitchell.github.io/ORbarchart.html";
+}
+
+function myFunctionUS() {
+  document.getElementById("myframe").src = "https://ryanjmitchell.github.io/USbarchart.html";
+}
+</script>
+
+</body>
+</html>
