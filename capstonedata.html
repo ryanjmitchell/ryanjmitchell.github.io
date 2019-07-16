@@ -74,8 +74,8 @@ a {
 	<div id='console'>
 		<!-- <h1 style='color:#F8B2B0;'>Landing Zones</h1> -->
 		<div id='legend' class='legend'>
-			<div><span style='background-color: #fb6a4a'></span>Gentrified Area</div>
-			<div><span style='background-color: yellow'></span>Displacment Area</div>
+			<div><span style='background-color: #fb6a4a'></span>Areas of Gentrification</div>
+			<div><span style='background-color: yellow'></span>Areas of Displacment</div>
 		</div>
 	</div>
 	<script>
@@ -91,13 +91,14 @@ a {
 		center: [-122.558597,45.547010],
 		zoom: 10,
 		minZoom: 10,
+		interactive: false,
 		maxBounds: bounds // Sets bounds as max
 	});
 	<!-- Geocoder -->
-	map.addControl(new MapboxGeocoder({
+	/*map.addControl(new MapboxGeocoder({
 		accessToken: mapboxgl.accessToken,
 		mapboxgl: mapboxgl
-	}));
+	}));*/
 	map.on('load', function(){
 //Portlan/Gresham
 		map.addSource('portgres', {
