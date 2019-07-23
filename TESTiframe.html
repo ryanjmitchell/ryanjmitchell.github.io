@@ -1,26 +1,66 @@
 <!DOCTYPE html>
 <html>
+<style>
+.container{
+	 width: 100%;
+	 display: flex;
+	 height: 100vh;
+	 justify-content: center;
+}
+.btn-group button {
+  background-color: #4CAF50; /* Green background */
+  border: 1px solid green; /* Green border */
+  color: white; /* White text */
+  padding: 10px 24px; /* Some padding */
+  cursor: pointer; /* Pointer/hand icon */
+  float: left; /* Float the buttons side by side */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+  content: '';
+  clear: both;
+  display: table;
+}
+
+.btn-group button:not(:last-child) {
+  border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+  background-color: #3e8e41;
+}
+</style>
 <body>
 
-<iframe id="myframe" src="https://ryanjmitchell.github.io/USbarchart.html" style='width: 720px;height: 520px; align= center;background-color: white;'></iframe>
-
-<p>Click the buttons to change things</p>
-
-<button onclick="myFunctionUS()">USA</button>
-<button onclick="myFunctionOR()">Oregon</button>
-<button onclick="myFunction()">Portland, OR</button>
+<p align='center'><iframe id='myframe' src='totalcartogram.html' style='width: 1000px; height: 520px; background-color: grey;'></iframe></p>
+<div class='container'>
+<div class='btn-group'>
+<button onclick='myFunctionTotal()'>Total Vulnerability</button>
+<button onclick='myFunctionRace()'>Communities of Color</button>
+<button onclick='myFunctionPoverty()'>Poverty</button>
+<button onclick='myFunctionRent()'>Renters</button>
+<button onclick='myFunctionBachelors()'>Bachelor's Degree</button>
+</div></div>
 
 <script>
-function myFunction() {
-  document.getElementById("myframe").src = "https://ryanjmitchell.github.io/Portlandbarchart.html";
+function myFunctionTotal() {
+  document.getElementById('myframe').src = 'totalcartogram.html';
+}
+function myFunctionRace() {
+  document.getElementById('myframe').src = 'nonwhitecartogram.html';
 }
 
-function myFunctionOR() {
-  document.getElementById("myframe").src = "https://ryanjmitchell.github.io/ORbarchart.html";
+function myFunctionPoverty() {
+  document.getElementById('myframe').src = 'povertycartogram.html';
 }
 
-function myFunctionUS() {
-  document.getElementById("myframe").src = "https://ryanjmitchell.github.io/USbarchart.html";
+function myFunctionRent() {
+  document.getElementById('myframe').src = 'rentcartogram.html';
+}
+function myFunctionBachelors() {
+  document.getElementById('myframe').src = 'bachelorscartogram.html';
 }
 </script>
 
