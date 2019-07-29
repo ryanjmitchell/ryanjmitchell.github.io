@@ -36,6 +36,7 @@ a {
 
 #console {
 	position: absolute;
+	top: 400px;
 	width: 223px;
 	margin: 5px;
 	padding: 0px 5px;
@@ -191,7 +192,7 @@ var toggleableLayerIds = [ 'Distort', 'Renters' ];
 var link = document.createElement('a');
 link.href = '#';
 link.className = 'active';
-link.textContent = 'Cartogram';
+link.textContent = 'DISTORT';
 link.onclick = function (e) {
 	for(var index in toggleableLayerIds) {
 		var clickedLayer = toggleableLayerIds[index];
